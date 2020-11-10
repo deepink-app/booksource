@@ -1,0 +1,43 @@
+{
+    "name": "SF轻小说",
+    "url": "sfacg.com",
+    "version": 100,
+    "search": {
+        "url": "https://api.sfacg.com/search/novels/result?q=${key}&expand=novels,comics,albums,chatnovelstags,typeName,authorName,intro,latestchaptitle,latestchapintro,tags,sysTags&sort=hot&page=0&size=12&systagids=",
+        "list": "$.data.novels",
+        "name": "$.novelName",
+        "author": "$.authorName",
+        "cover": "$.novelCover",
+        "detail": "https://api.sfacg.com/novels/${$.novelId}?expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,essaytag,auditCover,preOrderInfo"
+    },
+    "detail": {
+        "status": "$.data.isFinish@equal->false",
+        "summary": "$.data.expand.intro",
+        "category": "$.data.expand.typeName",
+        "words": "$.data.charCount",
+        "update": "$.data.lastUpdateTime",
+        "lastChapter": "$.data.expand.latestChapter.title",
+        "catalog": "https://api.sfacg.com/novels/${$.data.novelId}/dirs?expand=originNeedFireMoney"
+    },
+    "catalog": {
+        "list": "$.data.volumeList",
+        "booklet": {
+            "name": "$.title",
+            "list": "$.chapterList"
+        },
+        "name": "$.title",
+        "chapter": "https://api.sfacg.com/Chaps/${$.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false"
+    },
+    "chapter": {
+        "content": "$.data.expand.content"
+    },
+    "auth": {
+        "login": "https://m.sfacg.com/login",
+        "header":"authorization: Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE=",
+        "cookie": "m.sfacg.com",
+        "verify": "https://m.sfacg.com/my/",
+        "logged": ".my_menu > a > li@equal->我的书架",
+        "vip": "$.data.isVip@equal->true",
+        "buy": "$.status.httpCode@equal->200"
+    }
+}
