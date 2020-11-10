@@ -13,7 +13,7 @@
     "detail": {
         "summary": ".about-text",
         "status": ".book-data > span:nth-child(7)",
-        "category": ".book-cats.clearfix > a",
+        "category": ".book-cats@replace->/-> ",
         "words": ".book-data > span:nth-child(1)",
         "update": ".book-last-update@match->(?<=更新于)(.+)",
         "lastChapter": ".chapter-item.new > a",
@@ -32,7 +32,7 @@
         "content": ".article-text > p"
     },
     "auth": {
-        "login": "https://www.linovel.net/",
+        "login": "https://www.linovel.net/auth/login",
         "cookie": "linovel.net",
         "verify": "https://www.linovel.net/my/profile",
         "logged": "li.user-item > div > div.panel-bottom > div > ul > li:nth-child(4) > a@equal->注销登录"
