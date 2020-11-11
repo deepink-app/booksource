@@ -1,0 +1,40 @@
+{
+    "name": "飞卢小说网",
+    "url": "faloo.com",
+    "version": 100,
+    "search": {
+        "url": "https://wap.faloo.com/category/0/1.html?k=${key}",
+        "charset": "gb2312",   
+        "list": ".book_vessel",
+        "name": ".show_title2 > a",
+        "author": ".show_author > a",
+        "cover": ".book_vessel_left > a > img",
+        "detail": ".show_title2 > a"
+    },
+    "detail": {
+        "summary": "#info2@match->(?<=).+(?=飞卢小说网提醒：本小说及人物纯属虚构，如有雷同，纯属巧合，切勿模仿。)@replace->【收起】->",
+        "status": "dd:nth-child(3) > h2@match->(?<=状态：).+",
+        "category": ".dd_box:nth-child(3) > span > a",
+        "words": ".dd_box:nth-child(4) > h2@match->(?<=字数：).+",
+        "update": ".time",
+        "lastChapter": ".chap",
+        "catalog": "li:nth-child(4) > div:nth-child(2) > a"
+    },
+    "catalog": {
+        "list": "[onclick=BookEx.listLink(this);]",
+        "name": "a@replace->V->",
+        "chapter": "a"
+    },
+    "chapter": {
+        "content": "#content",
+        "filter": ["@a","@b","@script","@br"],
+        "purify": ["本章为图片章节，如果无法显示请设置您的浏览器为可以显示图片。","本书由飞卢小说网提供。","本书来自：wap.faloo.com。"]
+    },
+    "auth": {
+        "login": "https://u.faloo.com/regist/Login.aspx",
+        "cookie": "faloo.com",
+        "verify": "https://u.faloo.com/AccountInfo.aspx",
+        "logged": ".balanceVip > span@equal->现余额VIP点",
+        "vip": "#content > a:nth-child(4)@equal->订阅本章节>>"
+    }
+}
