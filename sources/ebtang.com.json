@@ -27,7 +27,7 @@
     },
     "chapter": {
         "content":"$..content"
-    }        ,
+    },
     "auth": {
         "login": "http://m.ebtang.com/m/user/login",
         "cookie": "m.ebtang.com",
