@@ -32,5 +32,6 @@
         "login": "http://m.ebtang.com/m/user/login",
         "cookie": "m.ebtang.com",
         "verify": "http://m.ebtang.com/m/user/index",
-        "logged": ".btn-three@equal->充值"   }
+        "logged": ".btn-three@equal->充值" 
+    }
 }
