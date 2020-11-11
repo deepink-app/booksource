@@ -16,6 +16,7 @@
         "summary": ".book-dec.Jbook-dec > p",
         "update": ".time@match->(?<=· ).+(?= · )",
         "lastChapter": ".book-new-chapter > .tit > a",
+        "words": ".nums > span:eq(0) > i",
         "catalog": ".all-catalog"
     },
     "catalog": {
