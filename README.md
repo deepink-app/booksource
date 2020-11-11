@@ -1,6 +1,6 @@
 ### 聚合搜索
 
-目前支持下列网站
+目前支持下列网站：
 - [豆瓣读书 douban.com](https://douban.com)
 - [起点中文网 qidian.com](https://qidian.com)
 - [晋江文学城 jjwxc.net](https://jjwxc.net)
