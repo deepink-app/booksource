@@ -1,6 +1,6 @@
 {
     "name": "17k小说",
-    "url": "www.17k.com",
+    "url": "17k.com",
     "version": 103,
     "search": {
         "url": "http://api.ali.17k.com/v2/book/search?sort_type=0&app_key=4037465544&_access_version=2&cps=0&channel=2&_versions=1070&merchant=17KH5&page=1&client_type=1&_filter_data=1&class=0&key=${key}",

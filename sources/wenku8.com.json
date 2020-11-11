@@ -1,0 +1,25 @@
+{
+    "name": "轻小说文库",
+    "url": "wenku8.com",
+    "version": 100,
+    "search": {
+        "url": "https://www.wenku8.net/modules/article/search.php?searchtype=articlename&searchkey=${key}@header->cookie:PHPSESSID=fldrofovuesk751oq9etdftplg267ghr",
+        "charset": "gbk",
+        "list": "#content > table > tbody > tr > td > div",
+        "name": "b",
+        "author": "p@match->(?<=作者:)(.+?)(?=/)",
+        "cover": "img",
+        "detail": "a"
+    },
+    "detail": {
+        "name": "td:nth-child(1) > span > b",
+        "author": "div > table > tbody > tr:nth-child(2) > td:nth-child(2)@match->(?<=：)(.+)",
+        "cover": "td > img",
+        "summary": "#content > div > table:nth-child(4) > tbody > tr > td:nth-child(2)@match->(?<=内容简介：)(.+)",
+        "status": "#content > div > table > tbody > tr:nth-child(2) > td:nth-child(3)",
+        "category": "#content > div > table > tbody > tr:nth-child(2) > td:nth-child(1)@match->(?<=类：)(.+)",
+        "words": "#content > div > table > tbody > tr:nth-child(2) > td:nth-child(5)@match->(?<=：)(.+?)(?=字)",
+        "update": "#content > div > table > tbody > tr:nth-child(2) > td:nth-child(4)@match->(?<=：)(.+)",
+        "lastChapter": "td:nth-child(2) > span > a"
+    }
+}
