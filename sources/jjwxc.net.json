@@ -13,7 +13,7 @@
     },
     "detail": {
         "summary": "$.novelIntro@replace->&lt;br/&gt;&lt;br/&gt;->\n",
-        "status": "$.novelStep@equal->2",
+        "status": "$.novelStep@equal->1",
         "category":"$.novelClass@replace->--> ",
         "words":"$.novelSize",
         "update": "$.renewDate",
@@ -36,6 +36,6 @@
         "verify": "https://m.jjwxc.net/my",
         "logged": "h2@equal->首页>我的晋江",
         "vip":".b>font@match->.+(?=，)@equal->VIP章节",
-        "buy":".grid-c>div>a:not(style):nth-child(12)@equal->目录"
+        "buy":".grid-c>div>a:nth-child(12)@equal->目录"
       }
 }
