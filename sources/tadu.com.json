@@ -1,0 +1,22 @@
+{
+    "name": "塔读",
+    "url": "tadu.com",
+    "version": 100,
+    "search": {
+        "url": "https://www.tadu.com/search@post->query=${key}",
+        "list": "ul.bookList > li",
+        "name": "a.bookNm",
+        "author": "a.authorNm",
+        "cover": ".bookImg > img@attr->data-src@replace->media7->media3@replace->125_100->276_200",
+        "detail": "a.bookNm"
+    },
+    "detail": {
+        "summary": ".bookIntro > div > p",
+        "status": ".sortList > a@equal->连载中",
+        "category": "div.boxCenter.navList > a:nth-child(4)",
+        "words": ".datum > span:nth-child(1) > em",
+        "update": ".newUpdate > span@replace->更新时间：->",
+        "lastChapter": ".newUpdate > a",
+        "catalog": ".readBtn > a:nth-child(2)"
+    }
+}
