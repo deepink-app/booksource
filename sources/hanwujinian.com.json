@@ -26,14 +26,5 @@
            },
     "chapter": {
         "content":".article-con"
-    },
-    "auth": {
-      "login": "https://www.hanwujinian.com/login.php",
-      "cookie": "hanwujinian.com",
-      "header":"User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.110 Safari/537.36",
-      "verify":"https://www.hanwujinian.com/modules/article/bookcase.php",
-     "logged": ".bd>li:nth-child(5)@equal->退出登陆",
-     "vip":"caption@equal->购买VIP章节",
-     "buy":".icommentbtn@equal->我要评论"
     }          
 }
