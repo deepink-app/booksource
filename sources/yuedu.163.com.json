@@ -1,6 +1,6 @@
 {
     "name": "网易云阅读",
-    "url": "m.yuedu.163.com",
+    "url": "yuedu.163.com",
     "version": 105,
     "search": {
         "url": "http://m.yuedu.163.com/search/book/data.json?key=${key}",
