@@ -11,3 +11,5 @@
 - [x] SF轻小说 [sfacg.com](https://sfacg.com)
 - [x] 飞卢中文网 [faloo.com](https://faloo.com)
 - [x] 豆腐 [doufu.la](https://doufu.la)
+- [x] 黑岩 [heiyan.com](https://heiyan.com)
+- [x] 长佩文学 [gongzicp.com](https://gongzicp.com)
