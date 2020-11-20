@@ -1,37 +1,36 @@
 {
     "name": "黑岩",
     "url": "heiyan.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "http://search.heiyan.com/web/search?queryString=${key}&highlight=false",
         "list": "$..content[*]",
         "name": "$.name",
         "author": "$.authorname",
         "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-        "detail": "https://www.heiyan.com/book/${$.id}"
+        "detail": "https://w.heiyan.com/book/${$.id}"
     },
     "detail": {
         "summary": "meta[property=og:description]@attr->content",
         "status": "meta[property=og:novel:status]@attr->content",
         "category": "meta[property=og:novel:category]@attr->content",
-        "words": "span.words@replace->字->",
+        "words": "div.info > div:nth-child(3)@match->(?<=)(.+?)(?=字)",
         "update": "meta[property=og:novel:update_time]@attr->content",
         "lastChapter": "meta[property=og:novel:latest_chapter_name]@attr->content",
-        "catalog": ".buttons.clearfix > a.index"
+        "catalog": "div.more-index > a@replace->w.->www."
     },
     "catalog": {
         "list": "ul.float-list > li",
         "name": "a",
-        "chapter": "a"
+        "chapter": "a@replace->www.->w."
     },
     "chapter": {
         "content": ".page-content > p"
     },
     "auth": {
-        "login": "https://www.heiyan.com/accounts/login?backUrl=http://www.heiyan.com/",
+        "login": "https://w.heiyan.com/accounts/login?backUrl=https://w.heiyan.com/",
         "cookie": "heiyan.com",
-        "verify": "https://accounts.heiyan.com/people",
-        "logged": ".accounts > .right > p > a:nth-child(3)@equal->退出",
-        "vip": "div.hd > span.title@equal->订阅VIP章节"
+        "verify": "https://accounts.heiyan.com/m/people/",
+        "logged": "p.header_title@equal->个人中心"
     }
 }
