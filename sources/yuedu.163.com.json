@@ -17,7 +17,7 @@
         "status": ".info > p:nth-child(4)@match->(?<= | ).+",
         "summary":".j-intro-wrap > p",
         "update": ".m-book-recent > p@match->.+(?=更新)",
-        "words":".info > p:nth-child(5)@match->(?=字数：).+",
+        "words":".info > p:nth-child(5)@match->(?<=字数：).+",
         "category":".info > p:nth-child(4)@match->(?<=分类：)(.+)(?=\\ \\|\\ )@replace->/-> ",
         "lastChapter": ".m-book-recent > a",
         "catalog": "http://m.yuedu.163.com/reader/book/info.json?catalog_only=true&source_uuid=${div.j-actions@attr->data-sourceuuid}"
