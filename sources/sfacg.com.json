@@ -1,14 +1,14 @@
 {
     "name": "SF轻小说",
     "url": "sfacg.com",
-    "version": 100,
+    "version": 101,
     "search": {
-        "url": "https://api.sfacg.com/search/novels/result?q=${key}&expand=novels,comics,albums,chatnovelstags,typeName,authorName,intro,latestchaptitle,latestchapintro,tags,sysTags&sort=hot&page=0&size=12&systagids=",
-        "list": "$.data.novels",
-        "name": "$.novelName",
-        "author": "$.authorName",
-        "cover": "$.novelCover",
-        "detail": "https://api.sfacg.com/novels/${$.novelId}?expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,essaytag,auditCover,preOrderInfo"
+        "url": "http://s.sfacg.com/?Key=${key}&S=1&SS=0",
+        "list": "[style=width:100%]",
+        "name": "strong.F14PX",
+        "author": "li:nth-child(2)@match->(?<=综合信息：).+?(?=/)",
+        "cover": "img",
+        "detail": "https://api.sfacg.com/novels/${strong.F14PX > a}?expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,essaytag,auditCover,preOrderInfo@replace->http://book.sfacg.com/Novel/->"
     },
     "detail": {
         "status": "$.data.isFinish@equal->false",
@@ -24,7 +24,7 @@
         "booklet": {
             "name": "$.title",
             "list": "$.chapterList"
-        },
+          },
         "name": "$.title",
         "chapter": "https://api.sfacg.com/Chaps/${$.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false"
     },
@@ -38,6 +38,8 @@
         "verify": "https://m.sfacg.com/my/",
         "logged": ".my_menu > a > li@equal->我的书架",
         "vip": "$.data.isVip@equal->true",
-        "buy": "$.status.httpCode@equal->200"
+        "buy": "$.status.httpCode@equal->200",
+        "profile": "https://m.sfacg.com/my/",
+        "recharge": "@replace->api.sfacg.com/Chaps->m.sfacg.com/c@replace->?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false->/"
     }
 }
