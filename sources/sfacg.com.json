@@ -39,6 +39,7 @@
           "logged": ".my_menu > a > li@equal->我的书架",
           "vip": "$.data.isVip@equal->true",
           "buy": "$.status.httpCode@equal->200",
+          "profile": "https://m.sfacg.com/my/",
           "recharge": "@replace->api.sfacg.com/Chaps->m.sfacg.com/c@replace->?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false->/"
       }
   }
