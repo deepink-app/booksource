@@ -1,0 +1,37 @@
+{
+    "name": "鲸鱼阅读",
+    "url": "jingyu.com",
+    "version": 100,
+    "search": {
+        "url": "http://www.jingyu.com/search/?kw=${key}",
+        "list": ".novel",
+        "name": ".title",
+        "author": ".brief > span > a:nth-child(1)",
+        "cover": ".novel-cover > a > img@attr->data-src",
+        "detail": ".title > a"
+    },
+    "detail": {
+        "summary": "li:nth-child(1) > p",
+        "status": ".novel_status@attr->data-status@equal->1",
+        "category": ".details > p:nth-child(2) > a",
+        "words": ".details > p:nth-child(3) > i:nth-child(2)",
+        "lastChapter": ".update@match->(?<=最新章节：).+",
+        "catalog": ".details > div > a:nth-child(3)"
+    },
+    "catalog": {
+        "list": ".chapter-list > li",
+        "name": "a",
+        "chapter": "a@match->(?<=/chapter/).+(?=.html)@replace->http://www.jingyu.com/chaplist/->http://m.jingyu.com/novel/read?cid="
+    },
+    "chapter": {
+        "content": ".js-chapterContent",
+        "filter": ["@p.name","@div","@a","@span","@img"]
+    },
+    "auth": {
+        "login": "http://m.jingyu.com/qhpass",
+        "cookie": "jingyu.com",
+        "verify": "http://m.jingyu.com/profile",
+        "logged": ".logout-btn@equal->退出登录",
+        "vip": ".subscribe-btn@equal->购买本章"
+    }
+}
