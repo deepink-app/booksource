@@ -12,7 +12,7 @@
         "detail": "https://h5.reader.qq.com/9/intro?bid=${$.id}"
     },
     "detail": {
-        "status": "$.book.finished@equal->1", 
+        "status": "$..finished@equal->1", 
         "words":"$..totalWords",
         "category":"$.caname",
         "update": "$.uptime",
