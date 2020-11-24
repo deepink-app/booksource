@@ -1,7 +1,7 @@
 {
     "name": "QQ阅读",
     "url": "reader.qq.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "https://h5.reader.qq.com/9/search?key=${key}&pageNo=1",
         "charset": "UTF-8",
