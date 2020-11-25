@@ -1,14 +1,13 @@
 {
     "name": "不可能的世界",
     "url": "8kana.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "http://inf.8kana.com/book/search@post->UserId=&Keyword=${key}&SearchType=3&Page=1&system=android",
         "list": "$.data.Books",
         "name": "$.BookName",
         "author": "$.AuthorName",
         "cover": "$.BookCover",
-        "summary": "$.NoteForMobile",
         "detail": "http://inf.8kana.com/Works/book@post->UserId=&BookId=${$.BookId}&Type=1&system=android"
     },
     "detail": {
@@ -22,19 +21,17 @@
     "catalog": {
         "list": "$.data.ChapterList",
         "name": "$.Title",
-        "chapter": "https://www.8kana.com/read/${$.ChapterId}.html"
+        "chapter": "https://m.8kana.com/chapter/content/${$.ChapterId}"
     },
     "chapter": {
-        "content": ".myContent",
-        "filter": ["span"],
-        "purify": ["本书连载自免费原创小说网站”不可能的世界”www.8kana.com，中国最有爱的年轻小说网站！各大市场下载官方免费APP，享最快更新。"]
+        "content": ".readMain_Content"
     },
     "auth": {
-        "login": "https://www.8kana.com/www/passport/login",
-        "cookie": "8kanna.com",
-        "verify": "https:/www.8kana.com",
-        "logged": "#out@equal->退出登录",
-        "vip": "#msg@equal->开通VIP，本小说免费看",
-        "profile": "https://www.8kana.com/member/"
+        "login": "https://m.8kana.com/www/passport/login",
+        "cookie": "8kana.com",
+        "verify": "https://m.8kana.com/member/",
+        "logged": ".memberTitle_Text@equal->我的书架",
+        "vip": "div:nth-child(2) > div.readFeesBtn_Top@equal->订阅当前章节",
+        "profile": "https://m.8kana.com/member/"
     }
 }
