@@ -1,7 +1,7 @@
 {
     "name": "黑岩",
     "url": "heiyan.com",
-    "version": 102,
+    "version": 103,
     "search": {
         "url": "http://search.heiyan.com/web/search?queryString=${key}&highlight=false",
         "list": "$..content[*]",
@@ -44,12 +44,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         },
         {
             "title":"月人气",
@@ -61,12 +56,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         },
         {
             "title":"总人气",
@@ -78,12 +68,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         },
         {
             "title":"推荐榜",
@@ -95,12 +80,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         },
         {
             "title":"字数榜",
@@ -112,12 +92,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         },
         {
             "title":"总书库",
@@ -129,12 +104,7 @@
                 {"key": "6", "value": "玄幻"}, {"key": "14", "value": "奇幻"}, {"key": "7", "value": "仙侠"},
                 {"key": "8", "value": "武侠"}, {"key": "10", "value": "科幻"}, {"key": "9", "value": "游戏"},
                 {"key": "25", "value": "现代"}, {"key": "36", "value": "古言"}, {"key": "54", "value": "现实"}
-            ],
-            "list": "$..content[*]",
-            "name": "$.name",
-            "author": "$.authorname",
-            "cover": "https://b.heiyanimg.com/book/${$.id}.jpg",
-            "detail": "https://w.heiyan.com/book/${$.id}"
+            ]
         }
     ]
 }
