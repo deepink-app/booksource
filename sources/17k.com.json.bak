@@ -54,7 +54,7 @@
               "author": "$.authorPenName",
               "summary": "$.introduction",
               "cover": "$.coverImg",
-              "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+              "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
   
           },  {
             "title":"礼物榜",
@@ -67,7 +67,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         },  {
             "title":"红包榜",
@@ -80,7 +80,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         },  {
             "title":"新书榜",
@@ -93,7 +93,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } ,  {
             "title":"人气榜",
@@ -106,7 +106,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         }  ,  {
             "title":"完本榜",
@@ -119,7 +119,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } ,  {
             "title":"热评榜",
@@ -132,7 +132,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } ,  {
             "title":"更新榜",
@@ -145,7 +145,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } ,  {
             "title":"荣誉榜",
@@ -158,7 +158,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } 
          ,  {
@@ -172,7 +172,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         }  ,  {
             "title":"推荐票榜",
@@ -185,7 +185,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         },  {
             "title":"包月书榜",
@@ -198,7 +198,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         }, {
             "title":"免费书榜",
@@ -211,7 +211,7 @@
             "author": "$.authorPenName",
             "summary": "$.introduction",
             "cover": "$.coverImg",
-            "detail": "http://api.17k.com/book/${$.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0"
+            "detail": "https://www.17k.com/book/${$.id}.html?id=${$.id}"
 
         } 
       ]
