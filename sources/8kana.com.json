@@ -8,7 +8,6 @@
         "name": "$.BookName",
         "author": "$.AuthorName",
         "cover": "$.BookCover",
-        "summary": "$.NoteForMobile",
         "detail": "http://inf.8kana.com/Works/book@post->UserId=&BookId=${$.BookId}&Type=1&system=android"
     },
     "detail": {
