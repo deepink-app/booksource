@@ -1,7 +1,7 @@
 {
     "name": "长佩文学",
     "url": "gongzicp.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "https://m.gongzicp.com/novel/searchNovelOnlyByName?keyword=${key}&searchType=1&finishType=0&novelType=0&sortType=1&page=1@header->X-Requested-With: XMLHttpRequest",
          "charset": "utf-8",
@@ -40,7 +40,7 @@
         "vip":"$.data.chapter.chapter_price@equalNot->0",
         "buy":"$.data.chapter.is_sub@equal->1"
     } ,
-rank": [
+    "rank": [
         {
             "title":"畅销榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=1&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -57,13 +57,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"上架榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=2&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -80,13 +74,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"风云榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=3&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -103,13 +91,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"热读榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=4&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -126,13 +108,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"完结榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=75&r=2&d=2&p=1&t=${key}&r=5&d=7&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -149,13 +125,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"人气榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=6&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -172,13 +142,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"新书榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=7&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -195,13 +159,7 @@ rank": [
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
+            "list": "$.data[*]"
         },{
             "title":"新人榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=8&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -219,13 +177,7 @@ rank": [
             "page": 1,
             "size": 10,
             "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
-        },{
+       },{
             "title":"萌新榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=9&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
             "categories": [
@@ -242,13 +194,7 @@ rank": [
             "page": 1,
             "size": 10,
             "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
-        },{
+       },{
             "title":"打赏榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=2&d=2&p=${page}&t=${key}&r=10&d=5&p=${page}@header->X-Requested-With: XMLHttpRequest",
             "categories": [
@@ -265,13 +211,7 @@ rank": [
             "page": 1,
             "size": 10,
             "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
-        },{
+       },{
             "title":"互动榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=75&r=2&d=2&p=1&t=${key}&r=11&d=9&p=${page}@header->X-Requested-With: XMLHttpRequest",
             "categories": [
@@ -288,13 +228,7 @@ rank": [
             "page": 1,
             "size": 10,
             "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
-        },{
+       },{
             "title":"勤奋榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=75&r=2&d=2&p=1&t=${key}&r=12&d=4&p=${page}@header->X-Requested-With: XMLHttpRequest",
             "categories": [
@@ -311,14 +245,7 @@ rank": [
             "page": 1,
             "size": 10,
             "list": "$.data[*]",
-            "name": "$.novel_name",
-            "author": "$.novel_author",
-            "summary": "$.novel_desc",
-            "cover": "$.novel_cover",
-            "detail": "/novel/chapterList/id/${$.novel_id}@header->X-Requested-With: XMLHttpRequest"
- 
-        }
-        
-    ]
+       }        
+    ] 
  
 }
