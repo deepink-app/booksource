@@ -1,7 +1,7 @@
 {
     "name": "SF轻小说",
     "url": "sfacg.com",
-    "version": 102,
+    "version": 101,
     "search": {
         "url": "http://s.sfacg.com/?Key=${key}&S=1&SS=0",
         "list": "[style=width:100%]",
@@ -41,61 +41,5 @@
         "buy": "$.status.httpCode@equal->200",
         "profile": "https://m.sfacg.com/my/",
         "recharge": "@replace->api.sfacg.com/Chaps->m.sfacg.com/c@replace->?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false->/"
-    },
-    "rank": [
-        {
-            "title":"全部",
-            "url": "https://api.sfacg.com/novels/0/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"魔幻",
-            "url": "https://api.sfacg.com/novels/21/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"玄幻",
-            "url": "https://api.sfacg.com/novels/22/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"古风",
-            "url": "https://api.sfacg.com/novels/23/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"科幻",
-            "url": "https://api.sfacg.com/novels/24/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"校园",
-            "url": "https://api.sfacg.com/novels/25/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"都市",
-            "url": "https://api.sfacg.com/novels/26/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"游戏",
-            "url": "https://api.sfacg.com/novels/27/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        },
-        {
-            "title":"悬疑",
-            "url": "https://api.sfacg.com/novels/28/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate",
-            "page": 0,
-            "list": "$.data"
-        }
-    ]
+    }
 }
