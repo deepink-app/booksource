@@ -1,0 +1,41 @@
+{
+    "name": "磨铁中文网",
+    "url": "motie.com",
+    "version": 100,
+    "search": {
+        "url": "https://app2.motie.com/search?word=${key}&pageNo=1&pageSize=30",
+        "list": "$..bookList[*]",
+        "name": "$.name",
+        "author": "$.authorName",
+        "cover": "$.icon",
+        "detail": "https://app2.motie.com/books/${$.id}/detail"
+    },
+    "detail": {
+        "summary": "$.data.introduce",
+        "status": "$.data.finished@equal->false",
+        "category": "$.data.sortName ",
+        "words": "$.data.words",
+        "update": "$..chapterShowTime",
+        "lastChapter": "$.data.lastChapterList[*].name",
+        "catalog": "https://app2.motie.com/books/${$.data.id}/chapters"
+    },
+    "catalog": {
+        "list": "$.data.data[?(@.publishTime)]",
+        "name": "$.name",
+        "chapter": "https://app2.motie.com/chapters/${$.id}@header->os:wap"
+    },
+    "chapter": {
+        "content": "$..content"
+    },
+"auth": {
+        "login": "http://m.motie.com/authIntercept",
+        "cookie": "m.motie.com",
+        "header":"sd:${sd}",
+        "verify": "https://app2.motie.com/personal/basic_info@header->os:wap",
+        "logged": "$.result@equal->1",
+        "vip": "$..price@equalNot->0",
+        "buy":"$.error_msg@equalNot->需要购买",
+        "profile":"https://m.motie.com/accounts/my",
+        "recharge":"@replace->app2->m@replace->chapters->chapter"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "有毒小说",
+    "url": "youdubook.com",
+    "version": 100,
+    "search": {
+        "url": "https://www.youdubook.com/booklibrary/index/str/0_0_0_0_0_0_0_${key}",
+        "list": ".BooklibraryList > ul > li:not(li.clear-x):not(li.clear)",
+        "name": "span > a",
+        "author": ".nickname",
+        "cover": "em > img@attr->data-original",
+        "detail": "span > a"
+    },
+    "detail": {
+        "status": "li.a",
+        "summary": ".synopsisCon",
+        "category": ".label > ul > li:nth-child(n+3)",
+        "words": ".Font@match->.+(?=字)",
+        "update": ".title > i@match->(?<=更新时间：).+",
+        "lastChapter": ".zhangjie > a > span:nth-child(1)"
+    }
+}
