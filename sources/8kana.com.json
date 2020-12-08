@@ -1,7 +1,7 @@
 {
     "name": "不可能的世界",
     "url": "8kana.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "http://inf.8kana.com/book/search@post->UserId=&Keyword=${key}&SearchType=3&Page=1&system=android",
         "list": "$.data.Books",
@@ -33,5 +33,37 @@
         "logged": ".memberTitle_Text@equal->我的书架",
         "vip": "div:nth-child(2) > div.readFeesBtn_Top@equal->订阅当前章节",
         "profile": "https://m.8kana.com/member/"
-    }
+    },
+    "rank": [
+        {
+            "title":"烧脑",
+            "url": "http://inf.8kana.com/book/channel@post->Sex=1&Class0Id=3&VipType=&SeriesStatus=0&SearchType=1&Page=${page}&system=android",
+            "page": 1,
+            "list": "$.data.books"
+        },
+        {
+            "title":"神州",
+            "url": "http://inf.8kana.com/book/channel@post->Sex=1&Class0Id=6&VipType=&SeriesStatus=0&SearchType=1&Page=${page}&system=android",
+            "page": 1,
+            "list": "$.data.books"
+        },
+        {
+            "title":"轻幻想",
+            "url": "http://inf.8kana.com/book/channel@post->Sex=1&Class0Id=1&VipType=&SeriesStatus=0&SearchType=1&Page=${page}&system=android",
+            "page": 1,
+            "list": "$.data.books"
+        },
+        {
+            "title":"重幻想",
+            "url": "http://inf.8kana.com/book/channel@post->Sex=1&Class0Id=2&VipType=&SeriesStatus=0&SearchType=1&Page=${page}&system=android",
+            "page": 1,
+            "list": "$.data.books"
+        },
+        {
+            "title":"轻小说",
+            "url": "http://inf.8kana.com/book/channel@post->Sex=1&Class0Id=4&VipType=&SeriesStatus=0&SearchType=1&Page=${page}&system=android",
+            "page": 1,
+            "list": "$.data.books"
+        } 
+    ]
 }
