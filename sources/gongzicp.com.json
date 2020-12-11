@@ -176,7 +176,7 @@
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
+            "list": "$.data[*]"
        },{
             "title":"萌新榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=9&d=2&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -193,7 +193,7 @@
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
+            "list": "$.data[*]"
        },{
             "title":"打赏榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=${key}&r=2&d=2&p=${page}&t=${key}&r=10&d=5&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -210,7 +210,7 @@
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
+            "list": "$.data[*]"
        },{
             "title":"互动榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=75&r=2&d=2&p=1&t=${key}&r=11&d=9&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -227,7 +227,7 @@
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
+            "list": "$.data[*]"
        },{
             "title":"勤奋榜",
             "url": "https://m.gongzicp.com/home/ranking?&t=75&r=2&d=2&p=1&t=${key}&r=12&d=4&p=${page}@header->X-Requested-With: XMLHttpRequest",
@@ -244,7 +244,7 @@
             ],
             "page": 1,
             "size": 10,
-            "list": "$.data[*]",
+            "list": "$.data[*]"
        }        
     ] 
  
