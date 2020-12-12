@@ -29,7 +29,7 @@
         "chapter": "https://api.sfacg.com/Chaps/${$.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi,chatlines&autoOrder=false"
     },
     "chapter": {
-        "content": "$.data.expand.content@replace->\[img.+?\]-><img src=\"@replace->\[/img\]->\"/>"
+        "content": "$.data.expand.content@replace->[img.+?]-><img src=\"@replace->[/img]->\"/>"
     },
     "auth": {
         "login": "https://m.sfacg.com/login",
