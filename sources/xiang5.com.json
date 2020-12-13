@@ -1,14 +1,13 @@
 {
     "name": "香网",
     "url": "xiang5.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "http://m.xiang5.com/dosearch?word=${key}&sort=totalviews",
         "list": "$..list[*]",
         "name": "$.name",
         "author": "$.author",
         "cover": "$.img",
-        "status":"$.status",
         "detail": "$.book_url"
     },
     "detail": {
