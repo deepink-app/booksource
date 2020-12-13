@@ -1,10 +1,10 @@
 {
     "name": "轻之文库",
     "url": "linovel.net",
-    "version": 101,
+    "version": 102,
     "search": {
-        "url": "https://www.linovel.net/search/?kw=${key}",
-        "list": ".rank-book-list",
+        "url": "https://www.linovel.net/search/index?kw=${key}",
+        "list": ".rank-book-list > a",
         "name": ".book-name",
         "author": ".book-extra@match->(.+)(?= 丨)",
         "cover": ".book-cover > img",
