@@ -1,7 +1,7 @@
 {
     "name": "黑岩",
     "url": "heiyan.com",
-    "version": 103,
+    "version": 104,
     "search": {
         "url": "http://search.heiyan.com/web/search?queryString=${key}&highlight=false",
         "list": "$..content[*]",
@@ -30,8 +30,9 @@
     "auth": {
         "login": "https://w.heiyan.com/accounts/login?backUrl=https://w.heiyan.com/",
         "cookie": "heiyan.com",
-        "verify": "https://accounts.heiyan.com/m/people/",
-        "logged": "p.header_title@equal->个人中心"
+        "verify": "ud",
+        "logged": "ud",
+        "profile": "https://accounts.heiyan.com/m/people/"
     },
     "rank": [
         {
