@@ -1,7 +1,7 @@
 {
     "name": "轻之文库",
     "url": "linovel.net",
-    "version": 102,
+    "version": 103,
     "search": {
         "url": "https://www.linovel.net/search/index?kw=${key}",
         "list": ".rank-book-list > a",
@@ -34,8 +34,9 @@
     "auth": {
         "login": "https://www.linovel.net/auth/login",
         "cookie": "linovel.net",
-        "verify": "https://www.linovel.net/my/profile",
-        "logged": "li.user-item > div > div.panel-bottom > div > ul > li:nth-child(4) > a@equal->注销登录"
+        "verify": "token",
+        "logged": "token",
+        "profile": "https://www.linovel.net/my/profile"
     },
     "rank": [
         {
