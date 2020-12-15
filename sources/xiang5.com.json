@@ -8,12 +8,12 @@
         "name": "$.name",
         "author": "$.author",
         "cover": "$.img",
-        "detail": "$.book_url"
+        "detail": "http://m.xiang5.com/bookinfo/${$.bookid}.html?status=${$.status}"
     },
     "detail": {
         "summary": ".bkdetails_intro>p:nth-child(2)",
         "category":"p.lastchapter>a@replace-> |->",
-        "status": ".bkdetails_intro>p:nth-child(2)@replace->->连载",
+        "status": "$params.status@replace->0->连载",
         "update": ".bkdetails_mulu>a>i@replace->目录->",
         "lastChapter": ".bkdetails_mulu>a>p@replace->目录->",
         "words":".bookcont>.type@match->(?<=字数：).+?(?=字)",
