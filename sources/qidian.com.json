@@ -1,7 +1,7 @@
 {
     "name": "起点中文网",
     "url": "qidian.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "https://m.qidian.com/majax/search/list?kw=${key}",
         "list": "$..records[*]",
@@ -35,8 +35,8 @@
         "login": "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
         "cookie": "qidian.com",
         "params": "_csrfToken=${_csrfToken}",
-        "verify": "https://m.qidian.com/user",
-        "logged": "#logout@equal->退出登录",
+        "verify": "_csrfToken",
+        "logged": "ywopenid",
         "vip": "$..vipStatus@equal->1",
         "buy": "$..isBuy@equal->1",
         "profile": "https://m.qidian.com/user",
