@@ -1,14 +1,14 @@
 {
     "name": "微信读书",
     "url": "weread.qq.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "https://weread.qq.com/web/search/global?keyword=${key}",
         "list": "$..bookInfo",
         "name": "$.title",
         "author": "$.author",
         "cover": "$.cover",
-        "detail": "$.bookId@decrypt->weread@replace->->https://weread.qq.com/web/reader/"
+        "detail": "$.bookId@decrypt->weread@replace->/search->/reader"
     },
     "detail": {
         "status": ".readerBookInfo_chapterPreview > a",
