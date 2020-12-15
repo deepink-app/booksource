@@ -1,1 +1,118 @@
-[ { "url": "8kana.com", "version": 102 }, { "url": "17k.com", "version": 104 }, { "url": "book.tiexue.net", "version": 101 }, { "url": "douban.com", "version": 100 }, { "url": "doufu.la", "version": 101 }, { "url": "dushu.baidu.com", "version": 100 }, { "url": "ebtang.com", "version": 101 }, { "url": "faloo.com", "version": 101 }, { "url": "gongzicp.com", "version": 101 }, { "url": "hanwujinian.com", "version": 100 }, { "url": "heiyan.com", "version": 103 }, { "url": "jingyu.com", "version": 101 }, { "url": "jjwxc.net", "version": 102 }, { "url": "kujiang.com", "version": 100 }, { "url": "linovel.net", "version": 102 }, { "url": "motie.com", "version": 100 }, { "url": "qidian.com", "version": 101 }, { "url": "reader.qq.com", "version": 101 }, { "url": "sfacg.com", "version": 104 }, { "url": "shuqi.com", "version": 100 }, { "url": "shushan.zhangyue.net", "version": 101 }, { "url": "tadu.com", "version": 101 }, { "url": "wenku8.com", "version": 102 }, { "url": "xiang5.com", "version": 100 }, { "url": "xrzww.com", "version": 100 }, { "url": "youdubook.com", "version": 100 }, { "url": "yuedu.163.com", "version": 107 }, { "url": "zongheng.com", "version": 100 } ]
+[
+    {
+        "url": "8kana.com",
+        "version": 102
+    },
+    {
+        "url": "17k.com",
+        "version": 104
+    },
+    {
+        "url": "book.tiexue.net",
+        "version": 101
+    },
+    {
+        "url": "douban.com",
+        "version": 100
+    },
+    {
+        "url": "doufu.la",
+        "version": 101
+    },
+    {
+        "url": "dushu.baidu.com",
+        "version": 100
+    },
+    {
+        "url": "ebtang.com",
+        "version": 101
+    },
+    {
+        "url": "faloo.com",
+        "version": 101
+    },
+    {
+        "url": "gongzicp.com",
+        "version": 101
+    },
+    {
+        "url": "hanwujinian.com",
+        "version": 100
+    },
+    {
+        "url": "heiyan.com",
+        "version": 103
+    },
+    {
+        "url": "jingyu.com",
+        "version": 101
+    },
+    {
+        "url": "jjwxc.net",
+        "version": 102
+    },
+    {
+        "url": "kujiang.com",
+        "version": 100
+    },
+    {
+        "url": "linovel.net",
+        "version": 102
+    },
+    {
+        "url": "motie.com",
+        "version": 100
+    },
+    {
+        "url": "qidian.com",
+        "version": 101
+    },
+    {
+        "url": "reader.qq.com",
+        "version": 101
+    },
+    {
+        "url": "sfacg.com",
+        "version": 104
+    },
+    {
+        "url": "shuqi.com",
+        "version": 100
+    },
+    {
+        "url": "shushan.zhangyue.net",
+        "version": 101
+    },
+    {
+        "url": "tadu.com",
+        "version": 101
+    },
+    {
+        "url": "wenku8.com",
+        "version": 102
+    },
+    {
+        "url": "weread.qq.com",
+        "version": 100
+    },
+    {
+        "url": "xiang5.com",
+        "version": 100
+    },
+    {
+        "url": "xrzww.com",
+        "version": 100
+    },
+    {
+        "url": "youdubook.com",
+        "version": 100
+    },
+    {
+        "url": "yuedu.163.com",
+        "version": 107
+    },
+    {
+        "url": "zongheng.com",
+        "version": 100
+    }
+]
