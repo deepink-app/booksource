@@ -1,7 +1,7 @@
 {
   "name": "晋江文学城",
   "url": "jjwxc.net",
-  "version": 102,
+  "version": 103,
   "search": {
     "url": "http://app.jjwxc.org/androidapi/search?keyword=${key}&type=1&page=1&token=null&searchType=1&sortMode=DESC&versionCode=133",
     "charset": "UTF-8",
@@ -31,8 +31,8 @@
   "auth": {
     "login": "https://m.jjwxc.net/my/login?login_mode=jjwxc",
     "header": "User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
-    "cookie": "m.jjwxc.net",
-    "verify": "https://m.jjwxc.net/my",
+    "cookie": "sid",
+    "verify": "sid",
     "logged": "h2@equal->首页>我的晋江",
     "vip": ".b>font@match->.+(?=，)@equal->VIP章节",
     "buy": ".grid-c>div>a:nth-child(12)@equal->目录"

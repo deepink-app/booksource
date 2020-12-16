@@ -1,7 +1,7 @@
 {
     "name": "雁北堂",
     "url": "ebtang.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "http://ebtang.com/book/search?searchName=${key}",  
         "charset": "UTF-8",
@@ -27,12 +27,6 @@
     },
     "chapter": {
         "content":"$..content"
-    },
-    "auth": {
-        "login": "http://m.ebtang.com/m/user/login",
-        "cookie": "m.ebtang.com",
-        "verify": "http://m.ebtang.com/m/user/index",
-        "logged": ".btn-three@equal->充值" 
     },
     "rank": [
         {
