@@ -1,9 +1,9 @@
 {
     "name": "轻小说文库",
     "url": "wenku8.com",
-    "version": 102,
+    "version": 103,
     "search": {
-        "url": "https://www.wenku8.net/modules/article/search.php?searchtype=articlename&searchkey=${key}@header->cookie:PHPSESSID=me8rf20cdd8pmr1e0f8clfohhsf7u3st",
+        "url": "https://www.wenku8.net/modules/article/search.php?searchtype=articlename&searchkey=${key}@header->cookie:PHPSESSID=qn911o0bbn63oknl5jem04i5oedo0vth",
         "charset": "gbk",
         "list": "#content > table > tbody > tr > td > div",
         "name": "b",
