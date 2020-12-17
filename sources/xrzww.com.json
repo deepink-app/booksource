@@ -1,19 +1,19 @@
 {
     "name": "息壤中文网",
     "url": "xrzww.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "https://pre-api.xrzww.com/api/search?type=1&keyword=${key}",
         "list": "$.data.data",
         "name": "$.novel_name",
         "author": "$.novel_author",
-        "cover": "http://oss.xrzww.com/${$.novel_cover}", 
+        "cover": "http://oss.xrzww.com/${$.novel_cover}",
         "detail": "https://pre-api.xrzww.com/api/detail?novel_id=${$.novel_id}"
     },
     "detail": {
-        "summary":"$.data.novel_info",
+        "summary": "$.data.novel_info",
         "status": "$.data.novel_process@equal->1",
-        "category": "$.data.novel_tags",
+        "category": "$.data.novel_tags@replace->,-> ",
         "words": "$.data.novel_wordnumber",
         "lastChapter": "$.data.novel_newcname",
         "catalog": "https://pre-api.xrzww.com/api/directoryList?nid=${$.data.novel_id}&orderBy=0"
