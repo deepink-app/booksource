@@ -1,7 +1,7 @@
 {
     "name": "铁血读书",
     "url": "book.tiexue.net",
-    "version": 101,
+    "version": 103,
     "search": {
         "url": "https://book.tiexue.net/SearchResults.aspx?keywords=${key}&noveltype=0",
         "charset": "GBK",
@@ -37,8 +37,8 @@
     "auth": {
         "login": "https://book.tiexue.net",
         "cookie": "book.tiexue.net",
-        "verify": "https://m.book.tiexue.net/usercenter.aspx",
-        "logged": ".cont-out@equal->退出登录",
+        "verify": "p",
+        "logged": "p",
         "vip": "#ButtonVIPTop@attr->value@equal->订阅已选章节",
         "buy": "#ButtonVIPTop@attr->value@equalNot->订阅已选章节"
       },
