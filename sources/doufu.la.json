@@ -1,7 +1,7 @@
 {
     "name": "豆腐",
     "url": "doufu.la",
-    "version": 101,
+    "version": 103,
     "search": {
         "url": "http://api.doufu.la/index.php/search/content?keyword=${key}&start=0&rows=20&types=18",
         "charset": "utf-8",
@@ -32,8 +32,8 @@
         "login": "https://m.doufu.la/login",
         "cookie": "m.doufu.la",
         "header":"x-csrf-token:${XSRF-TOKEN}",
-        "verify": "https://m.doufu.la/personal",
-        "logged": ".sns_logout@equal->退出登录",
+        "verify": "uid",
+        "logged": "uid",
         "vip": "$.chapter.need_pay",
         "buy":"$.chapter.is_pay@equal->1"
     }

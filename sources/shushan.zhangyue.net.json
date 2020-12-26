@@ -1,7 +1,7 @@
 {
     "name": "书山中文网",
     "url": "shushan.zhangyue.net",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "http://shushan.zhangyue.net/search/${key}/",
          "charset": "UTF-8",
@@ -31,9 +31,9 @@
     }    ,
     "auth": {
         "login": "http://wap.shushan.zhangyue.net/user/login",
-        "cookie": "wap.shushan.zhangyue.net",
-        "verify": "http://wap.shushan.zhangyue.net/user/page?type=account",
-        "logged": ".logout-btn.user-info > span@equal->退出登录",
+        "cookie": "shushan.zhangyue.net",
+        "verify": "__Male_",
+        "logged": "__Male_",
         "vip":"$.code@equalNot->200",
         "buy":"$.code@equal->200",
         "recharge":"@replace->index.php?c=book&m=content&bid=->book/@replace->&cid=->/"
