@@ -1,7 +1,7 @@
 {
     "name": "鲸鱼阅读",
     "url": "jingyu.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "http://www.jingyu.com/search/?kw=${key}",
         "list": ".novel",
