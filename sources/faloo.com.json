@@ -1,7 +1,7 @@
 {
     "name": "飞卢小说网",
     "url": "faloo.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "https://wap.faloo.com/category/0/1.html?k=${key}",
         "charset": "gb2312",   
@@ -33,8 +33,8 @@
     "auth": {
         "login": "https://u.faloo.com/regist/Login.aspx",
         "cookie": "faloo.com",
-        "verify": "https://u.faloo.com/AccountInfo.aspx",
-        "logged": ".balanceVip > span@equal->现余额VIP点",
+        "verify": "KeenFire",
+        "logged": "KeenFire",
         "vip": "#content > a:nth-child(4)@equal->订阅本章节>>"
     },
     "rank": [
