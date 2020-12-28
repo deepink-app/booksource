@@ -1,7 +1,7 @@
 {
     "name": "鲸鱼阅读",
     "url": "jingyu.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "http://www.jingyu.com/search/?kw=${key}",
         "list": ".novel",
@@ -30,8 +30,8 @@
     "auth": {
         "login": "http://m.jingyu.com/qhpass",
         "cookie": "jingyu.com",
-        "verify": "http://m.jingyu.com/profile",
-        "logged": ".logout-btn@equal->退出登录",
+        "verify": "__guid",
+        "logged": "u",
         "vip": ".subscribe-btn@equal->购买本章"
     },
     "rank": [

@@ -1,7 +1,7 @@
 {
     "name": "SF轻小说",
     "url": "sfacg.com",
-    "version": 104,
+    "version": 105,
     "search": {
         "url": "http://s.sfacg.com/?Key=${key}&S=1&SS=0",
         "list": "[style=width:100%]",
@@ -34,9 +34,9 @@
     "auth": {
         "login": "https://m.sfacg.com/login",
         "header":"authorization: Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE=",
-        "cookie": "m.sfacg.com",
-        "verify": "https://m.sfacg.com/my/",
-        "logged": ".my_menu > a > li@equal->我的书架",
+        "cookie": "sfacg.com",
+        "verify": "session_PC",
+        "logged": "session_PC",
         "vip": "$.data.isVip@equal->true",
         "buy": "$.status.httpCode@equal->200",
         "profile": "https://m.sfacg.com/my/",
