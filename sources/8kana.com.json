@@ -1,7 +1,7 @@
 {
     "name": "不可能的世界",
     "url": "8kana.com",
-    "version": 102,
+    "version": 103,
     "search": {
         "url": "http://inf.8kana.com/book/search@post->UserId=&Keyword=${key}&SearchType=3&Page=1&system=android",
         "list": "$.data.Books",
@@ -29,8 +29,8 @@
     "auth": {
         "login": "https://m.8kana.com/www/passport/login",
         "cookie": "8kana.com",
-        "verify": "https://m.8kana.com/member/",
-        "logged": ".memberTitle_Text@equal->我的书架",
+        "verify": "userinfo",
+        "logged": "authkey",
         "vip": "div:nth-child(2) > div.readFeesBtn_Top@equal->订阅当前章节",
         "profile": "https://m.8kana.com/member/"
     },
