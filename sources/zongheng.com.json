@@ -1,7 +1,7 @@
 {
     "name": "纵横中文网",
     "url": "zongheng.com",
-    "version": 101,
+    "version": 103,
     "search": {
         "url": "http://search.zongheng.com/s?keyword=${key}",
          "charset": "utf-8",
@@ -31,18 +31,7 @@
     "chapter": {
         "content":".content > p"
     },
-    "auth": {
-        "login": "https://passport.zongheng.com",
-        "cookie": "www.zongheng.com",
-        "params": "_csrfToken=${_csrfToken}",
-        "verify": "_csrfToken",
-        "logged": "ywopenid",
-        "vip": "$..vipStatus@equal->1",
-        "buy": "$..isBuy@equal->1",
-        "profile": "https://m.qidian.com/user",
-        "recharge": "@replace->majax/chapter/getChapterInfo?bookId=->book/@replace->&chapterId=->/"
-    },
-    "rank": [
+        "rank": [
         {
             "title":"月票榜",
             "url": "http://www.zongheng.com/rank/details.html?rt=1&d=1&i=2&p={page}",
@@ -115,5 +104,12 @@
             "summary": ".bookintro",
             "detail": ".bookimg > a"
         }
-    ]
+    ],
+    "auth": {
+        "login": "https://passport.zongheng.com/",
+        "cookie": "zongheng.com",
+        "verify": "__logon__",
+        "logged": "__logon__",
+        "vip":"#reader-order-box>h4@equal->抱歉哦，本章节为VIP章节，需要订阅才可以继续阅读哦~"    
+        }
 }
