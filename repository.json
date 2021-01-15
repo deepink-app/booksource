@@ -44,6 +44,10 @@
         "version": 104
     },
     {
+        "url": "idejian.com",		
+        "version": 100
+    },
+    {
         "url": "jingyu.com",
         "version": 102
     },
@@ -108,15 +112,15 @@
         "version": 100
     },
     {
+        "url": "yousuu.com",		
+        "version": 100
+    },
+    {
         "url": "yuedu.163.com",
         "version": 107
     },
     {
         "url": "zongheng.com",
         "version": 104
-    },
-    {
-        "url": "idejian.com",		
-        "version": 100,
     }
 ]
