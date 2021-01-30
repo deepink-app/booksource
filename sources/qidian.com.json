@@ -1,14 +1,14 @@
 {
     "name": "起点中文网",
     "url": "qidian.com",
-    "version": 102,
+    "version": 103,
     "search": {
-        "url": "https://m.qidian.com/majax/search/list?kw=${key}",
-        "list": "$..records[*]",
-        "name": "$.bName",
-        "author": "$.bAuth",
-        "cover": "$.imgUrl",
-        "detail": "/book/${$.bid}"
+        "url": "https://m.qidian.com/search?kw=${key}",
+        "list": "li.book-li",
+        "name": ".book-title",
+        "author": "span.book-author@match->(?<=作者 )(.+)",
+        "cover": "img",
+        "detail": "a"
     },
     "detail": {
         "summary": "content",
