@@ -1,7 +1,7 @@
 {
     "name": "起点中文网",
     "url": "qidian.com",
-    "version": 103,
+    "version": 104,
     "search": {
         "url": "https://m.qidian.com/search?kw=${key}",
         "list": "li.book-li",
@@ -49,7 +49,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "-1", "value": "全站"}, {"key": "21", "value": "玄幻"}, {"key": "1", "value": "奇幻"}, {"key": "2", "value": "武侠"}, {"key": "22", "value": "仙侠"}, {"key": "4", "value": "都市"}, {"key": "5", "value": "历史"}, {"key": "6", "value": "军事"}, {"key": "7", "value": "游戏"}, {"key": "8", "value": "体育"}, {"key": "9", "value": "科幻"}, {"key": "10", "value": "悬疑"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         },
         {
             "title":"畅销榜",
@@ -57,7 +61,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "-1", "value": "全站"}, {"key": "21", "value": "玄幻"}, {"key": "1", "value": "奇幻"}, {"key": "2", "value": "武侠"}, {"key": "22", "value": "仙侠"}, {"key": "4", "value": "都市"}, {"key": "5", "value": "历史"}, {"key": "6", "value": "军事"}, {"key": "7", "value": "游戏"}, {"key": "8", "value": "体育"}, {"key": "9", "value": "科幻"}, {"key": "10", "value": "悬疑"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         },
         {
             "title":"新书榜",
@@ -65,7 +73,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "male", "value": "男频"}, {"key": "female", "value": "女频"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         },
         {
             "title":"完结榜",
@@ -73,7 +85,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "male", "value": "男频"}, {"key": "female", "value": "女频"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         },
         {
             "title":"阅读榜",
@@ -81,7 +97,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "-1", "value": "全站"}, {"key": "21", "value": "玄幻"}, {"key": "1", "value": "奇幻"}, {"key": "2", "value": "武侠"}, {"key": "22", "value": "仙侠"}, {"key": "4", "value": "都市"}, {"key": "5", "value": "历史"}, {"key": "6", "value": "军事"}, {"key": "7", "value": "游戏"}, {"key": "8", "value": "体育"}, {"key": "9", "value": "科幻"}, {"key": "10", "value": "悬疑"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         },
         {
             "title":"推荐榜",
@@ -89,7 +109,11 @@
             "page": 1,
             "size": 20,
             "categories": [{"key": "-1", "value": "全站"}, {"key": "21", "value": "玄幻"}, {"key": "1", "value": "奇幻"}, {"key": "2", "value": "武侠"}, {"key": "22", "value": "仙侠"}, {"key": "4", "value": "都市"}, {"key": "5", "value": "历史"}, {"key": "6", "value": "军事"}, {"key": "7", "value": "游戏"}, {"key": "8", "value": "体育"}, {"key": "9", "value": "科幻"}, {"key": "10", "value": "悬疑"}],
-            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150"
+            "name": "$.bName",
+            "author": "$.bAuth",
+            "cover": "https://bookcover.yuewen.com/qdbimg/349573/${$.bid}/150",
+            "summary": "$.desc",
+            "detail": "/book/${$.bid}"
         }
     ]
 }
