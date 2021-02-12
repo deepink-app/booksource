@@ -30,9 +30,9 @@
     "auth": {
         "login": "https://www.youdubook.com/user/login",
         "header": "x-requested-with: XMLHttpRequest",
-        "cookie": "youdubook.com",
-        "verify": "",
-        "logged": "",
+        "cookie": "www.youdubook.com",
+        "verify": "saveMemberInfo",
+        "logged": "saveMemberInfo",
         "vip": "$.msg@euqalNot->获取成功!",
         "buy": "$.msg@equal->获取成功!",
         "profile": "https://www.youdubook.com/user/favobook"
@@ -55,22 +55,22 @@
         },
         {
             "title":"科幻时空",
-            "url": "https://www.youdubook.com/booklibrary/index/str/9_0_0_0_0_0_0",
+            "url": "https://www.youdubook.com/booklibrary/index/str/9_0_0_0_0_0_0?page=${page}",
             "page": 1
         },
         {
             "title":"都市逸闻",
-            "url": "https://www.youdubook.com/booklibrary/index/str/8_0_0_0_0_0_0",
+            "url": "https://www.youdubook.com/booklibrary/index/str/8_0_0_0_0_0_0?page=${page}",
             "page": 1
         },
         {
             "title":"军事历史",
-            "url": "https://www.youdubook.com/booklibrary/index/str/7_0_0_0_0_0_0",
+            "url": "https://www.youdubook.com/booklibrary/index/str/7_0_0_0_0_0_0?page=${page}",
             "page": 1
         },
         {
             "title":"诡秘悬疑",
-            "url": "https://www.youdubook.com/booklibrary/index/str/10_0_0_0_0_0_0",
+            "url": "https://www.youdubook.com/booklibrary/index/str/10_0_0_0_0_0_0?page=${page}",
             "page": 1
         }
     ]
