@@ -109,7 +109,7 @@
     },
     {
         "url": "youdubook.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "yousuu.com",		
@@ -125,6 +125,10 @@
     },
     {
         "url": "mm.sfacg.com",
+        "version": 100
+    },
+    {
+        "url": "linovelib.com",
         "version": 100
     }
 ]
