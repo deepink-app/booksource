@@ -1,0 +1,111 @@
+{
+  "name": "カクヨム",
+  "url": "kakuyomu.jp",
+  "version": 100,
+  "search": {
+    "url": "https://kakuyomu.jp/search?q=${key}",
+    "charset": "UTF-8",
+    "list": "#searchResult-works>div",
+    "name": "h3>a",
+    "cover":"h3",
+    "author": ".widget-workCard-author>a",
+    "detail": "h3>a"
+  },
+  "detail": {
+    "summary": "#introduction",
+    "status": "#workInformationList > dl:nth-child(1) > dd:nth-child(2)@replace->連載->连载",
+    "category": "#workInformationList > dl:nth-child(1) > dd:nth-child(6) > span",
+    "words": "#workInformationList > dl:nth-child(1) > dd:nth-child(12)@replace->文字->",
+    "update": "#workInformationList > dl:nth-child(1) > dd:nth-child(16) > time@attr->datetime",
+    "lastChapter": "#table-of-contents > section > div > ol > li:last-child",
+    "catalog": ""
+  },
+  "catalog": {
+    "list": "ol>li",
+    "name": "a",
+    "chapter": "a"
+  },
+  "chapter": {
+    "content": ".widget-episodeBody.js-episode-body>p"
+  },
+  "rank": [
+    {
+      "title": "総合",
+      "url": "https://kakuyomu.jp/rankings/all/${key}",
+      "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],
+      "list": ".widget-media-genresWorkList-right>div"
+    }  ,
+    {
+        "title": "異世界ファンタジー",
+        "url": "/rankings/fantasy/${key}",
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],
+        "list": ".widget-media-genresWorkList-right>div"
+      } ,    
+      {
+        "title": "現代ファンタジー",
+        "url": "https://kakuyomu.jp/rankings/action/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,  
+      {
+        "title": "SF",
+        "url": "https://kakuyomu.jp/rankings/sf/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "恋愛",
+        "url": "https://kakuyomu.jp/rankings/love_story/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "ラブコメ",
+        "url": "https://kakuyomu.jp/rankings/romance/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "現代ドラマ",
+        "url": "https://kakuyomu.jp/rankings/drama/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "ホラー",
+        "url": "https://kakuyomu.jp/rankings/horror/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "ミステリー",
+        "url": "https://kakuyomu.jp/rankings/mystery/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "エッセイ・ノンフィクション",
+        "url": "https://kakuyomu.jp/rankings/nonfiction/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "歴史・時代・伝奇",
+        "url": "https://kakuyomu.jp/rankings/history/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "創作論・評論",
+        "url": "https://kakuyomu.jp/rankings/criticism/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  ,
+      {
+        "title": "詩・童話・その他",
+        "url": "https://kakuyomu.jp/rankings/others/${key}", 
+        "categories": [{"key": "daily", "value": "日間"}, {"key": "weekly", "value": "週間"},{"key": "monthly", "value": "月間"}, {"key": "yearly", "value": "年間"},{"key": "entire", "value": "累計"}],    
+        "list": ".widget-media-genresWorkList-right>div"
+      }  
+  ]
+}
