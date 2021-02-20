@@ -1,13 +1,13 @@
 {
     "name": "起点中文网",
     "url": "qidian.com",
-    "version": 105,
+    "version": 106,
     "search": {
         "url": "https://m.qidian.com/search?kw=${key}",
         "list": "li.book-li",
         "name": ".book-title",
         "author": "span.book-author@match->(?<=作者 )(.+)",
-        "cover": "img",
+        "cover": "img@attr->data-src",
         "detail": "a"
     },
     "detail": {
