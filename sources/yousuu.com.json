@@ -1,9 +1,9 @@
 {
     "name": "优书网",
     "url": "yousuu.com",
-    "version": 100,
+    "version": 101,
     "search": {
-        "url": "https://www.yousuu.com/api/search?type=title&value=${key}&from=search",
+        "url": "https://api.yousuu.com/api/search?type=title&value=${key}&from=search",
         "list": "$..books[*]",
         "name": "$.title",
         "author": "$.author",
