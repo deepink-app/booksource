@@ -1,7 +1,7 @@
 {
     "name": "SF轻小说",
     "url": "sfacg.com",
-    "version": 106,
+    "version": 107,
     "search": {
         "url": "https://m.sfacg.com/API/HTML5.ashx?op=search&keyword=${key}",
         "list": "$.Novels[*]",
@@ -13,7 +13,7 @@
     "detail": {
         "status": "$.data.isFinish@equal->false",
         "summary": "$.data.expand.intro",
-        "category": "$.data.expand.typeName",
+        "category": "$.data.expand.sysTags[*].tagName",
         "words": "$.data.charCount",
         "update": "$.data.lastUpdateTime@match->.+(?=T)",
         "lastChapter": "$.data.expand.latestChapter.title",
