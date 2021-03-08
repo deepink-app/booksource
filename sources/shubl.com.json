@@ -1,7 +1,7 @@
 {
   "name": "书耽",
   "url": "shubl.com",
-  "version": 100,
+  "version": 101,
   "search": {
     "url": "https://www.shubl.com/index/get_search_book_list/${key}",
     "charset": "UTF-8",
@@ -13,11 +13,11 @@
   },
   "detail": {
     "summary": ".book-brief",
-    "status": ".tag-lianzai@equal->连载",
+    "status": ".tag.tag-lianzai",
     "category": ".book-info>.row:nth-child(5)@replace->分类： ->",
-    "words": ".book-info-numbers>span:nth-child(1)@match->(?<=数：).+",
-    "update": ".book-brief+div@replace->更新时间：->",
-    "lastChapter": ".tag-lianzai+span"
+    "words": ".row.book-info-numbers > span:nth-child(1)@match->(?<=数：).+",
+    "update": ".row.book-info-box > div > div:nth-child(4)@replace->更新时间：->",
+    "lastChapter": "#chapter_list > div > div:nth-child(4) > span:last-child"
   },
   "rank": [
      {
