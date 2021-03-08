@@ -44,7 +44,7 @@
         "version": 104
     },
     {
-        "url": "idejian.com",		
+        "url": "idejian.com",
         "version": 100
     },
     {
@@ -112,7 +112,7 @@
         "version": 101
     },
     {
-        "url": "yousuu.com",		
+        "url": "yousuu.com",
         "version": 101
     },
     {
@@ -134,8 +134,9 @@
     {
         "url": "kakuyomu.jp",
         "version": 100
-    },{
+    },
+    {
         "url": "shubl.com",
         "version": 100
-    },
+    }
 ]
