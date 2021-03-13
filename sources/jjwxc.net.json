@@ -1,7 +1,7 @@
 {
   "name": "晋江文学城",
   "url": "jjwxc.net",
-  "version": 105,
+  "version": 106,
   "search": {
     "url": "http://app.jjwxc.org/androidapi/search?keyword=${key}&type=1&page=1&token=null&searchType=1&sortMode=DESC&versionCode=133",
     "charset": "UTF-8",
@@ -26,7 +26,8 @@
     "chapter": "a"
   },
   "chapter": {
-    "content": "div:nth-child(2)>ul>li"
+    "content": "ul > li:has(br)",
+    "purify": ["class=\"\">"]
   },
   "auth": {
     "login": "https://m.jjwxc.net/my/login?login_mode=jjwxc",
