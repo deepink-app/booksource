@@ -44,7 +44,7 @@
         "version": 104
     },
     {
-        "url": "idejian.com",		
+        "url": "idejian.com",
         "version": 100
     },
     {
@@ -53,7 +53,7 @@
     },
     {
         "url": "jjwxc.net",
-        "version": 105
+        "version": 106
     },
     {
         "url": "kujiang.com",
@@ -112,7 +112,7 @@
         "version": 101
     },
     {
-        "url": "yousuu.com",		
+        "url": "yousuu.com",
         "version": 101
     },
     {
@@ -130,10 +130,17 @@
     {
         "url": "linovelib.com",
         "version": 100
-    }
-    ,
+    },
     {
         "url": "kakuyomu.jp",
+        "version": 100
+    },
+    {
+        "url": "shubl.com",
+        "version": 101
+    },
+    {
+        "url": "9kus.com",
         "version": 100
     }
 ]

@@ -1,0 +1,132 @@
+{
+  "name": "书耽",
+  "url": "shubl.com",
+  "version": 101,
+  "search": {
+    "url": "https://www.shubl.com/index/get_search_book_list/${key}",
+    "charset": "UTF-8",
+    "list": ".book-list>li",
+    "name": ".book-info>a",
+    "author": ".smaller@match->(?<=作者：).+(?= 最近更新)",
+    "cover": ".cover@attr->data-original",
+    "detail": ".book-info>a"
+  },
+  "detail": {
+    "summary": ".book-brief",
+    "status": ".tag.tag-lianzai",
+    "category": ".book-info>.row:nth-child(5)@replace->分类： ->",
+    "words": ".row.book-info-numbers > span:nth-child(1)@match->(?<=数：).+",
+    "update": ".row.book-info-box > div > div:nth-child(4)@replace->更新时间：->",
+    "lastChapter": "#chapter_list > div > div:nth-child(4) > span:last-child"
+  },
+  "rank": [
+     {
+      "title": "收藏榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=favor&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },
+     {
+      "title": "点击榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=click&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },
+     {
+      "title": "催更榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=blade&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },  
+     {
+      "title": "畅销榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=fans_value&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },
+     {
+      "title": "更新榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=word_count&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },
+     {
+      "title": "月票榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=yp&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },
+     {
+      "title": "推荐榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=recommend&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    },    
+     {
+      "title": "新书榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=yp_new&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    }, 
+     {
+      "title": "同人榜",
+      "url": "https://m.shubl.com/index/get_rank_book_list?page=${page}&rank_type=tongren&time_type=${key}",
+      "size": 100,
+      "page":0,
+      "categories": [{"key": "week","value": "周榜"}, {"key": "month","value": "月榜"}, {"key": "total","value": "总榜"}],
+      "list": "$..book_list[*]",
+      "name": "$.book_name",
+      "author": "$.author_name",
+      "cover": "$.cover",
+      "detail": "https://www.shubl.com/book/book_detail/${$.book_id}"
+    }                                                                                              
+  ]
+}
