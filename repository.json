@@ -1,146 +1,38 @@
 [
-    {
-        "url": "8kana.com",
-        "version": 103
-    },
-    {
-        "url": "17k.com",
-        "version": 105
-    },
-    {
-        "url": "book.tiexue.net",
-        "version": 103
-    },
-    {
-        "url": "douban.com",
-        "version": 101
-    },
-    {
-        "url": "doufu.la",
-        "version": 103
-    },
-    {
-        "url": "dushu.baidu.com",
-        "version": 100
-    },
-    {
-        "url": "ebtang.com",
-        "version": 102
-    },
-    {
-        "url": "faloo.com",
-        "version": 102
-    },
-    {
-        "url": "gongzicp.com",
-        "version": 103
-    },
-    {
-        "url": "hanwujinian.com",
-        "version": 100
-    },
-    {
-        "url": "heiyan.com",
-        "version": 104
-    },
-    {
-        "url": "idejian.com",
-        "version": 100
-    },
-    {
-        "url": "jingyu.com",
-        "version": 102
-    },
-    {
-        "url": "jjwxc.net",
-        "version": 106
-    },
-    {
-        "url": "kujiang.com",
-        "version": 101
-    },
-    {
-        "url": "linovel.net",
-        "version": 103
-    },
-    {
-        "url": "motie.com",
-        "version": 100
-    },
-    {
-        "url": "qidian.com",
-        "version": 106
-    },
-    {
-        "url": "reader.qq.com",
-        "version": 101
-    },
-    {
-        "url": "sfacg.com",
-        "version": 107
-    },
-    {
-        "url": "shuqi.com",
-        "version": 100
-    },
-    {
-        "url": "shushan.zhangyue.net",
-        "version": 102
-    },
-    {
-        "url": "tadu.com",
-        "version": 103
-    },
-    {
-        "url": "wenku8.com",
-        "version": 103
-    },
-    {
-        "url": "weread.qq.com",
-        "version": 101
-    },
-    {
-        "url": "xiang5.com",
-        "version": 102
-    },
-    {
-        "url": "xrzww.com",
-        "version": 103
-    },
-    {
-        "url": "youdubook.com",
-        "version": 101
-    },
-    {
-        "url": "yousuu.com",
-        "version": 101
-    },
-    {
-        "url": "yuedu.163.com",
-        "version": 107
-    },
-    {
-        "url": "zongheng.com",
-        "version": 104
-    },
-    {
-        "url": "mm.sfacg.com",
-        "version": 100
-    },
-    {
-        "url": "linovelib.com",
-        "version": 100
-    },
-    {
-        "url": "kakuyomu.jp",
-        "version": 100
-    },
-    {
-        "url": "shubl.com",
-        "version": 101
-    },
-    {
-        "url": "9kus.com",
-        "version": 100
-    }
+    "8kana.com",
+    "17k.com",
+    "book.tiexue.net",
+    "douban.com",
+    "doufu.la",
+    "dushu.baidu.com",
+    "ebtang.com",
+    "faloo.com",
+    "gongzicp.com",
+    "hanwujinian.com",
+    "heiyan.com",
+    "idejian.com",
+    "jingyu.com",
+    "jjwxc.net",
+    "kujiang.com",
+    "linovel.net",
+    "motie.com",
+    "qidian.com",
+    "reader.qq.com",
+    "sfacg.com",
+    "shuqi.com",
+    "shushan.zhangyue.net",
+    "tadu.com",
+    "wenku8.com",
+    "weread.qq.com",
+    "xiang5.com",
+    "xrzww.com",
+    "youdubook.com",
+    "yousuu.com",
+    "yuedu.163.com",
+    "zongheng.com",
+    "mm.sfacg.com",
+    "linovelib.com",
+    "kakuyomu.jp",
+    "shubl.com",
+    "9kus.com"
 ]
