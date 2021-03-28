@@ -1,0 +1,186 @@
+{
+    "name": "连城读书",
+    "url": "lc1001.com",
+    "version": 100,
+    "search": {
+        "url": "http://my.lc1001.com/esou/q?dowhat=query&kw=${key}&type=1000",
+        "charset": "gbk",
+        "list": ".tb_con",
+        "name": ".txt_120_t2",
+        "author": ".txt_100_t>a:nth-child(3)",
+        "cover": "img",
+        "detail": ".pic_100_t>a"
+    },
+    "detail": {
+        "status": ".right-info>.serial-tag:nth-child(2)",
+        "summary": "#bri2",
+        "status": "h1",
+        "category": "[colspan=2]>div@match->(?<=类别:).+",
+        "words": "",
+        "update": "",
+        "lastChapter": "#cul>div:last-of-type>table>tbody>tr:last-of-type>td:last-of-type",
+        "catalog": ""
+    },
+    "catalog": {
+        "list": "#cul>div>table>tbody>tr>td",
+        "name": "a",
+        "chapter": "a"
+    },
+    "chapter": {
+        "content": "#ccon"
+    },
+    "auth": {
+        "login": "http://www.lcread.com/",
+        "cookie": "lcread.com",
+        "verify": "net",
+        "logged": "net",
+        "vip": "#dyDivB>a@equal->确认支付",
+        "buy": "#dyDivB>a@Notequal->确认支付"
+    },
+
+    "rank": [{
+            "title": "女生",
+            "url": "http://h5.lc1001.com/top/s@post->prefer=20&rank=${key}&pn=${page}0&aType=50&from=",
+            "categories": [{
+                    "key": "fsb",
+                    "value": "封神榜"
+                },
+                {
+                    "key": "zsb",
+                    "value": "钻石榜"
+                },
+                {
+                    "key": "qgb",
+                    "value": "勤更榜"
+                },
+                {
+                    "key": "tjb",
+                    "value": "推荐榜"
+                },
+                {
+                    "key": "rqb",
+                    "value": "人气榜"
+                },
+                {
+                    "key": "scb",
+                    "value": "收藏榜"
+                },
+                {
+                    "key": "wdb",
+                    "value": "字数榜"
+                },
+                {
+                    "key": "xsb",
+                    "value": "新书榜"
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
+                }
+            ],
+            "page": 0,
+            "size": 20,
+            "list": "$.TOPLIST[*].BOOKS[*]",
+            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "name": "$.BOOKNAME",
+            "author": "$.AUTHORNAME",
+            "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
+        },
+        {
+            "title": "男生",
+            "url": "http://h5.lc1001.com/top/s@post->prefer=10&rank=${key}&pn=${page}0&aType=50&from=",
+            "categories": [{
+                    "key": "fsb",
+                    "value": "封神榜"
+                },
+                {
+                    "key": "zsb",
+                    "value": "钻石榜"
+                },
+                {
+                    "key": "qgb",
+                    "value": "勤更榜"
+                },
+                {
+                    "key": "tjb",
+                    "value": "推荐榜"
+                },
+                {
+                    "key": "rqb",
+                    "value": "人气榜"
+                },
+                {
+                    "key": "scb",
+                    "value": "收藏榜"
+                },
+                {
+                    "key": "wdb",
+                    "value": "字数榜"
+                },
+                {
+                    "key": "xsb",
+                    "value": "新书榜"
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
+                }
+            ],
+            "page": 0,
+            "size": 20,
+            "list": "$.TOPLIST[*].BOOKS[*]",
+            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "name": "$.BOOKNAME",
+            "author": "$.AUTHORNAME",
+            "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
+        },
+        {
+            "title": "耽美同人",
+            "url": "http://h5.lc1001.com/top/s@post->prefer=50&rank=${key}&pn=${page}0&aType=50&from=",
+            "categories": [{
+                    "key": "fsb",
+                    "value": "封神榜"
+                },
+                {
+                    "key": "zsb",
+                    "value": "钻石榜"
+                },
+                {
+                    "key": "qgb",
+                    "value": "勤更榜"
+                },
+                {
+                    "key": "tjb",
+                    "value": "推荐榜"
+                },
+                {
+                    "key": "rqb",
+                    "value": "人气榜"
+                },
+                {
+                    "key": "scb",
+                    "value": "收藏榜"
+                },
+                {
+                    "key": "wdb",
+                    "value": "字数榜"
+                },
+                {
+                    "key": "xsb",
+                    "value": "新书榜"
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
+                }
+            ],
+            "page": 0,
+            "size": 20,
+            "list": "$.TOPLIST[*].BOOKS[*]",
+            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "name": "$.BOOKNAME",
+            "author": "$.AUTHORNAME",
+            "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
+        }
+    ]
+}
