@@ -53,7 +53,7 @@
     },
     {
         "url": "jjwxc.net",
-        "version": 106
+        "version": 107
     },
     {
         "url": "kujiang.com",
@@ -142,5 +142,9 @@
     {
         "url": "9kus.com",
         "version": 100
-    }
+    },
+    {
+        "url": "lc1001.com",
+        "version": 100
+    }    
 ]
