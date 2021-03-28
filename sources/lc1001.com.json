@@ -1,7 +1,7 @@
 {
     "name": "连城读书",
     "url": "lc1001.com",
-    "version": 100,
+    "version": 101,
     "search": {
         "url": "http://my.lc1001.com/esou/q?dowhat=query&kw=${key}&type=1000",
         "charset": "gbk",
@@ -27,7 +27,7 @@
         "chapter": "a"
     },
     "chapter": {
-        "content": "#ccon"
+        "content": "#ccon,.ccon_vip"
     },
     "auth": {
         "login": "http://www.lcread.com/",
@@ -72,12 +72,16 @@
                 {
                     "key": "xsb",
                     "value": "新书榜"
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
                 }
             ],
             "page": 0,
             "size": 20,
             "list": "$.TOPLIST[*].BOOKS[*]",
-            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "cover": "http://pic.lc1001.com/pic/cover/${$.BOOKID}wenmoux/${$.BOOKID}_120.gif@replace->(\\d{3})wenmoux->",
             "name": "$.BOOKNAME",
             "author": "$.AUTHORNAME",
             "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
@@ -116,12 +120,16 @@
                 {
                     "key": "xsb",
                     "value": "新书榜"
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
                 }
             ],
             "page": 0,
             "size": 20,
             "list": "$.TOPLIST[*].BOOKS[*]",
-            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "cover": "http://pic.lc1001.com/pic/cover/${$.BOOKID}wenmoux/${$.BOOKID}_120.gif@replace->(\\d{3})wenmoux->",
             "name": "$.BOOKNAME",
             "author": "$.AUTHORNAME",
             "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
@@ -160,12 +168,16 @@
                 {
                     "key": "xsb",
                     "value": "新书榜"
-                }               
+                },
+                {
+                    "key": "17",
+                    "value": "百合"
+                }
             ],
             "page": 0,
             "size": 20,
             "list": "$.TOPLIST[*].BOOKS[*]",
-            "cover": "http://pic.lc1001.com/pic/cover/00/${$.BOOKID}_120.gif",
+            "cover": "http://pic.lc1001.com/pic/cover/${$.BOOKID}wenmoux/${$.BOOKID}_120.gif@replace->(\\d{3})wenmoux->",
             "name": "$.BOOKNAME",
             "author": "$.AUTHORNAME",
             "detail": "http://www.lcread.com/bookpage/${$.BOOKID}"
