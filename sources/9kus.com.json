@@ -1,0 +1,30 @@
+{
+    "name": "九库文学",
+    "url": "9kus.com",
+    "version": 100,
+    "search": {
+        "url": "https://m.9kus.com/Search/searchList?fr=18031&key=${key}",
+        "list": ".rowone",
+        "name": "h3@match->.+?(?=\\d+)",
+        "author": "h3+p",
+        "cover": "img",
+        "detail": "a"
+    },
+    "detail": {
+        "status": "meta[property=og:novel:status]@attr->content",
+        "summary": "meta[property=og:description]@attr->content",
+        "category": "meta[property=og:novel:category]@attr->content",
+        "update": "meta[property=og:novel:update_time]@attr->content",
+        "lastChapter": "meta[property=og:novel:latest_chapter_name]@attr->content",
+        "words": ".info_right>p:nth-child(3)@match->\\d+(?=字)",
+        "catalog":"meta[property=og:url]@attr->content@replace->m.9kus->www.9kus@replace->detail->directory"
+    },
+    "catalog": {
+        "list": ".book_catalogue>ul>li",
+        "name": "a",
+        "chapter": "a@replace->bookid->book_id@replace->www.9kus->m.9kus"
+    },
+    "chapter": {
+        "content": ".content>p"
+    }
+}

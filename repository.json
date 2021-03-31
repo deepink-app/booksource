@@ -44,12 +44,16 @@
         "version": 104
     },
     {
+        "url": "idejian.com",
+        "version": 100
+    },
+    {
         "url": "jingyu.com",
         "version": 102
     },
     {
         "url": "jjwxc.net",
-        "version": 105
+        "version": 107
     },
     {
         "url": "kujiang.com",
@@ -65,15 +69,15 @@
     },
     {
         "url": "qidian.com",
-        "version": 102
+        "version": 106
     },
     {
         "url": "reader.qq.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "sfacg.com",
-        "version": 105
+        "version": 108
     },
     {
         "url": "shuqi.com",
@@ -85,7 +89,7 @@
     },
     {
         "url": "tadu.com",
-        "version": 101
+        "version": 103
     },
     {
         "url": "wenku8.com",
@@ -101,11 +105,15 @@
     },
     {
         "url": "xrzww.com",
-        "version": 101
+        "version": 103
     },
     {
         "url": "youdubook.com",
-        "version": 100
+        "version": 101
+    },
+    {
+        "url": "yousuu.com",
+        "version": 101
     },
     {
         "url": "yuedu.163.com",
@@ -114,5 +122,29 @@
     {
         "url": "zongheng.com",
         "version": 105
+    },
+    {
+        "url": "mm.sfacg.com",
+        "version": 100
+    },
+    {
+        "url": "linovelib.com",
+        "version": 100
+    },
+    {
+        "url": "kakuyomu.jp",
+        "version": 100
+    },
+    {
+        "url": "shubl.com",
+        "version": 101
+    },
+    {
+        "url": "9kus.com",
+        "version": 100
+    },
+    {
+        "url": "lc1001.com",
+        "version": 101
     }
 ]
