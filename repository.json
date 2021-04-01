@@ -53,7 +53,7 @@
     },
     {
         "url": "jjwxc.net",
-        "version": 106
+        "version": 107
     },
     {
         "url": "kujiang.com",
@@ -73,7 +73,7 @@
     },
     {
         "url": "reader.qq.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "sfacg.com",
@@ -121,7 +121,7 @@
     },
     {
         "url": "zongheng.com",
-        "version": 104
+        "version": 105
     },
     {
         "url": "mm.sfacg.com",
@@ -142,5 +142,9 @@
     {
         "url": "9kus.com",
         "version": 100
+    },
+    {
+        "url": "lc1001.com",
+        "version": 101
     }
 ]
