@@ -1,7 +1,7 @@
 {
     "name": "晋江文学城",
     "url": "jjwxc.net",
-    "version": 107,
+    "version": 108,
     "search": {
         "url": "http://app.jjwxc.org/androidapi/search?keyword=${key}&type=1&page=1&token=null&searchType=1&sortMode=DESC&versionCode=133",
         "charset": "UTF-8",
@@ -12,7 +12,7 @@
         "detail": "http://app-cdn.jjwxc.net:80/androidapi/novelbasicinfo?novelId=${$.novelid}"
     },
     "detail": {
-        "summary": "$.novelIntro@replace->&lt;br/&gt;&lt;br/&gt;->\n",
+        "summary": "${$.novelIntroShort}\n标签: ${$.novelTags}\n${$.protagonist}\n${$.costar}\n${$.other}\n风格: ${$.novelStyle}\n视角: ${$.mainview}\n${$.novelIntro}@replace->&lt;br/&gt;&lt;br/&gt;->\n",
         "status": "$.novelStep@equal->1",
         "category": "$.novelClass@replace->--> ",
         "words": "$.novelSize",

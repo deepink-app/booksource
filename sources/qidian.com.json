@@ -1,7 +1,7 @@
 {
     "name": "起点中文网",
     "url": "qidian.com",
-    "version": 106,
+    "version": 107,
     "search": {
         "url": "https://m.qidian.com/search?kw=${key}",
         "list": "li.book-li",
@@ -107,6 +107,291 @@
             "cover": ".book-img-box > a >  img",
             "summary": "p.intro",
             "detail": ".book-img-box > a"
-        }
+        },
+        {
+             "title": "🎀收藏榜🎀",
+             "url": "https://www.qidian.com/mm/rank/collect?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "80",
+                 "value": "古代言情"
+             }, {
+                 "key": "81",
+                 "value": "仙侠奇缘"
+             }, {
+                 "key": "82",
+                 "value": "现代言情"
+             }, {
+                 "key": "83",
+                 "value": "浪漫青春"
+             }, {
+                 "key": "84",
+                 "value": "玄幻言情"
+             }, {
+                 "key": "85",
+                 "value": "悬疑推理"
+             }, {
+                 "key": "86",
+                 "value": "科幻空间"
+             }, {
+                 "key": "88",
+                 "value": "游戏竞技"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         }, {
+             "title": "🎀推荐票榜🎀",
+             "url": "https://www.qidian.com/mm/rank/recom?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "80",
+                 "value": "古代言情"
+             }, {
+                 "key": "81",
+                 "value": "仙侠奇缘"
+             }, {
+                 "key": "82",
+                 "value": "现代言情"
+             }, {
+                 "key": "83",
+                 "value": "浪漫青春"
+             }, {
+                 "key": "84",
+                 "value": "玄幻言情"
+             }, {
+                 "key": "85",
+                 "value": "悬疑推理"
+             }, {
+                 "key": "86",
+                 "value": "科幻空间"
+             }, {
+                 "key": "88",
+                 "value": "游戏竞技"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         }, {
+             "title": "🎀总字数榜🎀",
+             "url": "https://www.qidian.com/mm/rank/wordcount?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "80",
+                 "value": "古代言情"
+             }, {
+                 "key": "81",
+                 "value": "仙侠奇缘"
+             }, {
+                 "key": "82",
+                 "value": "现代言情"
+             }, {
+                 "key": "83",
+                 "value": "浪漫青春"
+             }, {
+                 "key": "84",
+                 "value": "玄幻言情"
+             }, {
+                 "key": "85",
+                 "value": "悬疑推理"
+             }, {
+                 "key": "86",
+                 "value": "科幻空间"
+             }, {
+                 "key": "88",
+                 "value": "游戏竞技"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },{
+             "title": "🎀阅读指数榜🎀",
+             "url": "https://www.qidian.com/mm/rank/readIndex?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "80",
+                 "value": "古代言情"
+             }, {
+                 "key": "81",
+                 "value": "仙侠奇缘"
+             }, {
+                 "key": "82",
+                 "value": "现代言情"
+             }, {
+                 "key": "83",
+                 "value": "浪漫青春"
+             }, {
+                 "key": "84",
+                 "value": "玄幻言情"
+             }, {
+                 "key": "85",
+                 "value": "悬疑推理"
+             }, {
+                 "key": "86",
+                 "value": "科幻空间"
+             }, {
+                 "key": "88",
+                 "value": "游戏竞技"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },
+         {
+             "title": "🎀新书热销榜🎀",
+             "url": "https://www.qidian.com/mm/rank/newsales?style=1&page=${page}",
+             "page": 1,
+             "size": 20,
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },
+         {
+             "title": "🎀起点月票榜🎀",
+             "url": "https://www.qidian.com/mm/rank/yuepiao?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "21",
+                 "value": "古代言情"
+             }, {
+                 "key": "22",
+                 "value": "现代言情"
+             }, {
+                 "key": "23",
+                 "value": "幻想言情"
+             }, {
+                 "key": "0",
+                 "value": "VIP新作"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },
+         {
+             "title": "🎀24小时热销榜🎀",
+             "url": "https://www.qidian.com/mm/rank/hotsales?style=1&page=${page}",
+             "page": 1,
+             "size": 20,
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },
+         {
+             "title": "🎀新增粉丝榜🎀",
+             "url": "https://www.qidian.com/mm/rank/newFans?style=1&chn=${key}&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "-1",
+                 "value": "全部"
+             }, {
+                 "key": "80",
+                 "value": "古代言情"
+             }, {
+                 "key": "81",
+                 "value": "仙侠奇缘"
+             }, {
+                 "key": "82",
+                 "value": "现代言情"
+             }, {
+                 "key": "83",
+                 "value": "浪漫青春"
+             }, {
+                 "key": "84",
+                 "value": "玄幻言情"
+             }, {
+                 "key": "85",
+                 "value": "悬疑推理"
+             }, {
+                 "key": "86",
+                 "value": "科幻空间"
+             }, {
+                 "key": "88",
+                 "value": "游戏竞技"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         }, {
+             "title": "🎀热门单订榜🎀",
+             "url": "https://www.qidian.com/mm/rank/subscr?style=1&page=${page}",
+             "page": 1,
+             "size": 20,
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         },
+         {
+             "title": "🎀新书排行榜🎀",
+             "url": "https://www.qidian.com/mm/rank/${key}?style=1&page=${page}",
+             "page": 1,
+             "size": 20,
+             "categories": [{
+                 "key": "pubnewbook",
+                 "value": "公众作者"
+             }, {
+                 "key": "signnewbook",
+                 "value": "签约作者"
+             }, {
+                 "key": "newsign",
+                 "value": "新人签约"
+             }, {
+                 "key": "newauthor",
+                 "value": "新人作者"
+             }],
+             "list": ".book-img-text > ul > li",
+             "name": "h4",
+             "author": "p.author > a.name",
+             "cover": ".book-img-box > a >  img",
+             "summary": "p.intro",
+             "detail": ".book-img-box > a"
+         }
     ]
 }
