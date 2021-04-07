@@ -1,34 +1,101 @@
 {
-    "name": "酷匠网",
+    "name": "酷匠",
     "url": "kujiang.com",
-    "version": 101,
+    "version": 102,
     "search": {
-        "url": "http://www.kujiang.com/search?keyword=${key}",
-        "list": ".border-bottom.gap-bottom",
-        "name": "h5 > a",
-        "author": ".kjauthor > a",
-        "cover": "a > img",
-        "detail": "h5 > a"
+        "url": "https://app.kujiang.com/v1/book/search?keyword=${key}",
+        "list": "$.body[*]",
+        "name": "$.v_book",
+        "author": "$.penname",
+        "cover": "$.img_url",
+        "detail": "https://app.kujiang.com/v1/book/get_book_infos?book=${$.book}"
     },
     "detail": {
-        "status": ".kjstatus",
-        "summary": ".book_intro",
-        "category": ".kjaside-tagslist > li",
-        "words": ".book_size@match->.+(?= 字)",
-        "update": "li:nth-child(5) > span:nth-child(2)",
-        "lastChapter": "li:nth-child(5) > span:nth-child(1) > a",
-        "catalog": ".catalog_last_nine > div > a"
+        "status": "$.body.bookinfo.status@equal->3",
+        "summary": "$.body.bookinfo.intro",
+        "category": "$.body.bookinfo.tags",
+        "words": "$.body.bookinfo.public_size",
+        "update": "$.body.bookinfo.u_time",
+        "lastChapter": "$.body.bookinfo.v_u_chapter",
+        "catalog": "https://app.kujiang.com/v1/book/catalog?book=${$.body.bookinfo.book}@header->platform: android@header->version: 3.8.0.7"
     },
     "catalog": {
-        "list": "ul.kjlist>li",
+        "list": "$.body.catalog[*]",
         "booklet": {
-            "name": ".kjblue",
-            "list": ".third"
+            "name": "$.v_volumn",
+            "list": "$.chapters[*]"
           },
-        "name": "a",
-        "chapter": "a"
+        "name": "$.v_chapter",
+        "chapter": "https://m.kujiang.com/book/${$params.book}/${$.chapter}"
     },
     "chapter": {
-        "content": ".content > p"
-    }
+        "content": "#readArticle"
+    },
+    "rank": [
+        {
+            "title":"玄幻",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=1&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"都市",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=2&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"校园",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=3&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"灵异",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=4&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"仙侠",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=5&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"网游",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=6&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"武侠",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=7&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"奇幻",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=8&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"科幻",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=9&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"军事",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=10&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"历史",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=11&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"体育",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=12&page=${page}",
+            "page": 1
+        },
+        {
+            "title":"二次元",
+            "url": "https://app.kujiang.com/v1/library/get_category_list?category_id=13&page=${page}",
+            "page": 1
+        }
+    ]
 }

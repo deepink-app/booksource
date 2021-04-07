@@ -1,13 +1,13 @@
 {
     "name": "纵横中文网",
     "url": "zongheng.com",
-    "version": 104,
+    "version": 105,
     "search": {
         "url": "http://search.zongheng.com/s?keyword=${key}",
          "charset": "utf-8",
         "list": ".search-result-list",
         "name": "h2>a",
-        "author": ".bookinfo > a:nth-child(1)",
+        "author": ".bookinfo > a:nth-child(2)",
         "cover": ".imgbox.fl.se-result-book > a > img",
         "detail": "h2>a"
     },

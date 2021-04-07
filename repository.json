@@ -57,7 +57,7 @@
     },
     {
         "url": "kujiang.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "linovel.net",
@@ -121,7 +121,7 @@
     },
     {
         "url": "zongheng.com",
-        "version": 104
+        "version": 105
     },
     {
         "url": "mm.sfacg.com",
@@ -146,5 +146,5 @@
     {
         "url": "lc1001.com",
         "version": 101
-    }    
+    }
 ]
