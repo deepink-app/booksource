@@ -38,22 +38,7 @@
         "vip": ".b>font@match->.+(?=，)@equal->VIP章节",
         "buy": ".grid-c>div>a:nth-child(12)@equal->目录"
     },
-    "rank": [{
-            "title": "我的",
-            "url": "https://m.jjwxc.net/my/${key}?r=1",
-            "categories": [{
-                "key": "order",
-                "value": "本月订购"
-            }, {
-                "key": "fav",
-                "value": "我的收藏"
-            }],
-            "list": "li",
-            "name": "li>a:nth-child(1)",
-            "author": "li>a:nth-child(2)",
-            "cover": "li>a:nth-child(1)@replace->https://m.jjwxc.net/book2/->http://i9-static.jjwxc.net/novelimage.php?novelid=",
-            "detail": "li>a:nth-child(1)@replace->https://m.jjwxc.net/book2/->http://app-cdn.jjwxc.net:80/androidapi/novelbasicinfo?novelId="
-        },
+    "rank": [
         {
             "title": "新书",
             "url": "http://app.jjwxc.org:80/androidapi/newDayList",
