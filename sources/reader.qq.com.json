@@ -1,14 +1,14 @@
 {
     "name": "QQ阅读",
     "url": "reader.qq.com",
-    "version": 102,
+    "version": 103,
     "search": {
         "url": "https://h5.reader.qq.com/9/search?key=${key}&pageNo=1",
         "charset": "UTF-8",
         "list": "$.booklist[*]",
         "name": "$.title",
         "author": "$.author",
-        "cover": "$.cover",
+        "cover": "$.cover@replace->s_->t9_",
         "detail": "https://h5.reader.qq.com/9/intro?bid=${$.id}"
     },
     "detail": {

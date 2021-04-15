@@ -1,18 +1,20 @@
 {
     "name": "微信读书",
     "url": "weread.qq.com",
-    "version": 101,
+    "version": 102,
     "search": {
         "url": "https://weread.qq.com/web/search/global?keyword=${key}",
         "list": "$..bookInfo",
         "name": "$.title",
         "author": "$.author",
-        "cover": "$.cover",
+        "cover": "$.cover@replace->s_->t9_",
         "detail": "$.bookId@decrypt->weread@replace->/search->/reader"
     },
     "detail": {
-        "status": ".readerBookInfo_chapterPreview > a",
+        "status": "script[nonce]@match->(?<=\"finished\":)(.+?)(?=,)@equal->0",
         "summary":".bookInfo_intro",
+        "category": "script[nonce]@match->(?<=\"category\":\")(.+?)(?=\",)",
+        "words": "script[nonce]@match->(?<=\"totalWords\":)(.+?)(?=,)",
         "update": ".readerBookInfo_chapterPreview > a > .line2",
         "lastChapter": ".readerBookInfo_chapterPreview > a > .line1"
     }
