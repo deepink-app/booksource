@@ -2,5 +2,9 @@
     {
         "url": "qidian.com",
         "version": 100
+    },
+    {
+        "url": "ruochu.com",
+        "version": 100
     }
 ]
