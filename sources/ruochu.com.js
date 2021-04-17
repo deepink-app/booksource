@@ -32,7 +32,7 @@ const detail = (url) => {
     summary: $('.book-intro > div > .bd').text(),
     status: $('.finish').text(),
     category: $('.tags').text(),
-    words: $('.info').text().match(/(?<= )(.+)(?=字)/)[0],
+    words: $('.info').text().match(/(?<= )(\S+?)(?=字)/)[0],
     update: $('.time').text().match(/(?<=更新于)(.+)/)[0],
     lastChapter: $('.update > a > span[style]').text(),
     catalog: $('.chapters > a').attr('href').replace('m.ruochu.com/chapter', 'a.ruochu.com/m/ajax/book').replace('?isAsc=', '/chapter')
