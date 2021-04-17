@@ -14,12 +14,11 @@ const search = (key) => {
   let array = []
   let $ = JSON.parse(response)
   $.data.content.forEach((child) => {
-    let $ = JSON.parse(child)
     array.push({
-      name: $.name,
-      author: $.authorname,
-      cover: `https://b-new.heiyanimg.com/book/${$.id}.jpg`,
-      detail: `${baseUrl}/book/${$.id}`,
+      name: child.name,
+      author: child.authorname,
+      cover: `https://b-new.heiyanimg.com/book/${child.id}.jpg`,
+      detail: `${baseUrl}/book/${child.id}`,
     })
   })
   return JSON.stringify(array)
@@ -48,8 +47,8 @@ const catalog = (url) => {
   let array = []
   catalogLoadPage(url, array, $)
   for (var i = 1; i < $.volumeNames.pageCount; i++) {
-    let response = GET(`${url}?volumeIndex=${i}`)
-    let $ = JSON.parse(response)
+    response = GET(`${url}?volumeIndex=${i}`)
+    $ = JSON.parse(response)
     catalogLoadPage(url, array, $)
   }
   return JSON.stringify(array)
