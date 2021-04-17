@@ -14,7 +14,7 @@ const search = (key) => {
   let array = []
   let $ = JSON.parse(response)
   $.data.content.forEach((child) => {
-    let $ = HTML.parse(child)
+    let $ = JSON.parse(child)
     array.push({
       name: $.name,
       author: $.authorname,
