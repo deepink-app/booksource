@@ -87,9 +87,18 @@ const profile = () => {
   let response = GET(`https://a.ruochu.com/m/ajax/user/info`)
   let $ = JSON.parse(response)
   return JSON.stringify({
-    url: 'https://accounts.ruochu.com/m/people',
+    url: `https://accounts.ruochu.com/m/people/${$.userVO.id}`,
     nickname: $.userVO.name,
-    balance: $.balance,
-    recharge: 'https://pay.ruochu.com/m/accounts/pay'
+    recharge: 'https://pay.ruochu.com/m/accounts/pay',
+    balance: [
+      {
+        name: '岩币',
+        coin: $.balance
+      },
+      {
+        name: '钻石',
+        coin: $.coin
+      }
+    ]
   })
 }

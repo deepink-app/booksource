@@ -80,7 +80,12 @@ const profile = () => {
   return JSON.stringify({
     url: 'https://m.qidian.com/user',
     nickname: $('div.center-header > p').text(),
-    balance: $('ul.btn-group > li:last-child > a > output').text(),
-    recharge: 'https://pay.yuewen.com/h5/index?appId=13&areaId=31&returnUrl=http%3A%2F%2Fm.qidian.com%2Fuser%3Ffrom%3Dpay'
+    recharge: 'https://pay.yuewen.com/h5/index?appId=13&areaId=31&returnUrl=http%3A%2F%2Fm.qidian.com%2Fuser%3Ffrom%3Dpay',
+    balance: [
+      {
+        name: '起点币',
+        coin: $('ul.btn-group > li:last-child > a > output').text()
+      }
+    ]
   })
 }
