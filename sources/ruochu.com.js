@@ -54,11 +54,13 @@ const catalog = (url) => {
   return JSON.stringify(array)
 }
 
+//目录分页
 const catalogLoadPage = (url, array, $) => {
   $.rf.forEach((chapter) => {
     array.push({
       name: chapter.name,
-      url: url.replace('a.ruochu.com/m/ajax', 'm.ruochu.com').replace('chapter', chapter.id)
+      url: url.replace('a.ruochu.com/m/ajax', 'm.ruochu.com').replace('chapter', chapter.id),
+      vip: chapter.free == false
     })
   })
 }
