@@ -107,5 +107,10 @@ const profile = () => {
 
 //签到
 const sign = () => {
-  GET('https://a.ruochu.com/m/jsonp/user/sign')
+  let response = GET('https://a.ruochu.com/m/jsonp/user/get/sign')
+  let $ = JSON.parse(response)
+  if($.result.isSign) return true
+  response = GET('https://a.ruochu.com/m/jsonp/user/sign')
+  $ = JSON.parse(response)
+  return $.code == 'sign-2'
 }
