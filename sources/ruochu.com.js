@@ -74,7 +74,7 @@ const chapter = (url) => {
     code: 403,
     message: url
   })
-  //已购买
+  //VIP章节已购买
   if ($.chapter.htmlContent) return $.chapter.htmlContent
   //免费章节
   response = GET(url)
