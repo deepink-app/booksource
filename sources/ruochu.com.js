@@ -1,5 +1,5 @@
 var bookSource = JSON.stringify({
-  name: "若初文学",
+  name: "若初文学网",
   url: "ruochu.com",
   version: 100,
   authorization: "https://m.ruochu.com/accounts/login",
