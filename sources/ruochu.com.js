@@ -88,7 +88,7 @@ const profile = () => {
   let $ = JSON.parse(response)
   return JSON.stringify({
     url: 'https://accounts.ruochu.com/m/people',
-    nickname: $.name,
+    nickname: $.userVO.name,
     balance: $.balance,
     recharge: 'https://pay.ruochu.com/m/accounts/pay'
   })
