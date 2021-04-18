@@ -75,7 +75,7 @@ const chapter = (url) => {
     message: url
   })
   //已购买
-  if ($.nopay == false) return $.content
+  if ($.chapter.htmlContent) return $.chapter.htmlContent
   //免费章节
   response = GET(url)
   $ = HTML.parse(response)
