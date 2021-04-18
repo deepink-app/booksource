@@ -46,6 +46,7 @@ const catalog = (url) => {
   let $ = JSON.parse(response)
   let array = []
   catalogLoadPage(url, array, $)
+  //得到页数读取分页
   for (var i = 1; i < $.volumeNames.pageCount; i++) {
     response = GET(`${url}?volumeIndex=${i}`)
     $ = JSON.parse(response)
