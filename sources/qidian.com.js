@@ -3,7 +3,7 @@ var bookSource = JSON.stringify({
   url: "qidian.com",
   version: 100,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
-  cookies: [".qidian.com", ".yuewen.com"],
+  cookies: [".qidian.com", ".yuewen.com"]
 })
 
 const baseUrl = "https://m.qidian.com"
@@ -89,4 +89,44 @@ const profile = () => {
       }
     ]
   })
+}
+
+//排行榜
+bookSource.ranks = [
+  {
+    title: {
+      key: 'yuepiao',
+      value: '月票榜'
+    },
+    categories: [
+      { key: "-1", value: "全站" },
+      { key: "21", value: "玄幻" },
+      { key: "1", value: "奇幻" },
+      { key: "2", value: "武侠" },
+      { key: "22", value: "仙侠" },
+      { key: "4", value: "都市" },
+      { key: "5", value: "历史" },
+      { key: "6", value: "军事" },
+      { key: "7", value: "游戏" },
+      { key: "8", value: "体育" },
+      { key: "9", value: "科幻" },
+      { key: "10", value: "悬疑" }
+    ]
+  }
+]
+
+const rank = (title, category, page) => {
+  let response = GET(`https://www.qidian.com/rank/${title}?chn=${category}&page=${page}`)
+  let $ = HTML.parse(response)
+  let array = []
+  $('.book-img-text > ul > li').forEach((child) => {
+    let $ = HTML.parse(child)
+    array.push({
+      name: $('h4').text(),
+      author: $('p.author > a.name').text(),
+      cover: `https:${$('.book-img-box > a >  img').attr('src')}`,
+      detail: `https:${$('.book-img-box > a').attr('href')}`,
+    })
+  })
+  return JSON.stringify(array)
 }
