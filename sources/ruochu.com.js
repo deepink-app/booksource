@@ -101,11 +101,12 @@ const profile = () => {
         coin: $.coin
       }
     ],
+    //声明自动签到权限
     sign: 'sign();'
   })
 }
 
-//签到
+//签到 返回true表示签到成功
 const sign = () => {
   let response = GET('https://a.ruochu.com/m/jsonp/user/get/sign')
   let $ = JSON.parse(response)
