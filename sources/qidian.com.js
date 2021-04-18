@@ -51,7 +51,8 @@ const catalog = (url) => {
     booklet.cs.forEach((chapter) => {
       array.push({
         name: chapter.cN,
-        url: `${baseUrl}/majax/chapter/getChapterInfo?bookId=${url.query('bookId')}&chapterId=${chapter.id}`
+        url: `${baseUrl}/majax/chapter/getChapterInfo?bookId=${url.query('bookId')}&chapterId=${chapter.id}`,
+        vip: chapter.sS == 0
       })
     })
   })
