@@ -1,11 +1,3 @@
-var bookSource = JSON.stringify({
-  name: "若初文学网",
-  url: "ruochu.com",
-  version: 100,
-  authorization: "https://m.ruochu.com/accounts/login",
-  cookies: [".ruochu.com"],
-})
-
 const baseUrl = "https://m.ruochu.com"
 
 //搜索
@@ -76,7 +68,7 @@ const chapter = (url) => {
     message: url
   })
   //VIP章节已购买
-  if ($.chapter.htmlContent) return $.chapter.htmlContent
+  if ($.chapter?.htmlContent) return $.chapter.htmlContent
   //免费章节
   response = GET(url)
   $ = HTML.parse(response)
@@ -101,8 +93,15 @@ const profile = () => {
         coin: $.coin
       }
     ],
-    //声明自动签到权限
-    sign: 'sign();'
+    //拓展方法
+    extra: [
+      {
+        name: '自动签到',
+        type: 'permission',
+        method: 'sign',
+        times: 'day' 
+      }
+    ]
   })
 }
 
@@ -110,8 +109,100 @@ const profile = () => {
 const sign = () => {
   let response = GET('https://a.ruochu.com/m/jsonp/user/get/sign')
   let $ = JSON.parse(response)
-  if($.result.isSign) return true
+  if ($.result?.isSign) return true
   response = GET('https://a.ruochu.com/m/jsonp/user/sign')
   $ = JSON.parse(response)
   return $.code == 'sign-2'
 }
+
+//排行榜
+const rank = (title, category, page) => {
+  if (page != 0) return JSON.stringify([])
+  let array = []
+  if (title.length == 1) {
+    let response = GET(`https://m.ruochu.com/top10`)
+    let $ = HTML.parse(response)
+    $ = HTML.parse($('.rank-detail')[parseInt(title)])
+    $('.detail-item').forEach((child) => {
+      let $ = HTML.parse(child)
+      array.push({
+        name: $('.title-box > .cut').text(),
+        author: $('.author-name').text(),
+        cover: `https://b-new.heiyanimg.com${$('a').attr('href')}.jpg`,
+        detail: `${baseUrl}${$('a').attr('href')}`
+      })
+    })
+  } else {
+    let response = GET(`https://vote.ruochu.com/m/top/${title}/day?pageSize=10`)
+    let $ = JSON.parse(response)
+    $.voteBookRankList.forEach((book) => {
+      array.push({
+        name: book.bookName,
+        author: book.userVO.name,
+        cover: `https://b-new.heiyanimg.com/book/${book.bookId}.jpg`,
+        detail: `${baseUrl}/book/${book.bookId}`
+      })
+    })
+  }
+  return JSON.stringify(array)
+}
+
+const ranks = [
+  {
+    title: {
+      key: '0',
+      value: '新书榜'
+    }
+  },
+  {
+    title: {
+      key: '1',
+      value: '点击榜'
+    }
+  },
+  {
+    title: {
+      key: '2',
+      value: '热门榜'
+    }
+  },
+  {
+    title: {
+      key: 'monthly',
+      value: '钻石榜'
+    }
+  },
+  {
+    title: {
+      key: '4',
+      value: '订阅榜'
+    }
+  },
+  {
+    title: {
+      key: '5',
+      value: '收藏榜'
+    }
+  },
+  {
+    title: {
+      key: 'tuijian',
+      value: '推荐榜'
+    }
+  },
+  {
+    title: {
+      key: '7',
+      value: '捧场榜'
+    }
+  }
+]
+
+var bookSource = JSON.stringify({
+  name: "若初文学网",
+  url: "ruochu.com",
+  version: 100,
+  authorization: "https://m.ruochu.com/accounts/login",
+  cookies: [".ruochu.com"],
+  ranks: ranks
+})

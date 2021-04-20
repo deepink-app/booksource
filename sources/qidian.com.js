@@ -1,11 +1,3 @@
-var bookSource = JSON.stringify({
-  name: "起点中文网",
-  url: "qidian.com",
-  version: 100,
-  authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
-  cookies: [".qidian.com", ".yuewen.com"]
-})
-
 const baseUrl = "https://m.qidian.com"
 
 //搜索
@@ -92,31 +84,8 @@ const profile = () => {
 }
 
 //排行榜
-bookSource.ranks = [
-  {
-    title: {
-      key: 'yuepiao',
-      value: '月票榜'
-    },
-    categories: [
-      { key: "-1", value: "全站" },
-      { key: "21", value: "玄幻" },
-      { key: "1", value: "奇幻" },
-      { key: "2", value: "武侠" },
-      { key: "22", value: "仙侠" },
-      { key: "4", value: "都市" },
-      { key: "5", value: "历史" },
-      { key: "6", value: "军事" },
-      { key: "7", value: "游戏" },
-      { key: "8", value: "体育" },
-      { key: "9", value: "科幻" },
-      { key: "10", value: "悬疑" }
-    ]
-  }
-]
-
 const rank = (title, category, page) => {
-  let response = GET(`https://www.qidian.com/rank/${title}?chn=${category}&page=${page}`)
+  let response = GET(`https://www.qidian.com/${title}?chn=${category}&page=${page + 1}`)
   let $ = HTML.parse(response)
   let array = []
   $('.book-img-text > ul > li').forEach((child) => {
@@ -130,3 +99,156 @@ const rank = (title, category, page) => {
   })
   return JSON.stringify(array)
 }
+
+const ranks = [
+  {
+    title: {
+      key: 'rank/yuepiao',
+      value: '起点月票榜'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "21", value: "玄幻" },
+      { key: "1", value: "奇幻" },
+      { key: "2", value: "武侠" },
+      { key: "22", value: "仙侠" },
+      { key: "4", value: "都市" },
+      { key: "5", value: "历史" },
+      { key: "6", value: "军事" },
+      { key: "7", value: "游戏" },
+      { key: "8", value: "体育" },
+      { key: "9", value: "科幻" },
+      { key: "10", value: "悬疑" },
+      { key: "12", value: "轻小说" },
+      { key: "0", value: "VIP新作" }
+    ]
+  },
+  {
+    title: {
+      key: 'rank/hotsales',
+      value: '24小时热销榜'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "21", value: "玄幻" },
+      { key: "1", value: "奇幻" },
+      { key: "2", value: "武侠" },
+      { key: "22", value: "仙侠" },
+      { key: "4", value: "都市" },
+      { key: "5", value: "历史" },
+      { key: "6", value: "军事" },
+      { key: "7", value: "游戏" },
+      { key: "8", value: "体育" },
+      { key: "9", value: "科幻" },
+      { key: "10", value: "悬疑" },
+      { key: "12", value: "轻小说" }
+    ]
+  },
+  {
+    title: {
+      key: 'rank/readIndex',
+      value: '阅读指数榜'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "21", value: "玄幻" },
+      { key: "1", value: "奇幻" },
+      { key: "2", value: "武侠" },
+      { key: "22", value: "仙侠" },
+      { key: "4", value: "都市" },
+      { key: "5", value: "历史" },
+      { key: "6", value: "军事" },
+      { key: "7", value: "游戏" },
+      { key: "8", value: "体育" },
+      { key: "9", value: "科幻" },
+      { key: "10", value: "悬疑" },
+      { key: "12", value: "轻小说" }
+    ]
+  },
+  {
+    title: {
+      key: 'rank/signnewbook',
+      value: '签约作者新书榜'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "21", value: "玄幻" },
+      { key: "1", value: "奇幻" },
+      { key: "2", value: "武侠" },
+      { key: "22", value: "仙侠" },
+      { key: "4", value: "都市" },
+      { key: "5", value: "历史" },
+      { key: "6", value: "军事" },
+      { key: "7", value: "游戏" },
+      { key: "8", value: "体育" },
+      { key: "9", value: "科幻" },
+      { key: "10", value: "悬疑" },
+      { key: "12", value: "轻小说" }
+    ]
+  },
+  {
+    title: {
+      key: 'mm/rank/yuepiao',
+      value: '起点月票榜 · 女生'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "21", value: "古言" },
+      { key: "22", value: "现言" },
+      { key: "23", value: "幻言" },
+      { key: "0", value: "VIP新作" }
+    ]
+  },
+  {
+    title: {
+      key: 'mm/rank/hotsales',
+      value: '24小时热销榜 · 女生'
+    },
+    categories: [
+      { key: "-1", value: "全部" }
+    ]
+  },
+  {
+    title: {
+      key: 'mm/rank/readIndex',
+      value: '阅读指数榜 · 女生'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "80", value: "古代言情" },
+      { key: "81", value: "仙侠奇缘" },
+      { key: "82", value: "现代言情" },
+      { key: "83", value: "浪漫青春" },
+      { key: "84", value: "玄幻言情" },
+      { key: "85", value: "悬疑推理" },
+      { key: "86", value: "科幻空间" },
+      { key: "88", value: "游戏竞技" }
+    ]
+  },
+  {
+    title: {
+      key: 'mm/rank/signnewbook',
+      value: '签约作者新书榜 · 女生'
+    },
+    categories: [
+      { key: "-1", value: "全部" },
+      { key: "80", value: "古代言情" },
+      { key: "81", value: "仙侠奇缘" },
+      { key: "82", value: "现代言情" },
+      { key: "83", value: "浪漫青春" },
+      { key: "84", value: "玄幻言情" },
+      { key: "85", value: "悬疑推理" },
+      { key: "86", value: "科幻空间" },
+      { key: "88", value: "游戏竞技" }
+    ]
+  }
+]
+
+var bookSource = JSON.stringify({
+  name: "起点中文网",
+  url: "qidian.com",
+  version: 100,
+  authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
+  cookies: [".qidian.com", ".yuewen.com"],
+  ranks: ranks
+})
