@@ -139,5 +139,6 @@ var bookSource = JSON.stringify({
     url: '8kana.com',
     version: 100,
     authorization: 'https://m.8kana.com/www/passport/login',
+    cookies: ["8kana.com"],
     ranks: ranks
 })
