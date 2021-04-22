@@ -95,7 +95,7 @@ const profile = () => {
  * @param {页码} page 
  */
 const bookshelf = (page) => {
-  let response = GET(`${baseUrl}/meajax/MBookShelf/List?_csrfToken=${COOKIE('_csrfToken')}&pageNum=${page}&pageSize=20&sort=2&gid=-100&gname=`)
+  let response = GET(`${baseUrl}/meajax/MBookShelf/List?_csrfToken=${COOKIE('_csrfToken')}&pageNum=${page + 1}&pageSize=20&sort=2&gid=-100&gname=`)
   let books = JSON.parse(response).data.list.map(book => ({
     name: book.bName,
     author: book.bAuth,
@@ -270,7 +270,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 101,
+  version: 102,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
