@@ -79,9 +79,32 @@ const profile = () => {
         name: '起点币',
         coin: $('ul.btn-group > li:last-child > a > output').text()
       }
+    ],
+    extra: [
+      {
+        name: '书架',
+        type: 'books',
+        method: 'bookshelf'
+      }
     ]
   })
 }
+
+/**
+ * 我的书架
+ * @param {页码} page 
+ */
+const bookshelf = (page) => {
+  let response = GET(`${baseUrl}/meajax/MBookShelf/List?_csrfToken=${COOKIE('_csrfToken')}&pageNum=${page + 1}&pageSize=20&sort=2&gid=-100&gname=`)
+  let books = JSON.parse(response).data.list.map(book => ({
+    name: book.bName,
+    author: book.bAuth,
+    cover: `https://bookcover.yuewen.com/qdbimg/349573/${book.bid}/300`,
+    detail: `${baseUrl}/book/${book.bid}`
+  }))
+  return JSON.stringify(books)
+}
+
 
 //排行榜
 const rank = (title, category, page) => {
@@ -247,7 +270,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 100,
+  version: 102,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
