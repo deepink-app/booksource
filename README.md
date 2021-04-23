@@ -10,3 +10,4 @@
 - [x] 晋江文学城 [m.jjwxc.net](https://m.jjwxc.net)
 - [x] 书旗小说 [shuqi.com](https://shuqi.com)
 - [x] 长佩文学 [gongzicp.com](https://gongzicp.com)
+- [x] 塔读文学 [tadu.com](https://tadu.com)
