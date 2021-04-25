@@ -40,9 +40,11 @@ const catalog = (url) => {
   $('ul.float-list > li').forEach((chapter) => {
     let $ = HTML.parse(chapter)
     let isvip = $('a.isvip').length != 0
+    let bookId = url.match('(?<=chapter\/)(.+?)(?=$)')[0]
+    let chapterId = $('a').attr('href').match(`(?<=${bookId}\/)(.+?)(?=$)`)[0]
     array.push({
       name: $('a').text(),
-      url: (`${$('a').attr('href')}`).replace('wwww.', 'w1.') + `?isvip=${isvip}`,
+      url: `https://a.heiyan.com/m/ajax/chapter/content/${chapterId}` + `?isvip=${isvip}&bookId=${bookId}&chapterId=${chapterId}`,
       vip: isvip
     })
   })
@@ -51,35 +53,45 @@ const catalog = (url) => {
 
 //章节
 const chapter = (url) => {
-  let response = GET(url)
-  let $ = HTML.parse(response)
   //VIP章节
-  if (url.query('isvip')) {
+  if (url.query('isvip') == 'true') {
+    let response = GET(url)
+    let $ = JSON.parse(response)
+
     //未购买返回403和自动订阅地址
-    if ($('.page-content').text().length < 200) throw JSON.stringify({
+    if ($.nopay || $.nologin) throw JSON.stringify({
       code: 403,
-      message: `可手动开启自动订阅`
+      message: `https://w1.heiyan.com/book/${url.query('bookId')}`
     })
+    
+    return $.chapter.htmlContent
   }
-  return $('.page-content').text()
+  
+  let response = GET(`https://w1.heiyan.com/book/${url.query('bookId')}/${url.query('chapterId')}`)
+  let $ = HTML.parse(response)
+  return $('.page-content')
 }
 
 //个人中心
 const profile = () => {
-  let response = GET(`${baseUrl}/my/profile`)
-  let $ = HTML.parse(response)
+  let response = GET('https://a.heiyan.com/m/ajax/user/info')
+  let $ = JSON.parse(response)
   return JSON.stringify({
     url: 'https://accounts.heiyan.com/m/people/',
-    nickname: $('div.userInfo > div.right > p.name > a').text(),
+    nickname: $.userVO.name,
     recharge: 'https://pay.heiyan.com/m/accounts/pay',
     balance: [
       {
         name: '岩币',
-        coin: $('p.title > span.money').text()
+        coin: $.balance
+      },
+      {
+        name: '钻石',
+        coin: $.shell
       },
       {
         name: '赠币',
-        coin: $('p.title > span.shell').text()
+        coin: $.coin
       }
     ],
   })
@@ -88,17 +100,20 @@ const profile = () => {
 //排行榜
 const rank = (title, category, page) => {
   let response = GET(`https://search.heiyan.com/m/all?order=${title}&sort=${category}&page=${page + 1}&words=-1&free=&finish=&solicitingid=0`)
-  let array = []
+  let books = []
   let $ = JSON.parse(response)
   $.data.content.forEach((child) => {
-    array.push({
+    books.push({
       name: child.name,
       author: child.authorname,
       cover: `https://b.heiyanimg.com/book/${child.id}.jpg`,
       detail: `${baseUrl}/book/${child.id}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $.data.empty,
+    books: books
+  })
 }
 
 const catagoryAll = [
@@ -156,8 +171,8 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "黑岩网",
   url: "heiyan.com",
-  version: 100,
-  authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://w1.heiyan.com/newHome",
+  version: 103,
+  authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://accounts.heiyan.com/m/people/",
   cookies: ["heiyan.com"],
   ranks: ranks
 })
