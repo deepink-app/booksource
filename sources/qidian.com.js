@@ -9,7 +9,7 @@ const search = (key) => {
     let $ = HTML.parse(child)
     array.push({
       name: $('.book-title').text(),
-      author: $('span.book-author').text().match('(?<=作者)(.+)')[0].replace(/\(.*)/, '').trim(),
+      author: $('span.book-author').text().match('(?<=作者)(.+)')[0].replace(/\(.+\)/, '').trim(),
       cover: `https:${$('img').attr('data-src')}`,
       detail: `${baseUrl}${$('a').attr('href')}`,
     })
@@ -274,7 +274,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 104,
+  version: 105,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
