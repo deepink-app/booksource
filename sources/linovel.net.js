@@ -153,7 +153,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "轻之文库",
   url: "linovel.net",
-  version: 101,
+  version: 102,
   authorization: "https://www.linovel.net/auth/login",
   cookies: ["linovel.net", "www.linovel.net"],
   ranks: ranks

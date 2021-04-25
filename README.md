@@ -11,3 +11,4 @@
 - [x] 书旗小说 [shuqi.com](https://shuqi.com)
 - [x] 长佩文学 [gongzicp.com](https://gongzicp.com)
 - [x] 塔读文学 [tadu.com](https://tadu.com)
+- [x] 哔哩轻小说 [linovelib.com](https://linovelib.com)

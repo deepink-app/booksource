@@ -168,7 +168,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "黑岩网",
   url: "heiyan.com",
-  version: 101,
+  version: 102,
   authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://accounts.heiyan.com/m/people/",
   cookies: ["heiyan.com"],
   ranks: ranks
