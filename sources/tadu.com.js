@@ -93,7 +93,10 @@ const rank = (title, category, page) => {
       detail: `${apiUrl}/ci/book/info?bookId=${child.bookId}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $.data.page == $.data.sumPage,
+    books: books
+  })
 }
 
 const ranks = [

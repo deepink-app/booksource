@@ -110,7 +110,10 @@ const rank = (title, category, page) => {
       detail: `${baseUrl}/book/${child.id}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $.data.empty,
+    books: books
+  })
 }
 
 const catagoryAll = [

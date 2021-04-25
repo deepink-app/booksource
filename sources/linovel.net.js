@@ -96,7 +96,10 @@ const rank = (title, category, page) => {
       detail: `https://www.linovel.net/book/${child.id}.html`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $.data.books.length == 0,
+    books: books
+  })
 }
 
 const catagoryAll = [

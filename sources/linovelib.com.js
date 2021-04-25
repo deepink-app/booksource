@@ -91,7 +91,10 @@ const rank = (title, category, page) => {
       detail: `${baseUrl}${$('.rank_d_b_name > a').attr('href')}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $('a.ngroup').attr('href').indexOf(`${page + 1}`) != -1,
+    books: books
+  })
 }
 
 const catagoryAll = [
