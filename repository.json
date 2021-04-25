@@ -38,5 +38,13 @@
     {
         "url": "ebtang.com",
         "version": 100
+    },
+    {
+        "url": "douban.com",
+        "version": 100
+    },
+    {
+        "url": "yousuu.com",
+        "version": 100
     }
 ]
