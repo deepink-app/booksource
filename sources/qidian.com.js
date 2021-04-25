@@ -114,17 +114,21 @@ const bookshelf = (page) => {
 const rank = (title, category, page) => {
   let response = GET(`https://www.qidian.com/${title}?chn=${category}&page=${page + 1}`)
   let $ = HTML.parse(response)
+  let pager = $('#page-container')
   let array = []
   $('.book-img-text > ul > li').forEach((child) => {
     let $ = HTML.parse(child)
     array.push({
       name: $('h4').text(),
       author: $('p.author > a.name').text(),
-      covesr: `https:${$('.book-img-box > a >  img').attr('src')}`,
+      cover: `https:${$('.book-img-box > a >  img').attr('src')}`,
       detail: `https:${$('.book-img-box > a').attr('href')}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: pager.attr('data-page') === pager.attr('data-pagemax'),
+    books: array
+  })
 }
 
 const ranks = [
@@ -274,7 +278,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 105,
+  version: 106,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
