@@ -57,7 +57,7 @@ const catalog = (url) => {
 const chapter = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
-  return $('.article-text > p').join('\n')
+  return $('.article-text')
 }
 
 //个人中心

@@ -69,7 +69,7 @@ const chapter = (url) => {
   
   let response = GET(`https://w1.heiyan.com/book/${url.query('bookId')}/${url.query('chapterId')}`)
   let $ = HTML.parse(response)
-  return $('.page-content > p').join('\n')
+  return $('.page-content')
 }
 
 //个人中心
