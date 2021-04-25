@@ -85,7 +85,6 @@ const profile = () => {
 
 //ranks
 const rank = (title, category, page) => {
-    if (page != 0) return JSON.stringify([])
     let response = POST('http://inf.8kana.com/book/channel', {
         data: `Sex=1&Class0Id=${title}&VipType=&SeriesStatus=0&SearchType=1&Page=1&system=android`
     })
@@ -98,7 +97,9 @@ const rank = (title, category, page) => {
             bookId: book.BookId
         })
     }))
-    return JSON.stringify(books)
+    return JSON.stringify({
+        books: books
+    })
 }
 
 const ranks = [
@@ -137,7 +138,7 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: '不可能的世界',
     url: '8kana.com',
-    version: 100,
+    version: 101,
     authorization: 'https://m.8kana.com/www/passport/login',
     cookies: ["8kana.com"],
     ranks: ranks

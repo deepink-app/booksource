@@ -1,15 +1,15 @@
 [
     {
         "url": "qidian.com",
-        "version": 103
+        "version": 106
     },
     {
         "url": "ruochu.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "8kana.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "linovel.net",
@@ -41,6 +41,18 @@
     },
     {
         "url": "ebtang.com",
+        "version": 100
+    },
+    {
+        "url": "douban.com",
+        "version": 100
+    },
+    {
+        "url": "yousuu.com",
+        "version": 100
+    },
+    {
+        "url": "zongheng.com",
         "version": 100
     },
     {
