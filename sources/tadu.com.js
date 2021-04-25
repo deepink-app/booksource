@@ -83,10 +83,10 @@ const profile = () => {
 //排行榜
 const rank = (title, category, page) => {
   let response = GET(`${apiUrl}/ci/categories/secondCategorys/?categoryid=${category}&page=${page + 1}&thirdcategory=0&activitytype=0&bookstatus=0&sorttype=0&chars=0&publishDate=&readingAge=1&bookType=0`, {headers: headerPrefix})
-  let array = []
+  let books = []
   let $ = JSON.parse(response)
   $.data.bookList.forEach((child) => {
-    array.push({
+    books.push({
       name: child.title,
       author: child.authors,
       cover: child.coverImage,
@@ -153,7 +153,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "塔读文学",
   url: "tadu.com",
-  version: 100,
+  version: 101,
   authorization: "https://m.tadu.com/auth/user/personalCenter",
   cookies: ["tadu.com", "m.tadu.com"],
   ranks: ranks

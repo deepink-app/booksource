@@ -100,10 +100,10 @@ const profile = () => {
 //排行榜
 const rank = (title, category, page) => {
   let response = GET(`https://search.heiyan.com/m/all?order=${title}&sort=${category}&page=${page + 1}&words=-1&free=&finish=&solicitingid=0`)
-  let array = []
+  let books = []
   let $ = JSON.parse(response)
   $.data.content.forEach((child) => {
-    array.push({
+    books.push({
       name: child.name,
       author: child.authorname,
       cover: `https://b.heiyanimg.com/book/${child.id}.jpg`,
@@ -171,7 +171,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "黑岩网",
   url: "heiyan.com",
-  version: 102,
+  version: 103,
   authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://accounts.heiyan.com/m/people/",
   cookies: ["heiyan.com"],
   ranks: ranks

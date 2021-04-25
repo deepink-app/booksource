@@ -13,11 +13,11 @@
     },
     {
         "url": "linovel.net",
-        "version": 102
+        "version": 103
     },
     {
         "url": "heiyan.com",
-        "version": 102
+        "version": 103
     },
     {
         "url": "17k.com",
@@ -37,7 +37,7 @@
     },
     {
         "url": "tadu.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "ebtang.com",
@@ -57,6 +57,6 @@
     },
     {
         "url": "linovelib.com",
-        "version": 100
+        "version": 101
     }
 ]

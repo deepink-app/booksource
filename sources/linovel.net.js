@@ -87,9 +87,9 @@ const profile = () => {
 const rank = (title, category, page) => {
   let response = GET(`https://www.linovel.net/hub/getTopBooks?unit=${title}&time=${category}&page=${page + 1}`)
   let $ = JSON.parse(response)
-  let array = []
+  let books = []
   $.data.books.forEach((child) => {
-    array.push({
+    books.push({
       name: child.name,
       author: child.author,
       cover: child.coverUrl,
@@ -156,7 +156,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "轻之文库",
   url: "linovel.net",
-  version: 102,
+  version: 103,
   authorization: "https://www.linovel.net/auth/login",
   cookies: ["linovel.net", "www.linovel.net"],
   ranks: ranks

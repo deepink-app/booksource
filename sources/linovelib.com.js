@@ -81,10 +81,10 @@ const profile = () => {
 const rank = (title, category, page) => {
   let response = GET(`https://www.linovelib.com/modules/article/toplist.php?order=${title}&sortid=${category}&page=${page + 1}`)
   let $ = HTML.parse(response)
-  let array = []
+  let books = []
   $('div.rank_d_list').forEach((child) => {
     let $ = HTML.parse(child)
-    array.push({
+    books.push({
       name: $('.rank_d_b_name').attr('title'),
       author: $('.rank_d_b_cate').attr('title'),
       cover: $('.rank_d_book_img > a > img').attr('data-original'),
@@ -92,7 +92,7 @@ const rank = (title, category, page) => {
     })
   })
   return JSON.stringify({
-    end: $('a.ngroup').attr('href').indexOf(`${page + 1}`) != -1,
+    end: $('a.ngroup').attr('href').indexOf(`/${page + 1}.html`) != -1,
     books: books
   })
 }
@@ -206,7 +206,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "哔哩轻小说",
   url: "linovelib.com",
-  version: 100,
+  version: 101,
   authorization: "https://m.linovelib.com/login.php",
   cookies: ["linovelib.com"],
   ranks: ranks
