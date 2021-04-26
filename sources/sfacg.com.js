@@ -45,7 +45,8 @@ const catalog = (url) => {
             $ = HTML.parse(chapter)
             chapters.push({
                 name: $('a').attr('title'),
-                url: $('a').attr('href')
+                url: $('a').attr('href'),
+                vip: $('.icn_vip').text() == "VIP"
             })
         })
     })
@@ -58,7 +59,7 @@ const chapter = (url) => {
     //未购买返回403和自动订阅地址
     if ($('.pay-bar > p.text')) throw JSON.stringify({
         code: 403,
-        message: url
+        message: `https://book.sfacg.com${url}`
     })
   return $('#ChapterBody')
 }
