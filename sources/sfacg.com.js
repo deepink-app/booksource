@@ -63,10 +63,104 @@ const chapter = (url) => {
   return $('#ChapterBody')
 }
 
+//个人中心
+const profile = () => {
+  let response = GET(`https://m.sfacg.com/my/`)
+  let $ = HTML.parse(response)
+  return JSON.stringify({
+    url: 'https://m.sfacg.com/my/',
+    nickname: $('.my_content > li > span > strong').text(),
+    recharge: 'https://m.sfacg.com/pay/',
+    balance: [
+      {
+        name: '火券',
+        coin: $('.my_menu > a > li > i').text().match(/(?<=).?(?=火券.+代券)/)[0]
+      },
+      {
+        name: '代券',
+        coin: $('.my_menu > a > li > i').text().match(/(?<=火券 \/ )[\s\S]*?(?=代券)/)[0]
+      },
+    ],
+  })
+}
+
+//排行榜
+const rank = (title, category, page) => {
+  let response = GET(`https://api.sfacg.com/novels/${title}/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate`,{headers:
+  ["authorization: Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE="]
+  })
+  let $ = JSON.parse(response)
+  let books = []
+  $.data.forEach((child) => {
+    books.push({
+      name: child.novelName,
+      author: child.authorName,
+      cover: child.novelCover,
+      detail: `https://api.sfacg.com/novels/${child.novelId}?expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,essaytag,auditCover,preOrderInfo`,
+    })
+  })
+  return JSON.stringify({
+    books: books
+  })
+}
+
+
+const ranks = [
+    {
+        title: {
+            key: '21',
+            value: '魔幻'
+        }
+    },
+    {
+        title: {
+            key: '22',
+            value: '玄幻'
+        }
+    },
+    {
+        title: {
+            key: '23',
+            value: '古风'
+        }
+    },
+    {
+        title: {
+            key: '24',
+            value: '科幻'
+        }
+    },
+    {
+        title: {
+            key: '25',
+            value: '校园'
+        }
+    },
+    {
+        title: {
+            key: '26',
+            value: '都市'
+        }
+    },
+    {
+        title: {
+            key: '27',
+            value: '游戏'
+        }
+    },
+    {
+        title: {
+            key: '28',
+            value: '悬疑'
+        }
+    }
+]
+
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 100,
+  version: 101,
   authorization: "https://m.sfacg.com/login",
-  cookies: [".sfacg.com"]
+  cookies: [".sfacg.com"],
+  ranks: ranks
 })
