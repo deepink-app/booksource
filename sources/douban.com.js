@@ -10,7 +10,7 @@ const search = (key) => {
     $('.result-list > .result').forEach(book => {
         $ = HTML.parse(book)
         books.push({
-            name: $('h3 > a').text(),
+            name: trimBookName($('h3 > a').text()),
             author: trimAuthor($('.subject-cast').text()),
             cover: $('img').attr('src'),
             detail: $('h3 > a').attr('href')
@@ -25,7 +25,17 @@ const search = (key) => {
  * @returns 
  */
 const trimAuthor = (author) => {
-    return author.match(/(.+?)(?=\/)/)[0].replace(/\[.*]/, '').replace('•', '·').trim()
+    return author.match(/(.+?)(?=\/)/)[0]
+        .replace(' 著', '')
+        .replace(/\[.*]/, '')
+        .replace(/（.+）/, '')
+        .replace(/\(.*\)/, '')
+        .replace('•', '·')
+        .trim()
+}
+
+const trimBookName = (bookName) => {
+    return bookName.replace(/（.+）$/, '').trim()
 }
 
 /**
@@ -45,8 +55,42 @@ const detail = (url) => {
     return JSON.stringify(book)
 }
 
+/**
+ * 排行榜
+ * @param {页码} page 
+ * @returns 
+ */
+const rank = (title, category, page) => {
+    let response = GET(`https://book.douban.com/${title}?start=${page * 25}`)
+    let $ = HTML.parse(response)
+    let books = []
+    $('table').forEach(book => {
+        $ = HTML.parse(book)
+        books.push({
+            name: trimBookName($('.pl2').text()),
+            author: trimAuthor($('td > .pl').text()),
+            cover: $('.nbg > img').attr('src'),
+            detail: $('.nbg').attr('href')
+        })
+    })
+    return JSON.stringify({
+        end: page * 25 === 9 * 25,
+        books: books
+    })
+}
+
+const ranks = [
+    {
+        title: {
+            key: 'top250',
+            value: 'Top 250'
+        }
+    }
+]
+
 var bookSource = JSON.stringify({
     name: "豆瓣读书",
     url: "douban.com",
-    version: 100
+    version: 101,
+    ranks: ranks
 })
