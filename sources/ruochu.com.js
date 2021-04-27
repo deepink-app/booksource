@@ -99,7 +99,7 @@ const profile = () => {
         name: '自动签到',
         type: 'permission',
         method: 'sign',
-        times: 'day' 
+        times: 'day'
       }
     ]
   })
@@ -117,7 +117,6 @@ const sign = () => {
 
 //排行榜
 const rank = (title, category, page) => {
-  if (page != 0) return JSON.stringify([])
   let array = []
   if (title.length == 1) {
     let response = GET(`https://m.ruochu.com/top10`)
@@ -144,7 +143,9 @@ const rank = (title, category, page) => {
       })
     })
   }
-  return JSON.stringify(array)
+  return JSON.stringify({
+    books: array
+  })
 }
 
 const ranks = [
@@ -201,7 +202,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "若初文学网",
   url: "ruochu.com",
-  version: 100,
+  version: 101,
   authorization: "https://m.ruochu.com/accounts/login",
   cookies: [".ruochu.com"],
   ranks: ranks

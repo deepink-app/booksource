@@ -9,7 +9,7 @@ const search = (key) => {
     let $ = HTML.parse(child)
     array.push({
       name: $('.book-title').text(),
-      author: $('span.book-author').text().match('(?<=作者)(.+)')[0].trim(),
+      author: $('span.book-author').text().match('(?<=作者)(.+)')[0].replace(/\(.+\)/, '').trim(),
       cover: `https:${$('img').attr('data-src')}`,
       detail: `${baseUrl}${$('a').attr('href')}`,
     })
@@ -96,13 +96,17 @@ const profile = () => {
  */
 const bookshelf = (page) => {
   let response = GET(`${baseUrl}/meajax/MBookShelf/List?_csrfToken=${COOKIE('_csrfToken')}&pageNum=${page + 1}&pageSize=20&sort=2&gid=-100&gname=`)
-  let books = JSON.parse(response).data.list.map(book => ({
+  let $ = JSON.parse(response).data
+  let books = $.list.map(book => ({
     name: book.bName,
     author: book.bAuth,
     cover: `https://bookcover.yuewen.com/qdbimg/349573/${book.bid}/300`,
     detail: `${baseUrl}/book/${book.bid}`
   }))
-  return JSON.stringify(books)
+  return JSON.stringify({
+    end: $.page.totalPage === page + 1,
+    books: books
+  })
 }
 
 
@@ -110,6 +114,7 @@ const bookshelf = (page) => {
 const rank = (title, category, page) => {
   let response = GET(`https://www.qidian.com/${title}?chn=${category}&page=${page + 1}`)
   let $ = HTML.parse(response)
+  let pager = $('#page-container')
   let array = []
   $('.book-img-text > ul > li').forEach((child) => {
     let $ = HTML.parse(child)
@@ -120,7 +125,10 @@ const rank = (title, category, page) => {
       detail: `https:${$('.book-img-box > a').attr('href')}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: pager.attr('data-page') === pager.attr('data-pagemax'),
+    books: array
+  })
 }
 
 const ranks = [
@@ -270,7 +278,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 102,
+  version: 106,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks

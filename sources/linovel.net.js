@@ -57,16 +57,29 @@ const catalog = (url) => {
 const chapter = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
-  return $('.article-text').text()
+  return $('.article-text')
 }
 
 //个人中心
 const profile = () => {
   let response = GET(`${baseUrl}/my/profile`)
   let $ = HTML.parse(response)
+  let response1 = GET('https://www.linovel.net')
+  let $1 = HTML.parse(response1)
   return JSON.stringify({
     url: 'https://www.linovel.net/my/profile',
-    nickname: $('p.form-control-static').text()
+    nickname: $('form > div:nth-child(3) > div > p').text(),
+    recharge: 'https://www.linovel.net/pay/',
+    balance: [
+      {
+        name: '轻币',
+        coin: $1('div.coin > span').text()
+      },
+      {
+        name: '墨水',
+        coin: $1('div.integral > span').text()
+      }
+    ],
   })
 }
 
@@ -74,16 +87,19 @@ const profile = () => {
 const rank = (title, category, page) => {
   let response = GET(`https://www.linovel.net/hub/getTopBooks?unit=${title}&time=${category}&page=${page + 1}`)
   let $ = JSON.parse(response)
-  let array = []
+  let books = []
   $.data.books.forEach((child) => {
-    array.push({
+    books.push({
       name: child.name,
       author: child.author,
       cover: child.coverUrl,
       detail: `https://www.linovel.net/book/${child.id}.html`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({
+    end: $.data.books.length == 0,
+    books: books
+  })
 }
 
 const catagoryAll = [
@@ -140,8 +156,8 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "轻之文库",
   url: "linovel.net",
-  version: 100,
+  version: 103,
   authorization: "https://www.linovel.net/auth/login",
-  cookies: ["linovel.net"],
+  cookies: ["linovel.net", "www.linovel.net"],
   ranks: ranks
 })
