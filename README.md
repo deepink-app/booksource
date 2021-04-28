@@ -14,3 +14,4 @@
 - [x] 哔哩轻小说 [linovelib.com](https://linovelib.com)
 - [x] 寒武纪年 [hanwujinian.com](https://www.hanwujinian.com/)
 - [x] SF轻小说 [sfacg.com](https://book.sfacg.com)
+- [x] 息壤中文网 [xrzww.com](https://xrzww.com)
