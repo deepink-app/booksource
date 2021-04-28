@@ -13,3 +13,4 @@
 - [x] 塔读文学 [tadu.com](https://tadu.com)
 - [x] 哔哩轻小说 [linovelib.com](https://linovelib.com)
 - [x] 寒武纪年 [hanwujinian.com](https://www.hanwujinian.com/)
+- [x] SF轻小说 [sfacg.com](https://book.sfacg.com)
