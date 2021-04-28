@@ -60,7 +60,7 @@ const chapter = (url) => {
   ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
   }))
     //未购买返回403和自动订阅地址
-    if ($.status.msg == "请支持作者的辛勤写作,VIP章节必须登录后才可阅读") throw JSON.stringify({
+    if ($.data.isVip == true) throw JSON.stringify({
         code: 403,
         message: `https://m.sfacg.com/c/${$.data.chapId}/`
     })
@@ -161,16 +161,15 @@ const login = (args) => {
 if(!args) return "账号或者密码不能为空"
     let data =`{"username":"${args[0]}","password":"${args[1]}"}`
     let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-    let response = POST("https://minipapi.sfacg.com/pas/mpapi/sessions",{data,headers})
+    let response = POST(`https://minipapi.sfacg.com/pas/mpapi/sessions`,{data,headers})
     let $ = JSON.parse(response)
     if($.status.httpCode == 401) return $.status.msg
-    return "登录成功"
 }
 
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 101,
+  version: 102,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
