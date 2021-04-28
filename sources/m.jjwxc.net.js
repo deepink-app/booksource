@@ -117,23 +117,22 @@ content  += child.replace(/class=\"\">/g,"")
           cover: book.novelCover,
           detail: `http://app-cdn.jjwxc.net:80/androidapi/novelbasicinfo?novelId=${book.novelId}`
       }))
-      return JSON.stringify(books)
+      return JSON.stringify({books})
   }
   const rank = (title, category, page) => {
-      if (page != 0) return JSON.stringify([])
       url = !category ? `http://app.jjwxc.org/${title}` : `http://app.robook.com:80/bookstore/getTop?channel=${title}${category}&offset=0&limit=100&versionCode=133`
       let response = GET(url)
       let $ = JSON.parse(response)
-      let array = []
+      let books = []
           $.forEach((item) => {
-              array.push({
+              books.push({
                   name: item.novelName,
                   author: item.authorName,
                   cover: item.cover,
                   detail: `http://app-cdn.jjwxc.net:80/androidapi/novelbasicinfo?novelId=${item.novelId}`,
               })
           })
-      return JSON.stringify(array)
+      return JSON.stringify({end:page!=0,books})
   }
   const ranks = [{
       "title": {
@@ -294,7 +293,7 @@ content  += child.replace(/class=\"\">/g,"")
   var bookSource = JSON.stringify({
       name: "晋江文学城",
       url: "m.jjwxc.net",
-      version: 100,
+      version: 101,
       authorization: "https://m.jjwxc.net/my/login?login_mode=jjwxc",
       cookies: [".jjwxc.net"],
       ranks: ranks

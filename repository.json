@@ -21,19 +21,19 @@
     },
     {
         "url": "17k.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "m.jjwxc.net",
-        "version": 100
+        "version": 101
     },
     {
         "url": "shuqi.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "gongzicp.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "tadu.com",
@@ -62,5 +62,9 @@
     {
         "url": "sfacg.com",
         "version": 100
+     },
+     {
+        "url": "hanwujinian.com",
+        "version": 100     
      }
 ]

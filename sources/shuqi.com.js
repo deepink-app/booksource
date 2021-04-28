@@ -132,10 +132,10 @@ function _decodeCont(t) {
 //章节
 const chapter = (url) => {
     let response = GET(url, {
-        header: [`referer:https://www.aliwx.com.cn/reader?bid=${url.query("bid")}&cid=${url.query("cid")}`]
+        header: [`referer:https://www.shuqi.com/reader?bid=${url.query("bid")}&cid=${url.query("cid")}`]
     })
     //VIP章节未购买返回403和自动订阅地址
-    if (url.query("isbuy") == "false" && url.query("vip") == "false") throw JSON.stringify({
+    if (url.query("isbuy") === "false" && url.query("vip") === "false") throw JSON.stringify({
         code: 403,
         message: `https://www.shuqi.com/reader?bid=${url.query("bid")}&cid=${url.query("cid")}`
     })
@@ -147,17 +147,19 @@ const chapter = (url) => {
 const rank = (title, category, page) => {
     let response = GET(`https://www.shuqi.com/ranklist?rank=${category+title}&page=${page+1}`)
     let $ = HTML.parse(response)
-    let array = []
+    let books = []
+    let pageC = $(".cp-wp-page:last-child>a").attr("href").match(/page=(\d+)/)[1]
+
     $(".ranklist-ul>li").forEach((chapter) => {
         let $ = HTML.parse(chapter)
-        array.push({
+        books.push({
             name: $("h3").text(),
             author: $(".ranklist-autor").text(),
             cover: $("img").attr("src"),
             detail: "https://www.shuqi.com" + $(".ranklinst-bk>a").attr("href")
         })
     })
-    return JSON.stringify(array)
+    return JSON.stringify({end:page+1 ===pageC, books})
 }
 let key = ["Click-点击", "Store-收藏", "Order-订阅", "hot-人气", "New-新书", "End-完结", "Update-更新"]
 let ranks = []
@@ -206,7 +208,7 @@ const profile = () => {
 var bookSource = JSON.stringify({
     name: "书旗小说",
     url: "shuqi.com",
-    version: 100,
+    version: 101,
     authorization: "https://write.shuqi.com/login?modal=1",
     cookies: [".shuqi.com"],
     ranks: ranks
