@@ -61,10 +61,14 @@
     },
     {
         "url": "sfacg.com",
-        "version": 101
+        "version": 102
      },
      {
         "url": "hanwujinian.com",
+        "version": 100     
+     },
+     {
+        "url": "xrzww.com",
         "version": 100     
      }
 ]
