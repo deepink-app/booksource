@@ -136,7 +136,7 @@ const profile = () => {
     })
 }
 const autotask = () => {
-    GET("https://h5.17k.com/userSigninH5/saveUserSigninH5.html")
+    POST("https://h5.17k.com/userSigninH5/saveUserSigninH5.html",{data:"w"})
     //每日任务奖励
     for (id of [4, 4, 5, 6, 8]) {
         let url = "http://api.17k.com/user/task/receive-prize"
@@ -157,7 +157,7 @@ const bookshelf = () => {
         cover: book.coverImg,
         detail: `http://api.17k.com/book/${book.bookId}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0`
     }))
-    return JSON.stringify(books)
+    return JSON.stringify({books})
 }
 
 const addReadBook = (bid, cid) => {
@@ -461,22 +461,22 @@ const ranks = [{
 const rank = (title, category, page) => {
     let response = GET(`http://api.17k.com/book/rank/client?classId=${category}&orderBy=1&page=${page+1}&type=${title}&clientType=1&cpsOpid=0&_filterData=1&channel=0&_versions=1070&merchant=17Kyyb&appKey=4037465544&cpsSource=0&platform=2`)
     let $ = JSON.parse(response)
-    let array = []
+    let books = []
     $.data.forEach((item) => {
-        array.push({
+        books.push({
             name: item.bookName,
             author: item.authorPenName,
             cover: item.coverImg,
             detail: `http://api.17k.com/book/${item.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0`,
         })
     })
-    return JSON.stringify(array)
+    return JSON.stringify({end:page+1==$.totalPage,books})
 }
 
 var bookSource = JSON.stringify({
     name: "17k小说",
     url: "17k.com",
-    version: 100,
+    version: 101,
     authorization: "https://passport.17k.com/login",
     cookies: [".17k.com"],
     ranks: ranks

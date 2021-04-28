@@ -110,13 +110,17 @@ const profile = () => {
 }
 const bookshelf = (page) => {
   let response = GET(`https://m.gongzicp.com/bookShelf/shelfList?sort_key=3&sort_flag=2&status=0&page=${page+1}&novel_name=&did=0`,{headers:["X-Requested-With:XMLHttpRequest"]})  
-  let books = JSON.parse(response).data.novel.list.map(book => ({
+  let list = JSON.parse(response).data.novel.list
+   let books = list.map(book => ({
     name: book.novel_name,
     author: book.novel_author,
     cover: book.novel_cover,
     detail: `https://m.gongzicp.com/novel-${book.novel_id}.html?id=${book.novel_id}`
   }))
-  return JSON.stringify(books)
+  return JSON.stringify({
+  end:list.length==0,
+  books
+  })
 }
 
 //签到
@@ -135,22 +139,22 @@ const rank = (title, category, page) => {
       ["X-Requested-With: XMLHttpRequest"]
   })
   let $ = JSON.parse(response)
-  let array = []
+  let books= []
   $.data.forEach((item) => {
-    array.push({
+    books.push({
       name: item.novel_name,
       author: item.novel_author,
       cover: item.novel_cover,
       detail: `https://m.gongzicp.com/novel-${item.novel_id}.html?id=${item.novel_id}`,
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify({books})
  }
  const ranks=[{"title":{"key":"1","value":"畅销榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"2","value":"上架榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"3","value":"风云榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"4","value":"热读榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"5","value":"完结榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"6","value":"人气榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"7","value":"新书榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"8","value":"新人榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"9","value":"萌新榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]},{"title":{"key":"10","value":"打赏榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]} ,{"title":{"key":"12","value":"勤奋榜"},"categories":[{"key":"75","value":"全部"},{"key":"3","value":"古代"},{"key":"1","value":"现代"},{"key":"4","value":"幻想"},{"key":"6","value":"悬疑"},{"key":"66","value":"短佩"},{"key":"9","value":"架空"},{"key":"73","value":"无CP"},{"key":"17","value":"百合"}]}]
  var bookSource = JSON.stringify({
   name: "长佩文学",
   url: "m.gongzicp.com",
-  version: 100,
+  version: 101,
   authorization: "https://m.gongzicp.com/login/signIn",
   cookies: [".gongzicp.com"],
   ranks: ranks
