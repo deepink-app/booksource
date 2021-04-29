@@ -51,7 +51,7 @@ const catalog = (url) => {
       })
     })
   })
-  return JSON.stringify  (array)
+  return JSON.stringify(array)
 }
 
 //章节
