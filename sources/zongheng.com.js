@@ -86,6 +86,9 @@ const chapter = (url) => {
  */
 const profile = () => {
     let $ = HTML.parse(GET('https://m.zongheng.com/h5/home'))
+    if ($('.user_name').text() === '未登录') throw JSON.stringify({
+        code: 401
+    })
     return JSON.stringify({
         url: 'https://m.zongheng.com/h5/home',
         nickname: $('.user_name').text(),
@@ -203,7 +206,7 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: "纵横中文网",
     url: "zongheng.com",
-    version: 100,
+    version: 101,
     authorization: "https://passport.zongheng.com/",
     cookies: ["zongheng.com"],
     ranks: ranks
