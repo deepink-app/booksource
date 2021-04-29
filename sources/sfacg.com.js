@@ -51,7 +51,7 @@ const catalog = (url) => {
       })
     })
   })
-  return JSON.stringify(array)
+  return JSON.stringify  (array)
 }
 
 //章节
@@ -60,7 +60,7 @@ const chapter = (url) => {
   ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
   }))
     //未购买返回403和自动订阅地址
-    if ($.data.isVip == true) throw JSON.stringify({
+    if ($.status.msg == "请支持作者的辛勤写作,VIP章节必须登录后才可阅读"||$.status.msg == "请支持作者的辛勤写作,VIP章节必须购买后才可阅读") throw JSON.stringify({
         code: 403,
         message: `https://m.sfacg.com/c/${$.data.chapId}/`
     })
@@ -169,7 +169,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 102,
+  version: 103,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
