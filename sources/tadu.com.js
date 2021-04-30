@@ -82,21 +82,25 @@ const chapter = (url) => {
 const profile = () => {
   let response = GET(`https://m.tadu.com/auth/user/personalCenter`)
   let $ = HTML.parse(response)
-  if ($('section.third').text() == "选择登录方式") throw JSON.stringify({
+  if ($('section.third').length != 0) throw JSON.stringify({
     code: 401
   })
   return JSON.stringify({
-    url: 'https://m.tadu.com/auth/user/personalCenter',
-    nickname: $('div.logged > h1').text(),
-    recharge: 'http://m.tadu.com/auth/charge/alipay',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $('div.logged > h1').text(),
+        url: 'https://m.tadu.com/auth/user/personalCenter'
+      },
       {
         name: '塔豆',
-        coin: $('div.con_top.clearfix > p > span').text()
+        value: $('div.con_top.clearfix > p > span').text(),
+        url: 'http://m.tadu.com/auth/charge/alipay'
       },
       {
         name: '塔券',
-        coin: $('div.con_column.con_taquan > a > p > span').text()
+        value: $('div.con_column.con_taquan > a > p > span').text(),
+        url: 'http://m.tadu.com/auth/charge/alipay'
       },
     ],
     extra: [
@@ -208,7 +212,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "塔读文学",
   url: "tadu.com",
-  version: 103,
+  version: 104,
   authorization: "https://m.tadu.com/auth/user/personalCenter",
   cookies: ["tadu.com", "m.tadu.com"],
   ranks: ranks
