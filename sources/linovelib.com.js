@@ -1,83 +1,98 @@
-const baseUrl = "https://www.linovelib.com"
+const baseUrl = "https://w.linovelib.com"
 
-//搜索
+const header_mobile = [ "User-Agent: Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Mobile Safari/537.36"]
+
+/**
+ * 搜索
+ * @params {string} key
+ * @returns {[{name, author, cover, detail}]}
+ */
 const search = (key) => {
-  let response = POST(`${baseUrl}/s/`, {
-    data: `searchkey=${encodeURI(key)}&searchtype=all`
-  })
+  let response = GET(`${baseUrl}/s/?searchkey=${encodeURI(key)}&searchtype=all`, {headers: header_mobile})
   let array = []
   let $ = HTML.parse(response)
-  $('.search-result-list').forEach((child) => {
-    let $ = HTML.parse(child)
-    array.push({
-      name: $('h2').text(),
-      author: $('.bookinfo > a:nth-child(1)').text(),
-      cover: $('a > img').attr('src'),
-      detail: `${baseUrl}${$('h2 > a').attr('href')}`,
+
+  if ($('#header > h1.header-back-title').text() == "搜索结果") {
+    $('li.book-li').forEach((child) => {
+      let $ = HTML.parse(child)
+      array.push({
+        name: $('h4.book-title').text(),
+        author: $('span.book-author').text().replace('作者','').trim(),
+        cover: $('a > img').attr('data-original'),
+        detail: `${baseUrl}${$('a.book-layout').attr('href')}`,
+      })
     })
-  })
+  } else {
+    // 搜索挑战主页问题
+    array.push({
+      name: $('meta[property=og:title]').attr('content'),
+      author: $('meta[property=og:novel:author]').attr('content'),
+      cover: $('meta[property=og:image]').attr('content'),
+      detail: `${baseUrl}${$('head > link[rel=canonical]').attr('href')}`,
+    })
+  }
+
   return JSON.stringify(array)
 }
 
-//详情
+/**
+ * 详情
+ * @params {string} url
+ * @returns {[{summary, status, category, words, update, lastChapter, catalog}]}
+ */
 const detail = (url) => {
-  let response = GET(url)
+  let response = GET(url, {headers: header_mobile})
   let $ = HTML.parse(response)
   let book = {
-    name: $('.book-name').text(),
-    author: $('.au-name').text(),
-    cover: $('.book-img > img').text(),
-    summary: $('.book-dec > p').text(),
-    status: $('.state').text(),
-    category: $('.book-label > span').text(),
-    words: $('.nums > span:nth-child(1) > i').text(),
-    update: $('.book-new-chapter > div:nth-child(2) > div').text(),
-    lastChapter: $('.book-new-chapter > div:nth-child(2) > a').text(),
+    summary: $('meta[property=og:description]').attr('content'),
+    status: $('meta[property=og:novel:status]').attr('content'),
+    category: $('meta[property=og:novel:category]').attr('content'),
+    words: $('#bookDetailWrapper > div > div.book-layout > div > p:nth-child(4)').match('(?<=\>)(.+?)(?=字)')[0],
+    update: $('meta[property=og:novel:update_time]').attr('content'),
+    lastChapter: $('meta[property=og:novel:latest_chapter_name]').attr('content'),
     catalog: url.replace('.html', '/catalog')
   }
   return JSON.stringify(book)
 }
 
-//目录
+/**
+ * 目录
+ * @params {string} url
+ * @returns {[{name, url, vip}]}
+ */
 const catalog = (url) => {
-  let response = GET(url)
+  let response = GET(url, {headers: header_mobile})
   let $ = HTML.parse(response)
   let array = []
-  $('.chapter-list > li').forEach((chapter) => {
+  $('#volumes > li').forEach((chapter) => {
     let $ = HTML.parse(chapter)
-    array.push({
-      name: $('a').text(),
-      url: `${baseUrl}${$('a').attr('href')}`,
-      vip: false
-    })
+    if ($('.chapter-bar').text().length != 0) {
+      array.push({ name: $('li').text() })
+    } else {
+      array.push({
+        name: $('a').text(),
+        url: `${baseUrl}${$('a').attr('href')}`,
+        vip: false
+      })
+    }
   })
   return JSON.stringify(array)
 }
 
-//章节
+/**
+ * 章节
+ * @params {string} url
+ * @returns {string}
+ */
 const chapter = (url) => {
-  let response = GET(url)
+  let response = GET(url, {headers: header_mobile})
   let $ = HTML.parse(response)
-  return $('#TextContent')
+  return $('#acontent')
 }
 
-//个人中心
-const profile = () => {
-  let response = GET(`https://m.linovelib.com/user.php`)
-  let $ = HTML.parse(response)
-  return JSON.stringify({
-    url: `https://m.linovelib.com/user.php`,
-    nickname: $('span.user-name').text(),
-    balance: [
-      {
-        name: '轻小说币',
-        coin: $('span.ding').text()
-      }
-    ],
-  })
-}
-
-//排行榜
+/**
+ * 排行榜
+ */
 const rank = (title, category, page) => {
   let response = GET(`https://www.linovelib.com/modules/article/toplist.php?order=${title}&sortid=${category}&page=${page + 1}`)
   let $ = HTML.parse(response)
@@ -88,7 +103,7 @@ const rank = (title, category, page) => {
       name: $('.rank_d_b_name').attr('title'),
       author: $('.rank_d_b_cate').attr('title'),
       cover: $('.rank_d_book_img > a > img').attr('data-original'),
-      detail: `${baseUrl}${$('.rank_d_b_name > a').attr('href')}`,
+      detail: `${baseUrl}${$('.rank_d_b_name > a').attr('href')}`.replace('www.', 'w.'),
     })
   })
   return JSON.stringify({
@@ -206,8 +221,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "哔哩轻小说",
   url: "linovelib.com",
-  version: 101,
-  authorization: "https://m.linovelib.com/login.php",
-  cookies: ["linovelib.com"],
+  version: 102,
   ranks: ranks
 })
