@@ -1,6 +1,10 @@
 const baseUrl = "https://w1.heiyan.com"
 
-//搜索
+/**
+ * 搜索
+ * @params {string} key
+ * @returns {[{name, author, cover, detail}]}
+ */
 const search = (key) => {
   let response = GET(`http://search.heiyan.com/web/search?queryString=${encodeURI(key)}&highlight=false`)
   let array = []
@@ -16,23 +20,31 @@ const search = (key) => {
   return JSON.stringify(array)
 }
 
-//详情
+/**
+ * 详情
+ * @params {string} url
+ * @returns {[{summary, status, category, words, update, lastChapter, catalog}]}
+ */
 const detail = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
   let book = {
-    summary: $('meta[property=og:description]').match('(?<=content=")(.+?)(?=">)')[0],
-    status: $('meta[property=og:novel:status]').match('(?<=content=")(.+?)(?=">)')[0],
-    category: $('meta[property=og:novel:category]').match('(?<=content=")(.+?)(?=">)')[0],
+    summary: $('meta[property=og:description]').attr('content'),
+    status: $('meta[property=og:novel:status]').attr('content'),
+    category: $('meta[property=og:novel:category]').attr('content'),
     words: $('div.info > div:nth-child(3)').match('(?<=)(.+?)(?=字)')[0],
-    update: $('meta[property=og:novel:update_time]').match('(?<=content=")(.+?)(?=">)')[0],
-    lastChapter: $('meta[property=og:novel:latest_chapter_name]').match('(?<=content=")(.+?)(?=">)')[0],
+    update: $('meta[property=og:novel:update_time]').attr('content'),
+    lastChapter: $('meta[property=og:novel:latest_chapter_name]').attr('content'),
     catalog: $('div.more-index > a').attr('href').replace('w1.', 'www.')
   }
   return JSON.stringify(book)
 }
 
-//目录
+/**
+ * 目录
+ * @params {string} url
+ * @returns {[{name, url, vip}]}
+ */
 const catalog = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
@@ -51,7 +63,11 @@ const catalog = (url) => {
   return JSON.stringify(array)
 }
 
-//章节
+/**
+ * 章节
+ * @params {string} url
+ * @returns {string}
+ */
 const chapter = (url) => {
   //VIP章节
   if (url.query('isvip') == 'true') {
@@ -72,10 +88,16 @@ const chapter = (url) => {
   return $('.page-content')
 }
 
-//个人中心
+/**
+ * 个人
+ * @returns {[{url, nickname, recharge, balance[{name, coin}], sign}]}
+ */
 const profile = () => {
   let response = GET('https://a.heiyan.com/m/ajax/user/info')
   let $ = JSON.parse(response)
+  if ($.isMe == undefined) throw JSON.stringify({
+    code: 401
+  })
   return JSON.stringify({
     url: 'https://accounts.heiyan.com/m/people/',
     nickname: $.userVO.name,
@@ -97,7 +119,10 @@ const profile = () => {
   })
 }
 
-//排行榜
+
+/**
+ * 排行榜
+ */
 const rank = (title, category, page) => {
   let response = GET(`https://search.heiyan.com/m/all?order=${title}&sort=${category}&page=${page + 1}&words=-1&free=&finish=&solicitingid=0`)
   let books = []
@@ -171,7 +196,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "黑岩网",
   url: "heiyan.com",
-  version: 103,
+  version: 104,
   authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://accounts.heiyan.com/m/people/",
   cookies: ["heiyan.com"],
   ranks: ranks
