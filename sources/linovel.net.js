@@ -64,6 +64,10 @@ const chapter = (url) => {
 const profile = () => {
   let response = GET(`${baseUrl}/my/profile`)
   let $ = HTML.parse(response)
+  if ($('div.dialog').text().indexOf("not_login") != -1) throw JSON.stringify({
+    code: 401
+  })
+
   let response1 = GET('https://www.linovel.net')
   let $1 = HTML.parse(response1)
   return JSON.stringify({
@@ -156,7 +160,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "轻之文库",
   url: "linovel.net",
-  version: 103,
+  version: 104,
   authorization: "https://www.linovel.net/auth/login",
   cookies: ["linovel.net", "www.linovel.net"],
   ranks: ranks

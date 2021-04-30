@@ -82,6 +82,9 @@ const chapter = (url) => {
 const profile = () => {
   let response = GET(`https://m.tadu.com/auth/user/personalCenter`)
   let $ = HTML.parse(response)
+  if ($('section.third').text() == "选择登录方式") throw JSON.stringify({
+    code: 401
+  })
   return JSON.stringify({
     url: 'https://m.tadu.com/auth/user/personalCenter',
     nickname: $('div.logged > h1').text(),
@@ -110,7 +113,7 @@ const profile = () => {
  * 我的书架
  * @param {页码} page 
  */
- const bookshelf = (page) => {
+const bookshelf = (page) => {
   let response = GET(`http://m.tadu.com/auth/my-bookshelf`)
   let $ = HTML.parse(response)
   let books = []
@@ -205,7 +208,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "塔读文学",
   url: "tadu.com",
-  version: 102,
+  version: 103,
   authorization: "https://m.tadu.com/auth/user/personalCenter",
   cookies: ["tadu.com", "m.tadu.com"],
   ranks: ranks
