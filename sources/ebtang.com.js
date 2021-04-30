@@ -76,21 +76,26 @@ const profile = () => {
     let $ = JSON.parse(response)
     response = GET(`${baseUrl}/user/index/${$.userId}`)
     return JSON.stringify({
-        url: `${baseUrl}/user/index/${$.userId}`,
-        nickname: HTML.parse(response)('#userNick').attr('value'),
-        recharge: `${baseUrl}/recharge`,
-        balance: [
+        basic: [
+            {
+                name: '账号',
+                value: HTML.parse(response)('#userNick').attr('value'),
+                url: `${baseUrl}/user/index/${$.userId}`
+            },
             {
                 name: '糖豆',
-                coin: $.balanceValue
+                value: $.balanceValue,
+                url: `${baseUrl}/recharge`
             },
             {
                 name: '书券',
-                coin: $.tokenValue
+                value: $.tokenValue,
+                url: `${baseUrl}/recharge`
             },
             {
                 name: '金票',
-                coin: $.goldenValue
+                value: $.goldenValue,
+                url: `${baseUrl}/recharge`
             }
         ],
         extra: [
@@ -153,7 +158,7 @@ const myBooks = (page, response) => {
 var bookSource = JSON.stringify({
     name: "雁北堂",
     url: "m.ebtang.com",
-    version: 100,
+    version: 101,
     authorization: "http://m.ebtang.com/m/user/login",
     cookies: ["ebtang.com"]
 })
