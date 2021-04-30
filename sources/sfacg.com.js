@@ -60,7 +60,7 @@ const chapter = (url) => {
   ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
   }))
     //未购买返回403和自动订阅地址
-    if ($.data.isVip == true) throw JSON.stringify({
+    if ($.status.msg == "请支持作者的辛勤写作,VIP章节必须登录后才可阅读"||$.status.msg == "请支持作者的辛勤写作,VIP章节必须购买后才可阅读") throw JSON.stringify({
         code: 403,
         message: `https://m.sfacg.com/c/${$.data.chapId}/`
     })
@@ -70,19 +70,46 @@ const chapter = (url) => {
 //个人中心
 const profile = () => {
   let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-  let response = GET(`${baseUrl}/pas/mpapi/user`,{headers})
-  let $ = JSON.parse(response)
-  return JSON.stringify({
-    url: 'https://m.sfacg.com/my/',
-    nickname: $.data.nickName,
-    recharge: 'https://m.sfacg.com/pay/',
+    let $ = JSON.parse(GET(`${baseUrl}/pas/mpapi/user`,{headers}))
+    if ($.status.msg === '需要登录才能访问该资源') throw JSON.stringify({
+        code: 401
+    })
+    return JSON.stringify({
+        url: 'https://m.sfacg.com/my/',
+        nickname: $.data.nickName,
+        recharge:'https://m.sfacg.com/pay/',
     balance: [
       {
         name: '火券',
         coin: $.data.fireCoin,
-      },
+      }
     ],
+    extra: [
+      {
+         name: '书架',
+         type: 'books',
+         method: 'bookshelf'
+      }
+    ]
   })
+}
+
+/**
+ * 我的书架
+ * @param {页码} page 
+ */
+const bookshelf = (page) => {
+  let response = GET(`${baseUrl}/pas/mpapi/user/Pockets?expand=novels`,{headers:
+  ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
+  })
+  let $ = JSON.parse(response).data[2]
+  let books = $.expand.novels.map(book => ({
+    name: book.novelName,
+    author: book.authorName,
+    cover: book.novelCover,
+    detail: `${baseUrl}/pas/mpapi/novels/${book.novelId}?expand=latestchapter,chapterCount,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney`
+  }))
+  return JSON.stringify({books})
 }
 
 //排行榜
@@ -169,7 +196,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 102,
+  version: 103,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
