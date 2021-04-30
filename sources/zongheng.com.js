@@ -86,22 +86,28 @@ const chapter = (url) => {
  */
 const profile = () => {
     let $ = HTML.parse(GET('https://m.zongheng.com/h5/home'))
+    if ($('.user_name').text() === '未登录') throw JSON.stringify({
+        code: 401
+    })
     return JSON.stringify({
-        url: 'https://m.zongheng.com/h5/home',
-        nickname: $('.user_name').text(),
-        recharge: 'http://pay.zongheng.com/wap/cashier?returnUrl=https%3A%2F%2Fm.zongheng.com%2Fh5%2Fshelf%3Fh5%3D1&platform=5',
-        balance: [
+        basic: [
             {
-                name: '纵横币',
-                coin: $('.user_account > p:eq(0) > span:eq(1)').text()
+                name: '账号',
+                value: $('.user_name').text(),
+                url: 'https://m.zongheng.com/h5/home'
             },
             {
-                name: '推荐票',
-                coin: $('.user_account > p:eq(1) > span:eq(1)').text()
+                name: '纵横币',
+                value: $('.user_account > p:eq(0) > span:eq(1)').text(),
+                url: 'http://pay.zongheng.com/wap/cashier?returnUrl=https%3A%2F%2Fm.zongheng.com%2Fh5%2Fshelf%3Fh5%3D1&platform=5',
             },
             {
                 name: '月票',
-                coin: $('.user_account > p:eq(2) > span:eq(1)').text()
+                value: $('.user_account > p:eq(2) > span:eq(1)').text()
+            },
+            {
+                name: '推荐票',
+                value: $('.user_account > p:eq(1) > span:eq(1)').text()
             }
         ],
         extra: [
@@ -203,7 +209,7 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: "纵横中文网",
     url: "zongheng.com",
-    version: 100,
+    version: 102,
     authorization: "https://passport.zongheng.com/",
     cookies: ["zongheng.com"],
     ranks: ranks

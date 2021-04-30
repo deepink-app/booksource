@@ -1,11 +1,11 @@
 [
     {
         "url": "qidian.com",
-        "version": 106
+        "version": 107
     },
     {
         "url": "ruochu.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "8kana.com",
@@ -13,11 +13,11 @@
     },
     {
         "url": "linovel.net",
-        "version": 103
+        "version": 105
     },
     {
         "url": "heiyan.com",
-        "version": 103
+        "version": 105
     },
     {
         "url": "17k.com",
@@ -37,11 +37,11 @@
     },
     {
         "url": "tadu.com",
-        "version": 101
+        "version": 104
     },
     {
         "url": "ebtang.com",
-        "version": 100
+        "version": 101
     },
     {
         "url": "douban.com",
@@ -53,18 +53,22 @@
     },
     {
         "url": "zongheng.com",
-        "version": 100
+        "version": 102
     },
     {
         "url": "linovelib.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "sfacg.com",
-        "version": 100
+        "version": 103
      },
      {
         "url": "hanwujinian.com",
         "version": 100     
+     },
+     {
+        "url": "xrzww.com",
+        "version": 101
      }
 ]

@@ -80,17 +80,21 @@ const profile = () => {
   let response = GET(`https://a.ruochu.com/m/ajax/user/info`)
   let $ = JSON.parse(response)
   return JSON.stringify({
-    url: `https://accounts.ruochu.com/m/people`,
-    nickname: $.userVO.name,
-    recharge: 'https://pay.ruochu.com/m/accounts/pay',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $.userVO.name,
+        url: 'https://accounts.ruochu.com/m/people'
+      },
       {
         name: '岩币',
-        coin: $.balance
+        value: $.balance,
+        url: 'https://pay.ruochu.com/m/accounts/pay'
       },
       {
         name: '钻石',
-        coin: $.coin
+        value: $.coin,
+        url: 'https://pay.ruochu.com/m/accounts/pay'
       }
     ],
     //拓展方法
@@ -202,7 +206,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "若初文学网",
   url: "ruochu.com",
-  version: 101,
+  version: 102,
   authorization: "https://m.ruochu.com/accounts/login",
   cookies: [".ruochu.com"],
   ranks: ranks

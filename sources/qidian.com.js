@@ -71,13 +71,16 @@ const profile = () => {
   let response = GET(`${baseUrl}/user`)
   let $ = HTML.parse(response)
   return JSON.stringify({
-    url: 'https://m.qidian.com/user',
-    nickname: $('div.center-header > p').text(),
-    recharge: 'https://pay.yuewen.com/h5/index?appId=13&areaId=31&returnUrl=http%3A%2F%2Fm.qidian.com%2Fuser%3Ffrom%3Dpay',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $('div.center-header > p').text(),
+        url: 'https://m.qidian.com/user'
+      },
       {
         name: '起点币',
-        coin: $('ul.btn-group > li:last-child > a > output').text()
+        value: $('ul.btn-group > li:last-child > a > output').text(),
+        url: 'https://pay.yuewen.com/h5/index?appId=13&areaId=31&returnUrl=http%3A%2F%2Fm.qidian.com%2Fuser%3Ffrom%3Dpay'
       }
     ],
     extra: [
@@ -278,7 +281,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 106,
+  version: 107,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
