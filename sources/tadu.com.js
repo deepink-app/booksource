@@ -4,7 +4,11 @@ const apiUrl = "http://211.151.212.66"
 
 const headerPrefix = ["X-Client: version=6.6.68.1673", "COOKIE:sessionid=cc3bedf27c3148e28274e4887e1e3a3a"]
 
-//搜索
+/**
+ * 搜索
+ * @params {string} key
+ * @returns {[{name, author, cover, detail}]}
+ */
 const search = (key) => {
   let response = GET(`${apiUrl}/ci/search/result?searchcontent=${encodeURI(key)}&page=1&type=3&readLike=0&searchType=3`, {headers: headerPrefix})
   let array = []
@@ -20,7 +24,11 @@ const search = (key) => {
   return JSON.stringify(array)
 }
 
-//详情
+/**
+ * 详情
+ * @params {string} url
+ * @returns {[{summary, status, category, words, update, lastChapter, catalog}]}
+ */
 const detail = (url) => {
   let response = GET(url, {headers: headerPrefix})
   let $ = JSON.parse(response)
@@ -36,7 +44,11 @@ const detail = (url) => {
   return JSON.stringify(book)
 }
 
-//目录
+/**
+ * 目录
+ * @params {string} url
+ * @returns {[{name, url, vip}]}
+ */
 const catalog = (url) => {
   let response = GET(url, {headers: headerPrefix})
   let $ = JSON.parse(response)
@@ -51,7 +63,11 @@ const catalog = (url) => {
   return JSON.stringify(array)
 }
 
-//章节
+/**
+ * 章节
+ * @params {string} url
+ * @returns {string}
+ */
 const chapter = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
@@ -59,28 +75,71 @@ const chapter = (url) => {
   return content.replace('callback({content:\'', '').replace('})', '')
 }
 
-//个人中心
+/**
+ * 个人
+ * @returns {[{url, nickname, recharge, balance[{name, coin}], sign}]}
+ */
 const profile = () => {
   let response = GET(`https://m.tadu.com/auth/user/personalCenter`)
   let $ = HTML.parse(response)
+  if ($('section.third').length != 0) throw JSON.stringify({
+    code: 401
+  })
   return JSON.stringify({
-    url: 'https://m.tadu.com/auth/user/personalCenter',
-    nickname: $('div.logged > h1').text(),
-    recharge: 'http://m.tadu.com/auth/charge/alipay',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $('div.logged > h1').text(),
+        url: 'https://m.tadu.com/auth/user/personalCenter'
+      },
       {
         name: '塔豆',
-        coin: $('div.con_top.clearfix > p > span').text()
+        value: $('div.con_top.clearfix > p > span').text(),
+        url: 'http://m.tadu.com/auth/charge/alipay'
       },
       {
         name: '塔券',
-        coin: $('div.con_column.con_taquan > a > p > span').text()
+        value: $('div.con_column.con_taquan > a > p > span').text(),
+        url: 'http://m.tadu.com/auth/charge/alipay'
       },
     ],
+    extra: [
+      {
+          name: '书架',
+          type: 'books',
+          method: 'bookshelf'
+      }
+    ]
   })
 }
 
-//排行榜
+/**
+ * 我的书架
+ * @param {页码} page 
+ */
+const bookshelf = (page) => {
+  let response = GET(`http://m.tadu.com/auth/my-bookshelf`)
+  let $ = HTML.parse(response)
+  let books = []
+  $('section.book_list.rank-list').forEach((book) => {
+    let $ = HTML.parse(book)
+    let bookId = $('a').attr('href').match(/(?<=book\/)(.+?)(?=\/)/)[0]
+    books.push({
+      name: $('h2.text_over').text(),
+      author: $('span.auther').text(),
+      cover: $('a > img').attr('data-src'),
+      detail: `${apiUrl}/ci/book/info?bookId=${bookId}`,
+    })
+  })
+  return JSON.stringify({
+      end: true,
+      books: books
+  })
+}
+
+/**
+ * 排行榜
+ */
 const rank = (title, category, page) => {
   let response = GET(`${apiUrl}/ci/categories/secondCategorys/?categoryid=${category}&page=${page + 1}&thirdcategory=0&activitytype=0&bookstatus=0&sorttype=0&chars=0&publishDate=&readingAge=1&bookType=0`, {headers: headerPrefix})
   let books = []
@@ -153,7 +212,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "塔读文学",
   url: "tadu.com",
-  version: 101,
+  version: 104,
   authorization: "https://m.tadu.com/auth/user/personalCenter",
   cookies: ["tadu.com", "m.tadu.com"],
   ranks: ranks

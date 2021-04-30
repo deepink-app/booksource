@@ -99,21 +99,26 @@ const profile = () => {
     code: 401
   })
   return JSON.stringify({
-    url: 'https://accounts.heiyan.com/m/people/',
-    nickname: $.userVO.name,
-    recharge: 'https://pay.heiyan.com/m/accounts/pay',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $.userVO.name,
+        url: 'https://accounts.heiyan.com/m/people/'
+      },
       {
         name: '岩币',
-        coin: $.balance
+        value: $.balance,
+        url: 'https://pay.heiyan.com/m/accounts/pay'
       },
       {
         name: '钻石',
-        coin: $.shell
+        value: $.shell,
+        url: 'https://pay.heiyan.com/m/accounts/pay'
       },
       {
         name: '赠币',
-        coin: $.coin
+        value: $.coin,
+        url: 'https://pay.heiyan.com/m/accounts/pay'
       }
     ],
   })
@@ -196,7 +201,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "黑岩网",
   url: "heiyan.com",
-  version: 104,
+  version: 105,
   authorization: "https://w1.heiyan.com/accounts/login?backUrl=https://accounts.heiyan.com/m/people/",
   cookies: ["heiyan.com"],
   ranks: ranks
