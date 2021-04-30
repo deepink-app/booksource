@@ -65,20 +65,46 @@ const chapter = (url) => {
 
 //个人中心
 const profile = () => {
-  let response = GET(`https://android-api.xrzww.com/api/getUserInfo`,{headers: [`Authorization: Bearer ${localStorage.getItem('auth')}`]
-  })
-  let $ = JSON.parse(response)
-  return JSON.stringify({
-    url: 'https://h5.xrzww.com/#/pages/mine/index',
-    nickname: $.data.user_nickname,
-    recharge: 'https://h5.xrzww.com/#/pages/bookread/chongzhi',
+  let headers = [`Authorization: Bearer ${localStorage.getItem('auth')}`]
+    let $ = JSON.parse(GET(`${baseUrl}/api/getUserInfo`,{headers}))
+    if ($.message === '请登录后再访问') throw JSON.stringify({
+        code: 401
+    })
+    return JSON.stringify({
+        url: '',
+        nickname: $.data.user_nickname,
+        recharge: '',
     balance: [
       {
         name: '书币',
         coin: $.data.user_gold2,
       },
     ],
+    extra: [
+      {
+         name: '书架',
+         type: 'books',
+         method: 'bookshelf'
+      }
+    ]
   })
+}
+
+/**
+ * 我的书架
+ * @param {页码} page 
+ */
+const bookshelf = (page) => {
+  let response = GET(`${baseUrl}/api/getBookshelfListNew`,{headers: [`Authorization: Bearer ${localStorage.getItem('auth')}`]
+  })
+  let $ = JSON.parse(response).data
+  let books = $.data.map(book => ({
+    name: book.novel_name,
+    author: book.novel_author,
+    cover: `http://oss.xrzww.com${book.novel_cover}`,
+    detail: `${baseUrl}//api/detail?novel_id=${book.novel_id}`
+  }))
+  return JSON.stringify({books})
 }
 
 //排行榜
@@ -147,7 +173,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "息壤中文网",
   url: "xrzww.com",
-  version: 100,
+  version: 101,
   authorization: JSON.stringify(['account','password']),
   cookies: ["xrzww.com"],
   ranks: ranks
