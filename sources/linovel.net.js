@@ -64,21 +64,29 @@ const chapter = (url) => {
 const profile = () => {
   let response = GET(`${baseUrl}/my/profile`)
   let $ = HTML.parse(response)
+  if ($('div.dialog').length != 0) throw JSON.stringify({
+    code: 401
+  })
+
   let response1 = GET('https://www.linovel.net')
   let $1 = HTML.parse(response1)
   return JSON.stringify({
-    url: 'https://www.linovel.net/my/profile',
-    nickname: $('form > div:nth-child(3) > div > p').text(),
-    recharge: 'https://www.linovel.net/pay/',
-    balance: [
+    basic: [
+      {
+        name: '账号',
+        value: $('form > div:nth-child(3) > div > p').text(),
+        url: 'https://www.linovel.net/my/profile'
+      },
       {
         name: '轻币',
-        coin: $1('div.coin > span').text()
+        value: $1('div.coin > span').text(),
+        url: 'https://www.linovel.net/pay/'
       },
       {
         name: '墨水',
-        coin: $1('div.integral > span').text()
-      }
+        value: $1('div.integral > span').text(),
+        url: 'https://www.linovel.net/pay/'
+      },
     ],
   })
 }
@@ -156,7 +164,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "轻之文库",
   url: "linovel.net",
-  version: 103,
+  version: 105,
   authorization: "https://www.linovel.net/auth/login",
   cookies: ["linovel.net", "www.linovel.net"],
   ranks: ranks

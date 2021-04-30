@@ -159,7 +159,10 @@ const rank = (title, category, page) => {
             detail: "https://www.shuqi.com" + $(".ranklinst-bk>a").attr("href")
         })
     })
-    return JSON.stringify({end:page+1 ===pageC, books})
+    return JSON.stringify({
+        end: page + 1 === pageC,
+        books
+    })
 }
 let key = ["Click-点击", "Store-收藏", "Order-订阅", "hot-人气", "New-新书", "End-完结", "Update-更新"]
 let ranks = []
@@ -195,20 +198,24 @@ const profile = () => {
     let response = GET("https://www.shuqi.com/api/getuserinfo?imei=")
     let $ = JSON.parse(response).data
     return JSON.stringify({
-        url: "https://www.shuqi.com/ucenter",
-        nickname: $.nickName,
-        recharge: 'https://www.shuqi.com/recharge',
-        balance: [{
-            name: '书豆',
-            coin: $.sdou
-        }]
+        basic: [{
+                name: "账号",
+                value: $.nickName,
+                url: "https://www.shuqi.com/ucenter"
+            },
+            {
+                name: '书豆',
+                value: $.sdou,
+                url: 'https://www.shuqi.com/recharge'
+            }
+        ]
     })
 }
 
 var bookSource = JSON.stringify({
     name: "书旗小说",
     url: "shuqi.com",
-    version: 101,
+    version: 102,
     authorization: "https://write.shuqi.com/login?modal=1",
     cookies: [".shuqi.com"],
     ranks: ranks

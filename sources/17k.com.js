@@ -93,24 +93,28 @@ const profile = () => {
     let response = GET("http://api.17k.com/user/mine/merge?access_token=1&accountInfo=1&bindInfo=1&benefitsType=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1230&merchant=17Khwyysd&platform=2&manufacturer=Xiaomi&clientType=1&width=1080&appKey=4037465544&cpsSource=0&youthModel=0&height=2175")
     let $ = JSON.parse(response).data
     return JSON.stringify({
-        url: 'https://user.17k.com/h5/info/',
-        nickname: $.nickname,
-        recharge: 'https://pay.17k.com/h5/',
-        balance: [{
+        basic: [{
+                name: "账号",
+                value: $.nickname,
+                url: 'https://user.17k.com/h5/info/'
+            },
+            {
                 name: 'VIP',
-                coin: $.vipLevel,
+                value: $.vipLevel,
             },
             {
                 name: 'k币',
-                coin: $.accountInfo.balance,
+                value: $.accountInfo.balance,
+                url: 'https://pay.17k.com/h5/'
             },
             {
-                'name': '代金券',
-                'coin': $.accountInfo.totalBalance
+                name: '代金券',
+                value: $.accountInfo.totalBalance,
+                url: "https://user.17k.com/h5/coupons/"
             },
             {
-                'name': '推荐票',
-                'coin': $.cardInfo.recommendTicketCount
+                name: '推荐票',
+                value: $.cardInfo.recommendTicketCount
             }
         ],
         extra: [{
@@ -118,15 +122,7 @@ const profile = () => {
                 type: 'permission',
                 method: 'autotask',
                 times: 'day'
-            }
-            /*,
-                        {
-                            name: '同步阅读记录',
-                            type: 'permission',
-                            method: 'addReadBook',
-                            times: ''
-                        }*/
-            ,
+            },
             {
                 name: '书架',
                 type: 'books',
@@ -136,7 +132,9 @@ const profile = () => {
     })
 }
 const autotask = () => {
-    POST("https://h5.17k.com/userSigninH5/saveUserSigninH5.html",{data:"w"})
+    POST("https://h5.17k.com/userSigninH5/saveUserSigninH5.html", {
+        data: "w"
+    })
     //每日任务奖励
     for (id of [4, 4, 5, 6, 8]) {
         let url = "http://api.17k.com/user/task/receive-prize"
@@ -157,7 +155,9 @@ const bookshelf = () => {
         cover: book.coverImg,
         detail: `http://api.17k.com/book/${book.bookId}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0`
     }))
-    return JSON.stringify({books})
+    return JSON.stringify({
+        books
+    })
 }
 
 const addReadBook = (bid, cid) => {
@@ -470,13 +470,16 @@ const rank = (title, category, page) => {
             detail: `http://api.17k.com/book/${item.id}/split1/merge?iltc=1&cpsOpid=0&_filterData=1&device_id=&channel=0&_versions=1160&merchant=17Kyyb&platform=2&manufacturer=Xiaomi&clientType=1&appKey=4037465544&model=&cpsSource=0&brand=Redmi&youthModel=0`,
         })
     })
-    return JSON.stringify({end:page+1==$.totalPage,books})
+    return JSON.stringify({
+        end: page + 1 == $.totalPage,
+        books
+    })
 }
 
 var bookSource = JSON.stringify({
     name: "17k小说",
     url: "17k.com",
-    version: 101,
+    version: 102,
     authorization: "https://passport.17k.com/login",
     cookies: [".17k.com"],
     ranks: ranks
