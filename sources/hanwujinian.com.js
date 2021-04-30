@@ -17,14 +17,23 @@ const search = (key) => {
 const detail = (url) => {
     let response = GET(url)
     let $ = JSON.parse(response)
+    let tags=""
+    if(Array.isArray($.label)){
+    tags =  $.label.join(" ")    
+    }else if(   Object.prototype.toString.call($.label) === '[object Object]' ){    
+   let str=[],  i=0
+    Object.keys($.label).forEach(key => { str[i++]=key
+  })
+  tags=  str.map(tag =>($.label[tag])).join(' ')
+    }
     let book = {
         summary: $.intro,
         status: $.isend ? "完结" : "连载",
-        category: $.label.join(","),
+        category: tags,
         words: $.presize,
         update: $.pubtime,
         lastChapter: $.lastchapter,
-        catalog: `https://wap.hanwujinian.com/api.php/api/book_app/chapterListWithUserStatus?lastupdate=0&bookId=${$.articleid}&uid=${uid?uid:"0"}`
+        catalog: `https://wap.hanwujinian.com/api.php/api/book_app/chapterListWithUserStatus?lastupdate=0&bookId=${$.articleid}&uid=${uid}`
     }
     return JSON.stringify(book)
 }
@@ -66,28 +75,31 @@ const profile = () => {
     let response = GET(`https://api.hanwujinian.net/api.php/api/user_app/index?token=${token}&uid=${uid}`)
     let $ = JSON.parse(response)
     return JSON.stringify({
-        url: 'http://wap.hanwujinian.net/users.php',
-        nickname: $.userName,
-        recharge: 'http://wap.hanwujinian.net/modules/pay/choosepay.php',
-        balance: [{
+        basic: [{
+                name: "账号",
+                value: $.userName,
+                url: 'http://wap.hanwujinian.net/users.php'
+            },
+            {
                 name: '虫币',
-                coin: $.egold
+                value: $.egold,
+                url: 'http://wap.hanwujinian.net/modules/pay/choosepay.php'
             },
             {
                 name: '月票',
-                coin: $.vipvote
+                value: $.vipvote
             },
             {
                 name: '推荐票',
-                coin: $.vote
+                value: $.vote
             },
             {
                 name: '阅读币',
-                coin: $.luckeyMoney
+                value: $.luckeyMoney
             },
             {
                 name: '纪年点',
-                coin: $.points
+                value: $.points
             }
         ],
 
@@ -181,7 +193,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
     name: "寒武纪年",
     url: "hanwujinian.com",
-    version: 100,
+    version: 101,
     authorization: JSON.stringify(['account', 'password']),
     cookies: [".hanwujinian.com"],
     ranks: ranks

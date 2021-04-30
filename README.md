@@ -16,3 +16,8 @@
 - [x] SF轻小说 [sfacg.com](https://book.sfacg.com)
 - [x] 息壤中文网 [xrzww.com](https://xrzww.com)
 - [x] 纵横中文网 [zongheng.com](https://zongheng.com)
+- [x] 连城读书 [lc1001.com](http://m.lc1001.com/)
+- [x] 掌阅小说 [zhangyue.com](https://m.zhangyue.com)
+
+
+

@@ -21,19 +21,19 @@
     },
     {
         "url": "17k.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "m.jjwxc.net",
-        "version": 101
+        "version": 102
     },
     {
         "url": "shuqi.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "gongzicp.com",
-        "version": 101
+        "version": 102
     },
     {
         "url": "tadu.com",
@@ -65,10 +65,18 @@
      },
      {
         "url": "hanwujinian.com",
-        "version": 100     
+        "version": 101     
      },
      {
         "url": "xrzww.com",
         "version": 101
-     }
+     },
+     {
+        "url": "lc1001.com",
+        "version": 100
+     },     
+     {
+        "url": "zhangyue.com",
+        "version": 100
+     },     
 ]
