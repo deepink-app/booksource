@@ -70,16 +70,20 @@ const chapter = (url) => {
 const profile = () => {
     let response = GET(`${baseUrl}/book/shelf`)
     let $ = HTML.parse(response)
+    if ($('.collectMember_Name').text() === "") throw JSON.stringify({
+        code: 401
+    })
     return JSON.stringify({
-        url: `${baseUrl}/member`,
-        nickname: $('.collectMember_Name').text(),
-        recharge: `${baseUrl}/recharge`,
-        balance: [
-            {
-                name: '余额',
-                coin: $('.collectMember_numText').text()
-            }
-        ]
+        basic: [{
+            name: "账号",
+            value: $('.collectMember_Name').text(),
+            url: `${baseUrl}/member`
+        },
+        {
+            name: '余额',
+            value: $('.collectMember_numText').text(),
+            url: `${baseUrl}/recharge`
+        }]
     })
 }
 
@@ -138,7 +142,7 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: '不可能的世界',
     url: '8kana.com',
-    version: 101,
+    version: 102,
     authorization: 'https://m.8kana.com/www/passport/login',
     cookies: ["8kana.com"],
     ranks: ranks

@@ -36,7 +36,7 @@ const detail = (url) => {
     let book = {
         summary: $('.brief_intro>p').text().replace("内容简介：", ""),
         status: status,
-        category: $('.tagbtn').text(),
+        category: $('.tagbtn').text()+" "+$("dd.ellipsis:not(.author)").text().match(/(.+?) |/)[1],
         words: (/字/).test($('.lastline').text()) ? $('.lastline').text().match(/(.+)字/)[1] : "0",
         update: status == "连载" ? ($('.catalog_new >a:nth-child(1)').text().match(/(?<=更新).+/) ? $('.catalog_new >a:nth-child(1)').text().match(/(?<=更新).+/)[0] : "") : "long long ago",
         lastChapter: status == "连载" ? ($('.catalog_new >a:nth-child(1)').text().match(/.+(?=更新)/) ? $('.catalog_new >a:nth-child(1)').text().match(/.+(?=更新)/)[0] : "") : "已完结",
@@ -74,12 +74,13 @@ const catalog = (url) => {
 const chapter = (url) => {
     let response = GET(url)
     let $ = HTML.parse(response)
+
     //VIP章节未购买返回403和自动订阅地址
     if ($(".tit").text() == "试读已结束，购买阅读更多精彩章节") throw JSON.stringify({
         code: 403,
         message: url
     })
-    let ChapterContent = $(".h5_mainbody")
+    let ChapterContent = $(".h5_mainbody,.read_c").remove("span,h1,h4")
     return ChapterContent
 }
 
@@ -181,7 +182,7 @@ const profile = () => {
 var bookSource = JSON.stringify({
     name: "掌阅小说",
     url: "zhangyue.com",
-    version: 100,
+    version: 101,
     authorization: "https://m.zhangyue.com/login?backUrl=https%3A%2F%2Fm.zhangyue.com%2F",
     cookies: [".zhangyue.com"],
     ranks: ranks

@@ -107,12 +107,12 @@ const catalog = (url) => {
 // 正文
 const chapter = (url) => {
     let response = GET(url)
-    let $ = HTML.parse(response)
+    let $ = HTML.parse(response.replace("../vipchapters", "http://my.lc1001.com/vipchapters"))
     if ((/订阅已选章节/).test(response)) throw JSON.stringify({
         code: 403,
         message: url
     })
-    return $("#ccon,p.ccon_vip").replace(/\.\.\/vipchapters/, "http://my.lc1001.com/vipchapters")
+    return $("#ccon,p.ccon_vip")
 
 }
 
@@ -229,8 +229,8 @@ const rank = (title, category, page) => {
 
 var bookSource = JSON.stringify({
     name: "连城读书",
-    url: "lcread.com",
-    version: 100,
+    url: "lc1001.com",
+    version: 101,
     authorization: "http://my.lc1001.com/user/login",
     cookies: [".lc1001.com", ".lcread.com"],
     ranks: ranks
