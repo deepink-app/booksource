@@ -529,7 +529,7 @@ const ranks = [{
 }]
 var bookSource = JSON.stringify({
     name: "长佩文学",
-    url: "m.gongzicp.com",
+    url: "gongzicp.com",
     version: 102,
     authorization: "https://m.gongzicp.com/login/signIn",
     cookies: [".gongzicp.com"],
