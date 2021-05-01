@@ -59,7 +59,7 @@
           code: 403,
           message: url
       })
-      return content  $('ul > li:has(br)')
+      return  $('ul > li:has(br)')
   }
 
   //个人中心
