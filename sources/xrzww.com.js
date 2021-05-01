@@ -63,23 +63,29 @@ const chapter = (url) => {
   return $.data.content
 }
 
-//个人中心
+/**
+ * 个人
+ * @returns {[{url, nickname, recharge, balance[{name, coin}], sign}]}
+ */
 const profile = () => {
-  let headers = [`Authorization: Bearer ${localStorage.getItem('auth')}`]
+    let headers = [`Authorization: Bearer ${localStorage.getItem('auth')}`]
     let $ = JSON.parse(GET(`${baseUrl}/api/getUserInfo`,{headers}))
     if ($.message === '请登录后再访问') throw JSON.stringify({
         code: 401
     })
     return JSON.stringify({
-        url: '',
-        nickname: $.data.user_nickname,
-        recharge: '',
-    balance: [
-      {
-        name: '书币',
-        coin: $.data.user_gold2,
-      },
-    ],
+        basic: [
+            {
+                name: '账号',
+                value: $.data.user_nickname,
+                url: ''
+            },
+            {
+                name: '书币',
+                value: $.data.user_gold2,
+                url: '',
+            }
+        ],
     extra: [
       {
          name: '书架',
@@ -173,7 +179,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "息壤中文网",
   url: "xrzww.com",
-  version: 101,
+  version: 102,
   authorization: JSON.stringify(['account','password']),
   cookies: ["xrzww.com"],
   ranks: ranks

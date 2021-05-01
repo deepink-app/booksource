@@ -67,23 +67,29 @@ const chapter = (url) => {
   return $.data.expand.content.replace(/\[img.*?\]/, '<img src="').replace(/\[.*img\]/, '"/>')
 }
 
-//个人中心
+/**
+ * 个人
+ * @returns {[{url, nickname, recharge, balance[{name, coin}], sign}]}
+ */
 const profile = () => {
-  let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
+    let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
     let $ = JSON.parse(GET(`${baseUrl}/pas/mpapi/user`,{headers}))
     if ($.status.msg === '需要登录才能访问该资源') throw JSON.stringify({
         code: 401
     })
     return JSON.stringify({
-        url: 'https://m.sfacg.com/my/',
-        nickname: $.data.nickName,
-        recharge:'https://m.sfacg.com/pay/',
-    balance: [
-      {
-        name: '火券',
-        coin: $.data.fireCoin,
-      }
-    ],
+        basic: [
+            {
+                name: '账号',
+                value: $.data.nickName,
+                url: 'https://m.sfacg.com/my/'
+            },
+            {
+                name: '火券',
+                value: $.data.fireCoin,
+                url: 'https://m.sfacg.com/pay/',
+            }
+        ],
     extra: [
       {
          name: '书架',
@@ -196,7 +202,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 103,
+  version: 104,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
