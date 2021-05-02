@@ -46,7 +46,6 @@ const catalog = (url) => {
     let response = POST(args.url, {
         data: `BookId=${args.bookId}`
     })
-    let v = 0
     let vlist = []
     let array = []
     let vidlist = []
