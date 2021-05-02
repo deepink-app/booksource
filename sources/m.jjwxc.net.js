@@ -59,9 +59,7 @@
           code: 403,
           message: url
       })
-
-      let content = $('ul > li:has(br)').replace(/class=\"\">/g, "")
-      return content
+      return  $('ul > li:has(br)')
   }
 
   //个人中心
@@ -297,7 +295,7 @@
   var bookSource = JSON.stringify({
       name: "晋江文学城",
       url: "m.jjwxc.net",
-      version: 102,
+      version: 103,
       authorization: "https://m.jjwxc.net/my/login?login_mode=jjwxc",
       cookies: [".jjwxc.net"],
       ranks: ranks
