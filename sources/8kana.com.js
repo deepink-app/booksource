@@ -1,9 +1,9 @@
-const baseUrl = 'https://m.8kana.com'
+const baseUrl = 'https://inf.8kana.com'
 
 //return [{name, author, cover, detail}]
 const search = (key) => {
-    let response = POST(`http://inf.8kana.com/book/search`, {
-        data: `UserId=&Keyword=${encodeURI(key)}&SearchType=3&Page=1&system=android`
+    let response = POST(`${baseUrl}/book/search`, {
+        data: `Keyword=${encodeURI(key)}`
     })
     let $ = JSON.parse(response)
     let books = $.data.Books.map(book => ({
@@ -11,7 +11,7 @@ const search = (key) => {
         author: book.AuthorName,
         cover: book.BookCover,
         detail: JSON.stringify({
-            url: 'http://inf.8kana.com/Works/book',
+            url: `${baseUrl}/Works/book`,
             bookId: book.BookId
         })
     }))
@@ -22,7 +22,7 @@ const search = (key) => {
 const detail = (url) => {
     let args = JSON.parse(url)
     let response = POST(args.url, {
-        data: `UserId=&BookId=${args.bookId}&Type=1&system=android`
+        data: `BookId=${args.bookId}&Type=1`
     })
     let $ = JSON.parse(response).data
     let book = {
@@ -33,7 +33,7 @@ const detail = (url) => {
         update: $.Info.LastModifyTime,
         lastChapter: $.Read.NewChapterName,
         catalog: JSON.stringify({
-            url: 'http://inf.8kana.com/book/newcatalog',
+            url: `${baseUrl}/book/newcatalog`,
             bookId: args.bookId
         })
     }
@@ -44,60 +44,127 @@ const detail = (url) => {
 const catalog = (url) => {
     let args = JSON.parse(url)
     let response = POST(args.url, {
-        data: `BookId=${args.bookId}&UpdateTime=0&ChapterNo=0&UserId=&system=android`
+        data: `BookId=${args.bookId}`
     })
-    let chapters = JSON.parse(response).data.ChapterList.map(chapter => ({
-        name: chapter.Title,
-        url: `${baseUrl}/chapter/content/${chapter.ChapterId}`,
-        vip: chapter.IsVip !== "0"
-    }))
-    return JSON.stringify(chapters)
+    let v = 0
+    let vlist = []
+    let array = []
+    let vidlist = []
+    let list = JSON.parse(response).data.ChapterList
+    JSON.parse(response).data.ChapterList.forEach((booklet) => {
+        if (vidlist.indexOf(booklet.VolumeId) == -1) {
+            vlist.push(booklet);
+            vidlist.push(booklet.VolumeId)
+        }
+    })
+    vlist.forEach((booklet) => {
+        let vid = booklet.VolumeId
+        array.push({
+            name: booklet.VolumeTitle
+        })
+        list.forEach((chapter) => {
+            if (vid == chapter.VolumeId) {
+                array.push({
+                    name: chapter.Title,
+                    url: JSON.stringify({
+                        url: `${baseUrl}/long/readbook`,
+                        bookId: args.bookId,
+                        ChapterId: chapter.ChapterId
+                    }),
+                    vip: chapter.IsVip == 1
+                })
+            }
+        })
+    })
+
+    return JSON.stringify(array)
 }
 
 //return string
 const chapter = (url) => {
-    let response = GET(url)
-    let $ = HTML.parse(response)
+    let args = JSON.parse(url)
+    let response = POST(args.url, {data: `bookId=${args.bookId}&chapterId=${args.ChapterId}`,headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
+  })
+    let $ = JSON.parse(response)
     //未购买返回403和自动订阅地址
-    if ($('.readFeesBtn_VIP')) throw JSON.stringify({
+    if ($.msg == '付费章节，需要购买') throw JSON.stringify({
         code: 403,
-        message: url
+        message: `https://m.8kana.com/read/${args.ChapterId}.html`
     })
-    return $('.readMain_Content')
+    return $.data.chapters.sections.replace(/\[kana\]/g, '\n')
 }
 
 //return {url, nickname, recharge, balance[{name, coin}], sign}
 const profile = () => {
-    let response = GET(`${baseUrl}/book/shelf`)
-    let $ = HTML.parse(response)
-    if ($('.collectMember_Name').text() === "") throw JSON.stringify({
+    let response = GET(`${baseUrl}/User/userinfo`,{headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
+  })
+    let $ = JSON.parse(response)
+    if ($.msg === "用户Id不能为空！") throw JSON.stringify({
         code: 401
     })
     return JSON.stringify({
         basic: [{
-            name: "账号",
-            value: $('.collectMember_Name').text(),
-            url: `${baseUrl}/member`
-        },
-        {
-            name: '余额',
-            value: $('.collectMember_numText').text(),
-            url: `${baseUrl}/recharge`
-        }]
-    })
+                name: "账号",
+                value: $.data.UserNickname,
+                url: `https://m.8kana.com/member`
+            },
+            {
+                name: '余额',
+                value: $.data.UserCoin,
+                url: `https://m.8kana.com/recharge`
+            },
+            {
+                name: '月票',
+                value: $.data.MonthNum,
+                url: `https://m.8kana.com/recharge`
+            },
+            {
+                name: '推荐票',
+                value: $.data.RecommendNum,
+                url: `https://m.8kana.com/recharge`
+            }
+        ],
+    extra: [
+      {
+         name: '书架',
+         type: 'books',
+         method: 'bookshelf'
+      }
+    ]
+  })
+}
+
+/**
+ * 我的书架
+ * @param {页码} page 
+ */
+const bookshelf = (page) => {
+  let response = GET(`${baseUrl}/Bookshelf/newIndex`,{headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
+  })
+  let $ = JSON.parse(response)
+  let books = $.data.map(book => ({
+    name: book.BookName,
+    author: book.AuthorName,
+    cover: book.BookCover,
+    detail: JSON.stringify({
+        url: `${baseUrl}/Works/book`,
+        bookId: book.BookId
+        })
+  }))
+  return JSON.stringify({books})
 }
 
 //ranks
 const rank = (title, category, page) => {
-    let response = POST('http://inf.8kana.com/book/channel', {
-        data: `Sex=1&Class0Id=${title}&VipType=&SeriesStatus=0&SearchType=1&Page=1&system=android`
+    let response = POST(`${baseUrl}/book/channel`, {
+        data: `Sex=1&Class0Id=${title}&VipType=&SeriesStatus=0&SearchType=1&Page=1`
     })
     let books = JSON.parse(response).data.books.map(book => ({
         name: book.BookName,
         author: book.AuthorName,
         cover: book.BookCover,
         detail: JSON.stringify({
-            url: 'http://inf.8kana.com/Works/book',
+            url: `${baseUrl}/Works/book`,
             bookId: book.BookId
         })
     }))
@@ -106,8 +173,7 @@ const rank = (title, category, page) => {
     })
 }
 
-const ranks = [
-    {
+const ranks = [{
         title: {
             key: '3',
             value: '烧脑'
@@ -139,11 +205,21 @@ const ranks = [
     }
 ]
 
+const login = (args) => {
+    if(!args) return "账号或者密码不能为空!"
+    let data =`UserName=${args[0]}&Password=${args[1]}` 
+    let response = POST(`${baseUrl}/Passport/login`,{data})
+    let $ = JSON.parse(response)
+    if($.code == 0) return "账号或密码错误"
+    localStorage.setItem("UserId", $.data.UserId)
+    localStorage.setItem("UserToken", $.data.UserToken)
+}
+
 var bookSource = JSON.stringify({
     name: '不可能的世界',
     url: '8kana.com',
-    version: 102,
-    authorization: 'https://m.8kana.com/www/passport/login',
+    version: 103,
+    authorization: JSON.stringify(['account','password']),
     cookies: ["8kana.com"],
     ranks: ranks
 })
