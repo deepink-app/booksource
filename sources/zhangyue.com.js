@@ -92,7 +92,7 @@ const rank = (title, category, page) => {
         let $ = HTML.parse(chapter)
         books.push({
             name: $("dt").text().replace("[精品]", ""),
-            author: $("dd.autor").text(),
+            author: $("dd.author").text(),
             cover: $("img").attr("data-src"),
             detail: $("a").attr("href")
         })
@@ -182,7 +182,7 @@ const profile = () => {
 var bookSource = JSON.stringify({
     name: "掌阅小说",
     url: "zhangyue.com",
-    version: 101,
+    version: 102,
     authorization: "https://m.zhangyue.com/login?backUrl=https%3A%2F%2Fm.zhangyue.com%2F",
     cookies: [".zhangyue.com"],
     ranks: ranks
