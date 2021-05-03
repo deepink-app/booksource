@@ -23,3 +23,4 @@
 - [x] 掌阅小说 [zhangyue.com](https://m.zhangyue.com)
 - [x] 刺猬猫阅读 [ciweimao.com](https://www.ciweimao.com)
 - [x] 书耽网 [shubl.com](https://www.shubl.com)
+- [x] 得间小说 [idejian.com](https://www.idejian.com)
