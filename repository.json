@@ -65,7 +65,7 @@
   },
   {
     "url": "hanwujinian.com",
-    "version": 101
+    "version": 102
   },
   {
     "url": "xrzww.com",
@@ -77,10 +77,14 @@
   },
   {
     "url": "zhangyue.com",
-    "version": 101
+    "version": 102
   },
   {
     "url": "hbooker.com",
     "version": 100
-  }
+  },
+  {
+    "url": "shubl.com",
+    "version": 100
+  }  
 ]

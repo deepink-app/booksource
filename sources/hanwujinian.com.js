@@ -61,7 +61,7 @@ const chapter = (url) => {
         headers: [`token: ${token}`]
     })
     let $ = JSON.parse(response)
-    if ($.data.isvip == 1 && $.data.isbuy == 0) throw JSON.stringify({
+    if ($.data.isvip == 1 && $.data.isbuy != 1) throw JSON.stringify({
         code: 403,
         message: `https://wap.hanwujinian.com/read/${url.query("aid")}/${url.query("cid")}`
     })
@@ -187,13 +187,12 @@ const login = (args) => {
     if ($.status == 0) return $.msg
     localStorage.setItem('token', $.tp_token)
     localStorage.setItem('uid', "" + $.uid)
-    return "欢迎回来~" + $.name
 }
 
 var bookSource = JSON.stringify({
     name: "寒武纪年",
     url: "hanwujinian.com",
-    version: 101,
+    version: 102,
     authorization: JSON.stringify(['account', 'password']),
     cookies: [".hanwujinian.com"],
     ranks: ranks
