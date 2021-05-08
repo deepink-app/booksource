@@ -64,7 +64,7 @@ const chapter = (url) => {
         code: 403,
         message: `https://m.sfacg.com/c/${$.data.chapId}/`
     })
-  return $.data.expand.content.replace(/\[img.*?\]/, '<img src="').replace(/\[.*img\]/, '"/>')
+  return $.data.expand.content.replace(/\[img.*?\]/g, '<img src="').replace(/\[.*img\]/g, '"/>')
 }
 
 /**
@@ -202,7 +202,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 104,
+  version: 105,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
