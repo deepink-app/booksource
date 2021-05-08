@@ -28,7 +28,7 @@ const search = (key) => {
       name: $('meta[property=og:title]').attr('content'),
       author: $('meta[property=og:novel:author]').attr('content'),
       cover: $('meta[property=og:image]').attr('content'),
-      detail: `${baseUrl}${$('head > link[rel=canonical]').attr('href')}`,
+      detail: $('head > link[rel=canonical]').attr('href'),
     })
   }
 
@@ -85,9 +85,16 @@ const catalog = (url) => {
  * @returns {string}
  */
 const chapter = (url) => {
-  let response = GET(url, {headers: header_mobile})
-  let $ = HTML.parse(response)
-  return $('#acontent')
+  let content = ""
+  let condition = true
+  while (condition) {
+    let response = GET(url, {headers: header_mobile})
+    let $ = HTML.parse(response)
+    content += $('#acontent')
+    condition = $('#footlink > a:nth-child(4)').attr('href').match('.+_.+\.html')
+    url = baseUrl + $('#footlink > a:nth-child(4)').attr('href')
+  }
+  return content
 }
 
 /**
@@ -221,6 +228,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "哔哩轻小说",
   url: "linovelib.com",
-  version: 103,
+  version: 104,
   ranks: ranks
 })
