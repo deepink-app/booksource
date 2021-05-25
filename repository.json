@@ -57,11 +57,11 @@
   },
   {
     "url": "linovelib.com",
-    "version": 102
+    "version": 104
   },
   {
     "url": "sfacg.com",
-    "version": 104
+    "version": 105
   },
   {
     "url": "hanwujinian.com",
@@ -86,5 +86,9 @@
   {
     "url": "shubl.com",
     "version": 100
-  }  
+  },
+  { 
+    "url": "idejian.com",
+    "version": 100
+  }
 ]
