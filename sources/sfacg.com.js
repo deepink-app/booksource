@@ -134,6 +134,7 @@ const rank = (title, category, page) => {
     })
   })
   return JSON.stringify({
+    end:  $.data.length === 0,
     books: books
   })
 }
@@ -202,7 +203,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 105,
+  version: 106,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
