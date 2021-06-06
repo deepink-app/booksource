@@ -127,6 +127,7 @@ const rank = (title, category, page) => {
     })
   })
   return JSON.stringify({
+    end: $.data.current_page == $.data.last_page,
     books: books
   })
 }
@@ -169,7 +170,7 @@ const ranks = [
 ]
 
 const login = (args) => {
-if(!args) return "账号或者密码不能为空"
+    if(!args) return "账号或者密码不能为空"
     let response = GET(`https://android-api.xrzww.com/api/login?user_name=${args[0]}&user_password=${args[1]}`)
     let $ = JSON.parse(response)
     if($.code == 400) return "账号或密码错误"
@@ -179,7 +180,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "息壤中文网",
   url: "xrzww.com",
-  version: 102,
+  version: 103,
   authorization: JSON.stringify(['account','password']),
   cookies: ["xrzww.com"],
   ranks: ranks
