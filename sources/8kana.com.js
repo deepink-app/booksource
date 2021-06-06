@@ -1,93 +1,126 @@
-const baseUrl = "https://minipapi.sfacg.com"
+const baseUrl = 'https://inf.8kana.com'
 
-//搜索
+//return [{name, author, cover, detail}]
 const search = (key) => {
-  let response = GET(`https://m.sfacg.com/API/HTML5.ashx?op=search&keyword=${encodeURI(key)}`)
-  let array = []
-  let $ = JSON.parse(response)
-  $.Novels.forEach((child) => {
-    array.push({
-      name: child.NovelName,
-      author: child.AuthorName,
-      cover: `https://rs.sfacg.com/web/novel/images/NovelCover/Big/${child.NovelCover}`,
-      detail: `${baseUrl}/pas/mpapi/novels/${child.NovelID}?expand=latestchapter,chapterCount,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney`,
+    let response = POST(`${baseUrl}/book/search`, {
+        data: `Keyword=${encodeURI(key)}`
     })
-  })
-  return JSON.stringify(array)
+    let $ = JSON.parse(response)
+    let books = $.data.Books.map(book => ({
+        name: book.BookName,
+        author: book.AuthorName,
+        cover: book.BookCover,
+        detail: JSON.stringify({
+            url: `${baseUrl}/Works/book`,
+            bookId: book.BookId
+        })
+    }))
+    return JSON.stringify(books)
 }
 
-//详情
+//return {summary, status, category, words, update, lastChapter, catalog}
 const detail = (url) => {
-  let response = GET(url,{headers:
-  ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-  })
-  let $ = JSON.parse(response)
-  let book = {
-    summary: $.data.expand.intro,
-    status: $.data.isFinish == false ? '连载' : '完结',
-    category: $.data.expand.sysTags[0].tagName,
-    words: $.data.charCount,
-    update: $.data.lastUpdateTime.match(/.+(?=T)/)[0],
-    lastChapter: $.data.expand.latestChapter.title,
-    catalog: `${baseUrl}/pas/mpapi/novels/${$.data.novelId}/dirs`
-  }
-  return JSON.stringify(book)
+    let args = JSON.parse(url)
+    let response = POST(args.url, {
+        data: `BookId=${args.bookId}&Type=1`
+    })
+    let $ = JSON.parse(response).data
+    let book = {
+        summary: $.Info.Note,
+        status: $.Info.SeriesStatus == 1 ? '连载' : '完结',
+        category: $.Info.ClassName,
+        words: $.Info.TotalWords,
+        update: $.Info.LastModifyTime,
+        lastChapter: $.Read.NewChapterName,
+        catalog: JSON.stringify({
+            url: `${baseUrl}/book/newcatalog`,
+            bookId: args.bookId
+        })
+    }
+    return JSON.stringify(book)
 }
 
-//目录
+//return [{name, url, vip}]
 const catalog = (url) => {
-  let response = GET(url,{headers:
-  ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-  })
-  let $ = JSON.parse(response)
-  let array = []
-  $.data.volumeList.forEach((booklet) => {
-    array.push({ name: booklet.title })
-    booklet.chapterList.forEach((chapter) => {
-      array.push({
-        name: chapter.title,
-        url: `${baseUrl}/pas/mpapi/Chaps/${chapter.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi&autoOrder=false`,
-        vip: chapter.isVip == true
-      })
+    let args = JSON.parse(url)
+    let response = POST(args.url, {
+        data: `BookId=${args.bookId}`
     })
-  })
-  return JSON.stringify(array)
+    let vlist = []
+    let array = []
+    let vidlist = []
+    let list = JSON.parse(response).data.ChapterList
+    JSON.parse(response).data.ChapterList.forEach((booklet) => {
+        if (vidlist.indexOf(booklet.VolumeId) == -1) {
+            vlist.push(booklet);
+            vidlist.push(booklet.VolumeId)
+        }
+    })
+    vlist.forEach((booklet) => {
+        let vid = booklet.VolumeId
+        array.push({
+            name: booklet.VolumeTitle
+        })
+        list.forEach((chapter) => {
+            if (vid == chapter.VolumeId) {
+                array.push({
+                    name: chapter.Title,
+                    url: JSON.stringify({
+                        url: `${baseUrl}/long/readbook`,
+                        bookId: args.bookId,
+                        ChapterId: chapter.ChapterId
+                    }),
+                    vip: chapter.IsVip == 1
+                })
+            }
+        })
+    })
+
+    return JSON.stringify(array)
 }
 
-//章节
+//return string
 const chapter = (url) => {
-    let $ = JSON.parse(GET(url,{headers:
-  ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-  }))
+    let args = JSON.parse(url)
+    let response = POST(args.url, {data: `bookId=${args.bookId}&chapterId=${args.ChapterId}`,headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
+  })
+    let $ = JSON.parse(response)
     //未购买返回403和自动订阅地址
-    if ($.status.msg == "请支持作者的辛勤写作,VIP章节必须登录后才可阅读"||$.status.msg == "请支持作者的辛勤写作,VIP章节必须购买后才可阅读") throw JSON.stringify({
+    if ($.msg == '付费章节，需要购买') throw JSON.stringify({
         code: 403,
-        message: `https://m.sfacg.com/c/${$.data.chapId}/`
+        message: `https://m.8kana.com/read/${args.ChapterId}.html`
     })
-  return $.data.expand.content.replace(/\[img.*?\]/g, '<img src="').replace(/\[.*img\]/g, '"/>')
+    return $.data.chapters.sections.replace(/\[kana\]/g, '\n')
 }
 
-/**
- * 个人
- * @returns {[{url, nickname, recharge, balance[{name, coin}], sign}]}
- */
+//return {url, nickname, recharge, balance[{name, coin}], sign}
 const profile = () => {
-    let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-    let $ = JSON.parse(GET(`${baseUrl}/pas/mpapi/user`,{headers}))
-    if ($.status.msg === '需要登录才能访问该资源') throw JSON.stringify({
+    let response = GET(`${baseUrl}/User/userinfo`,{headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
+  })
+    let $ = JSON.parse(response)
+    if ($.msg === "用户Id不能为空！") throw JSON.stringify({
         code: 401
     })
     return JSON.stringify({
-        basic: [
-            {
-                name: '账号',
-                value: $.data.nickName,
-                url: 'https://m.sfacg.com/my/'
+        basic: [{
+                name: "账号",
+                value: $.data.UserNickname,
+                url: `https://m.8kana.com/member`
             },
             {
-                name: '火券',
-                value: $.data.fireCoin,
-                url: 'https://m.sfacg.com/pay/',
+                name: '余额',
+                value: $.data.UserCoin,
+                url: `https://m.8kana.com/recharge`
+            },
+            {
+                name: '月票',
+                value: $.data.MonthNum,
+                url: `https://m.8kana.com/recharge`
+            },
+            {
+                name: '推荐票',
+                value: $.data.RecommendNum,
+                url: `https://m.8kana.com/recharge`
             }
         ],
     extra: [
@@ -105,106 +138,89 @@ const profile = () => {
  * @param {页码} page 
  */
 const bookshelf = (page) => {
-  let response = GET(`${baseUrl}/pas/mpapi/user/Pockets?expand=novels`,{headers:
-  ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
+  let response = GET(`${baseUrl}/Bookshelf/newIndex`,{headers: [`user-token: ${localStorage.getItem('UserId')}/${localStorage.getItem('UserToken')}`]
   })
-  let $ = JSON.parse(response).data[2]
-  let books = $.expand.novels.map(book => ({
-    name: book.novelName,
-    author: book.authorName,
-    cover: book.novelCover,
-    detail: `${baseUrl}/pas/mpapi/novels/${book.novelId}?expand=latestchapter,chapterCount,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney`
+  let $ = JSON.parse(response)
+  let books = $.data.map(book => ({
+    name: book.BookName,
+    author: book.AuthorName,
+    cover: book.BookCover,
+    detail: JSON.stringify({
+        url: `${baseUrl}/Works/book`,
+        bookId: book.BookId
+        })
   }))
   return JSON.stringify({books})
 }
 
-//排行榜
+//ranks
 const rank = (title, category, page) => {
-  let response = GET(`https://api.sfacg.com/novels/${title}/sysTags/novels?sort=latest&systagids=&isfree=both&isfinish=both&updatedays=-1&charcountbegin=0&charcountend=0&page=${page}&size=20&expand=typeName,tags,discount,discountExpireDate`,{headers:
-  ["authorization: Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE="]
-  })
-  let $ = JSON.parse(response)
-  let books = []
-  $.data.forEach((child) => {
-    books.push({
-      name: child.novelName,
-      author: child.authorName,
-      cover: child.novelCover,
-      detail: `${baseUrl}/pas/mpapi/novels/${child.novelId}?expand=latestchapter,chapterCount,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney`,
+    let response = POST(`${baseUrl}/book/channel`, {
+        data: `Sex=1&Class0Id=${title}&VipType=&SeriesStatus=0&SearchType=1&Page=${page + 1}`
     })
-  })
-  return JSON.stringify({
-    end:  $.data.length === 0,
-    books: books
-  })
+    let $ = JSON.parse(response)
+    let books = JSON.parse(response).data.books.map(book => ({
+        name: book.BookName,
+        author: book.AuthorName,
+        cover: book.BookCover,
+        detail: JSON.stringify({
+            url: `${baseUrl}/Works/book`,
+            bookId: book.BookId
+        })
+    }))
+    return JSON.stringify({
+      end: $.data.books.length === 0,
+      books: books
+    })
 }
 
-
-const ranks = [
-    {
+const ranks = [{
         title: {
-            key: '21',
-            value: '魔幻'
+            key: '3',
+            value: '烧脑'
         }
     },
     {
         title: {
-            key: '22',
-            value: '玄幻'
+            key: '6',
+            value: '神州'
         }
     },
     {
         title: {
-            key: '23',
-            value: '古风'
+            key: '1',
+            value: '轻幻想'
         }
     },
     {
         title: {
-            key: '24',
-            value: '科幻'
+            key: '2',
+            value: '重幻想'
         }
     },
     {
         title: {
-            key: '25',
-            value: '校园'
-        }
-    },
-    {
-        title: {
-            key: '26',
-            value: '都市'
-        }
-    },
-    {
-        title: {
-            key: '27',
-            value: '游戏'
-        }
-    },
-    {
-        title: {
-            key: '28',
-            value: '悬疑'
+            key: '4',
+            value: '轻小说'
         }
     }
 ]
 
 const login = (args) => {
-if(!args) return "账号或者密码不能为空"
-    let data =`{"username":"${args[0]}","password":"${args[1]}"}`
-    let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-    let response = POST(`https://minipapi.sfacg.com/pas/mpapi/sessions`,{data,headers})
+    if(!args) return "账号或者密码不能为空!"
+    let data =`UserName=${args[0]}&Password=${args[1]}` 
+    let response = POST(`${baseUrl}/Passport/login`,{data})
     let $ = JSON.parse(response)
-    if($.status.httpCode == 401) return $.status.msg
+    if($.code == 0) return "账号或密码错误"
+    localStorage.setItem("UserId", $.data.UserId)
+    localStorage.setItem("UserToken", $.data.UserToken)
 }
 
 var bookSource = JSON.stringify({
-  name: "SF轻小说",
-  url: "sfacg.com",
-  version: 106,
-  authorization: JSON.stringify(['account','password']),
-  cookies: ["sfacg.com"],
-  ranks: ranks
+    name: '不可能的世界',
+    url: '8kana.com',
+    version: 105,
+    authorization: JSON.stringify(['account','password']),
+    cookies: ["8kana.com"],
+    ranks: ranks
 })
