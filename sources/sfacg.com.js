@@ -73,7 +73,10 @@ const chapter = (url) => {
  */
 const profile = () => {
     let headers = ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
-    let $ = JSON.parse(GET(`${baseUrl}/pas/mpapi/user`,{headers}))
+    let response = GET(`${baseUrl}/pas/mpapi/user`,{headers})
+    let response2 = GET(`${baseUrl}/pas/mpapi/user/money`,{headers})
+    let $ = JSON.parse(response)
+    let  wenmoux = JSON.parse(response2).data
     if ($.status.msg === '需要登录才能访问该资源') throw JSON.stringify({
         code: 401
     })
@@ -86,7 +89,12 @@ const profile = () => {
             },
             {
                 name: '火券',
-                value: $.data.fireCoin,
+                value: wenmoux.fireMoneyRemain,
+                url: 'https://m.sfacg.com/pay/',
+            },
+            {
+                name: '代券',
+                value: wenmoux.couponsRemain,
                 url: 'https://m.sfacg.com/pay/',
             }
         ],
@@ -203,7 +211,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 106,
+  version: 107,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
