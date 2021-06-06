@@ -38,8 +38,8 @@ const detail = (url) => {
         status: status,
         category: $('.tagbtn').text()+" "+$("dd.ellipsis:not(.author)").text().match(/(.+?) |/)[1],
         words: (/字/).test($('.lastline').text()) ? $('.lastline').text().match(/(.+)字/)[1] : "0",
-        update: status == "连载" ? ($('.catalog_new >a:nth-child(1)').text().match(/(?<=更新).+/) ? $('.catalog_new >a:nth-child(1)').text().match(/(?<=更新).+/)[0] : "") : "long long ago",
-        lastChapter: status == "连载" ? ($('.catalog_new >a:nth-child(1)').text().match(/.+(?=更新)/) ? $('.catalog_new >a:nth-child(1)').text().match(/.+(?=更新)/)[0] : "") : "已完结",
+        update: status == "连载" ? ($('.time') ? $('.time').text().match(/(.+?)更新/)[1] : "") : "",
+        lastChapter: status == "连载" ? ($('.time') ? $('.catalog_new >a:nth-child(1)').text().match(/(?<=更新).+/)[0] : "") : "已完结",
         catalog: url.match(/\d+/)[0]
     }
     return JSON.stringify(book)
@@ -154,6 +154,7 @@ const ranks = [{
 const profile = () => {
     let response = GET("https://m.zhangyue.com/user")
     let $ = HTML.parse(response)
+    let vip = $(".con[data-js]>span.txt").text().replace("到期", "")
     return JSON.stringify({
         basic: [{
                 name: "账号",
@@ -172,7 +173,7 @@ const profile = () => {
             },
             {
                 name: 'VIP',
-                value: $(".con[data-js]>span.txt").text().replace("到期", ""),
+                value: vip.length==0?"无":vip,
                 url: $(".con[data-js]").attr("data-url")
             }
         ]
@@ -182,7 +183,7 @@ const profile = () => {
 var bookSource = JSON.stringify({
     name: "掌阅小说",
     url: "zhangyue.com",
-    version: 102,
+    version: 103,
     authorization: "https://m.zhangyue.com/login?backUrl=https%3A%2F%2Fm.zhangyue.com%2F",
     cookies: [".zhangyue.com"],
     ranks: ranks
