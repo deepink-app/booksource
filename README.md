@@ -24,3 +24,4 @@
 - [x] 刺猬猫阅读 [ciweimao.com](https://www.ciweimao.com)
 - [x] 书耽网 [shubl.com](https://www.shubl.com)
 - [x] 得间小说 [idejian.com](https://www.idejian.com)
+- [x] 飞卢 [faloo.com](https://faloo.com)
