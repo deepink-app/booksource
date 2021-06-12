@@ -86,7 +86,6 @@ const search = (key) => {
  * @returns {[{summary, status, category, words, update, lastChapter, catalog}]}
  */
 const detail = (url) => {
-    console.log(url)
     let res = CGET(url)
     let binfo = res.book_info
     let book = {
@@ -145,6 +144,11 @@ const chapter = (cid) => {
     })
     let txt = cres.chapter_info.txt_content
     txt = decrypt(txt, key)
+    //未购买返回403和自动订阅地址
+    if (cres.chapter_info.auth_access == 0) throw JSON.stringify({
+        code: 403,
+        message: `cres`
+    })
     return txt
 }
 
@@ -421,7 +425,7 @@ const rank = (title, category, page) => {
             name: r.book_name,
             author: r.author_name,
             cover: r.cover,
-            detail: `/book/get_info_by_id?book_id=${book.book_info.book_id}`,
+            detail: `/book/get_info_by_id?book_id=${r.book_id}`,
         })
     })
     return JSON.stringify({
@@ -450,7 +454,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
     name: '刺猬猫阅读',
     url: 'hbooker.com',
-    version: 101,
+    version: 102,
     authorization: JSON.stringify(['account', 'password']),
     cookies: ['hbooker.com'],
     ranks: ranks,
