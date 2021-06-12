@@ -122,6 +122,7 @@
       url = !category ? `http://app.jjwxc.org/${title}` : `http://app.robook.com:80/bookstore/getTop?channel=${title}${category}&offset=0&limit=100&versionCode=133`
       let response = GET(url)
       let $ = JSON.parse(response)
+      if(title== "bookstore/getFullPage?channel=novelfree"){$=$[0].data}
       let books = []
       $.forEach((item) => {
           books.push({
@@ -161,8 +162,62 @@
       }]
   }, {
       "title": {
-          "key": 70000,
+          "key": 7000,
           "value": "季榜"
+      },
+      "categories": [{
+          "key": "06",
+          "value": "言情"
+      }, {
+          "key": "07",
+          "value": "纯爱"
+      }, {
+          "key": "08",
+          "value": "原创"
+      }, {
+          "key": "09",
+          "value": "衍生"
+      }]
+  }, {
+      "title": {
+          "key": 700,
+          "value": "半年榜"
+      },
+      "categories": [{
+          "key": "011",
+          "value": "言情"
+      }, {
+          "key": "012",
+          "value": "纯爱"
+      }, {
+          "key": "013",
+          "value": "原创"
+      }, {
+          "key": "014",
+          "value": "衍生"
+      }]
+  }, {
+      "title": {
+          "key": 70002,
+          "value": "总分榜"
+      },
+      "categories": [{
+          "key": "1",
+          "value": "言情"
+      }, {
+          "key": "2",
+          "value": "纯爱"
+      }, {
+          "key": "3",
+          "value": "原创"
+      }, {
+          "key": "4",
+          "value": "衍生"
+      }]
+  }, {
+      "title": {
+          "key": 70001,
+          "value": "长生殿"
       },
       "categories": [{
           "key": "6",
@@ -179,61 +234,7 @@
       }]
   }, {
       "title": {
-          "key": 7000,
-          "value": "半年榜"
-      },
-      "categories": [{
-          "key": "11",
-          "value": "言情"
-      }, {
-          "key": "12",
-          "value": "纯爱"
-      }, {
-          "key": "13",
-          "value": "原创"
-      }, {
-          "key": "14",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 7000,
-          "value": "总分榜"
-      },
-      "categories": [{
-          "key": "21",
-          "value": "言情"
-      }, {
-          "key": "22",
-          "value": "纯爱"
-      }, {
-          "key": "23",
-          "value": "原创"
-      }, {
-          "key": "24",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 7000,
-          "value": "长生殿"
-      },
-      "categories": [{
-          "key": "16",
-          "value": "言情"
-      }, {
-          "key": "17",
-          "value": "纯爱"
-      }, {
-          "key": "18",
-          "value": "原创"
-      }, {
-          "key": "19",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 6,
+          "key": "bookstore/getFullPage?channel=novelfree",
           "value": "今日限免"
       }
   }, {
@@ -295,7 +296,7 @@
   var bookSource = JSON.stringify({
       name: "晋江文学城",
       url: "m.jjwxc.net",
-      version: 103,
+      version: 104,
       authorization: "https://m.jjwxc.net/my/login?login_mode=jjwxc",
       cookies: [".jjwxc.net"],
       ranks: ranks
