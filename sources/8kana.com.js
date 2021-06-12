@@ -158,6 +158,7 @@ const rank = (title, category, page) => {
     let response = POST(`${baseUrl}/book/channel`, {
         data: `Sex=1&Class0Id=${title}&VipType=&SeriesStatus=0&SearchType=1&Page=${page + 1}`
     })
+    let $ = JSON.parse(response)
     let books = JSON.parse(response).data.books.map(book => ({
         name: book.BookName,
         author: book.AuthorName,
@@ -218,7 +219,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
     name: '不可能的世界',
     url: '8kana.com',
-    version: 104,
+    version: 105,
     authorization: JSON.stringify(['account','password']),
     cookies: ["8kana.com"],
     ranks: ranks

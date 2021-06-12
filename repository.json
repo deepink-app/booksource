@@ -9,7 +9,7 @@
   },
   {
     "url": "8kana.com",
-    "version": 104
+    "version": 105
   },
   {
     "url": "linovel.net",
@@ -61,7 +61,7 @@
   },
   {
     "url": "sfacg.com",
-    "version": 106
+    "version": 107
   },
   {
     "url": "hanwujinian.com",
@@ -89,6 +89,10 @@
   },
   { 
     "url": "idejian.com",
+    "version": 100
+  },
+  {
+    "url": "faloo.com",
     "version": 100
   }
 ]
