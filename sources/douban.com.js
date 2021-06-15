@@ -25,13 +25,17 @@ const search = (key) => {
  * @returns 
  */
 const trimAuthor = (author) => {
-    return author.match(/(.+?)(?=\/)/)[0]
+    try {
+        return author.match(/(.+?)(?=\/)/)[0]
         .replace(' 著', '')
         .replace(/\[.*]/, '')
         .replace(/（.+）/, '')
         .replace(/\(.*\)/, '')
         .replace('•', '·')
         .trim()
+    } catch (error) {
+        return author
+    }
 }
 
 const trimBookName = (bookName) => {
@@ -91,6 +95,6 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: "豆瓣读书",
     url: "douban.com",
-    version: 101,
+    version: 102,
     ranks: ranks
 })
