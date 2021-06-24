@@ -86,13 +86,15 @@ const catalog = (url) => {
  */
 const chapter = (url) => {
   let content = ""
-  let condition = true
-  while (condition) {
-    let response = GET(url, {headers: header_mobile})
+  while (true) {
+    let response = GET(url.replace('w.', 'www.'))
     let $ = HTML.parse(response)
-    content += $('#acontent')
-    condition = $('#footlink > a:nth-child(4)').attr('href').match('.+_.+\.html')
-    url = baseUrl + $('#footlink > a:nth-child(4)').attr('href')
+    content += $('#mlfy_main_text')
+    let next_btn = $('#readbg > p > a:contains(下一页)')
+    if (next_btn.length == 0) {
+      break
+    }
+    url = baseUrl + next_btn.attr('href')
   }
   return content
 }
@@ -228,6 +230,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "哔哩轻小说",
   url: "linovelib.com",
-  version: 104,
+  version: 105,
   ranks: ranks
 })
