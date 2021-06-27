@@ -31,13 +31,13 @@ const detail = (url) => {
   let response = GET(url)
   let $ = HTML.parse(response)
   let book = {
-    summary: $('#info2').text().match(/(?<=).+(?=飞卢小说网提醒：本小说及人物纯属虚构，如有雷同，纯属巧合，切勿模仿。)/)[0].replace("【收起】",""),
-    status: $('dd:nth-child(3) > h2').text().replace("状态：",""),
-    category: $('.dd_box:nth-child(3) > span > a').text(),
-    words: $('.dd_box:nth-child(4) > h2').text().replace("字数：",""),
-    update: $('.time').text(),
-    lastChapter: $('.chap').text(),
-    catalog: `http:${$('li:nth-child(4) > div:nth-child(2) > a').attr('href')}`
+    summary: $('#novel_intro').text().replace(/飞卢小说网.+签约小说：.+；本小说及人物纯属虚构，如有雷同，纯属巧合，切勿模仿。/,""),
+    status: $('i.textHide').text(),
+    category: $('li > a.textHide:nth-child(4)').text(),
+    words: $('li.textHide:nth-child(3)').text().replace(/字.+万粉/,""),
+    update: $('li.textHide:nth-child(5)').text().replace("更新时间：",""),
+    lastChapter: $('a.newNode').text(),
+    catalog: `http:${$('div.btnLayout > a.textHide:nth-child(2)').attr('href')}`
   }
   return JSON.stringify(book)
 }
@@ -64,15 +64,14 @@ const catalog = (url) => {
 
 //章节
 const chapter = (url) => {
-    let res = GET(url)
-    let response = res.replace("活动:注册飞卢会员赠200点卷,马上注册!","").replace("充值：微信 支付宝 短信 更多","").replace("本书由飞卢小说网提供。","").replace("[免费听本书]","").replace("本书来自：wap.faloo.com。","")
+    let response = GET(url)
     let $ = HTML.parse(response)
     //未购买返回403和自动订阅地址
-    if ($('#content > a:nth-child(4)').text() == "订阅本章节>>"||$('#content > a:nth-child(5)').text() == "立即登录>>") throw JSON.stringify({
+    if ($('div.nodeContent').text() == "您还没有登录 请登录后在继续阅读本部小说！ 立即登录 注册账号"||$('div.nodeContent').text() == "您的账户余额不足 请充值！ 立即充值") throw JSON.stringify({
         code: 403,
         message: url
     })
-  return $('#content')
+  return $('div.nodeContent')
 }
 
 //个人中心
@@ -124,9 +123,9 @@ const bookshelf = (page) => {
       let $ = HTML.parse(child)
       array.push({
         name: $('.bookName').text(),
-        author: $('.collectBookInfo > dl > dt:nth-child(2) > span:nth-child(1) > a').text(),
+        author: $('.spanAuthor').text(),
         cover: $('.collectBookPic > a > img').attr('src'),
-        detail: $('.bookName').attr('href'),
+        detail: $('.bookName').attr('href').replace("b.faloo.com/f/","wap.faloo.com/"),
       })
     })
   return JSON.stringify({
@@ -137,7 +136,7 @@ const bookshelf = (page) => {
 var bookSource = JSON.stringify({
   name: "飞卢",
   url: "faloo.com",
-  version: 100,  
+  version: 101,  
   authorization: `https://u.faloo.com/regist/Login.aspx`,
   cookies: ["faloo.com"]
 })
