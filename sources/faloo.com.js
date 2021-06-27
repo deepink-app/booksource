@@ -34,7 +34,7 @@ const detail = (url) => {
     summary: $('#novel_intro').text().replace(/飞卢小说网.+签约小说：.+；本小说及人物纯属虚构，如有雷同，纯属巧合，切勿模仿。/,""),
     status: $('i.textHide').text(),
     category: $('li > a.textHide:nth-child(4)').text(),
-    words: $('li.textHide:nth-child(3)').text().replace(/字.+万粉/,""),
+    words: $('li.textHide:nth-child(3)').text().replace(/字.+粉/,""),
     update: $('li.textHide:nth-child(5)').text().replace("更新时间：",""),
     lastChapter: $('a.newNode').text(),
     catalog: `http:${$('div.btnLayout > a.textHide:nth-child(2)').attr('href')}`
@@ -67,10 +67,7 @@ const chapter = (url) => {
     let response = GET(url)
     let $ = HTML.parse(response)
     //未购买返回403和自动订阅地址
-    if ($('div.nodeContent').text() == "您还没有登录 请登录后在继续阅读本部小说！ 立即登录 注册账号"||$('div.nodeContent').text() == "您的账户余额不足 请充值！ 立即充值") throw JSON.stringify({
-        code: 403,
-        message: url
-    })
+    if ($('div.nodeContent').text() == "您还没有登录 请登录后在继续阅读本部小说！ 立即登录 注册账号"||$('div.nodeContent').text() == "您的账户余额不足 请充值！ 立即充值"||$('div.nodeContent').text() == "非VIP会员,不能阅读作者最新更新的VIP章节。"||$('.tips1').text() == "您还没有订阅本章节（VIP章节）") return "此为付费章节，请用飞卢官网或者飞卢APP阅读"
   return $('div.nodeContent')
 }
 
@@ -136,7 +133,7 @@ const bookshelf = (page) => {
 var bookSource = JSON.stringify({
   name: "飞卢",
   url: "faloo.com",
-  version: 101,  
+  version: 102,  
   authorization: `https://u.faloo.com/regist/Login.aspx`,
   cookies: ["faloo.com"]
 })
