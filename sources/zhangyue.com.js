@@ -57,7 +57,7 @@ const catalog = (url) => {
         $("li").forEach((booklet) => {
             let $ = HTML.parse(booklet)
             array.push({
-                name: $("a").text(),
+                name: $("a").text().replace("免费",""),
                 url: $("a").attr("href"),
                 vip: !($(".type").text() == "免费")
             })
@@ -183,8 +183,8 @@ const profile = () => {
 var bookSource = JSON.stringify({
     name: "掌阅小说",
     url: "zhangyue.com",
-    version: 103,
-    authorization: "https://m.zhangyue.com/login?backUrl=https%3A%2F%2Fm.zhangyue.com%2F",
+    version: 104,
+    authorization: "https://m.zhangyue.com/login",
     cookies: [".zhangyue.com"],
     ranks: ranks
 })
