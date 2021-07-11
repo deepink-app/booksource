@@ -50,7 +50,7 @@ const trimBookName = (bookName) => {
 const detail = (url) => {
     let $ = HTML.parse(GET(url))
     let book = {
-        summary: $('.intro:not(:has(.a_show_full))')[0].text(),
+        summary: $('.intro:not(:has(.a_show_full))')[0]?.text() ?? '',
         status: '完结',
         category: $('#db-tags-section > .indent').text(),
         words: $('#info').text().match(/(?<=页数:)(.+?)(?= )/)?.shift()?.trim() ?? '',
@@ -95,6 +95,6 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: "豆瓣读书",
     url: "douban.com",
-    version: 102,
+    version: 103,
     ranks: ranks
 })
