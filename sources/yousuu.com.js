@@ -25,7 +25,7 @@ const detail = (url) => {
     let book = {
         summary: response.match(/(?<=introduction:\")(.+?)(?=\",)/)[0].trim(),
         status: $('.status').text().match(/(?<=·)(.+)/)[0].trim(),
-        category: $('.el-tag')[0].text(),
+        category: $('.el-tag')[0] ? $('.el-tag')[0].text() : "",
         words: $('.book-word-count').text().match(/(?<=本书字数：)(.+?)(?=字)/)[0].trim()
     }
     return JSON.stringify(book)
@@ -34,5 +34,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
     name: "优书网",
     url: "yousuu.com",
-    version: 100
+    version: 101
 })

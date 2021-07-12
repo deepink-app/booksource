@@ -45,11 +45,11 @@
   },
   {
     "url": "douban.com",
-    "version": 101
+    "version": 103
   },
   {
     "url": "yousuu.com",
-    "version": 100
+    "version": 101
   },
   {
     "url": "zongheng.com",
@@ -57,7 +57,7 @@
   },
   {
     "url": "linovelib.com",
-    "version": 104
+    "version": 105
   },
   {
     "url": "sfacg.com",
@@ -77,11 +77,11 @@
   },
   {
     "url": "zhangyue.com",
-    "version": 103
+    "version": 104
   },
   {
     "url": "hbooker.com",
-    "version": 101
+    "version": 103
   },
   {
     "url": "shubl.com",
@@ -93,6 +93,6 @@
   },
   {
     "url": "faloo.com",
-    "version": 100
+    "version": 102
   }
 ]
