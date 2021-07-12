@@ -25,3 +25,4 @@
 - [x] 书耽网 [shubl.com](https://www.shubl.com)
 - [x] 得间小说 [idejian.com](https://www.idejian.com)
 - [x] 飞卢 [faloo.com](https://faloo.com)
+- [x] 番茄小说 [fanqienovel.com](https://fanqienovel.com)
