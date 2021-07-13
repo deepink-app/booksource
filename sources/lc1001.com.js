@@ -1,18 +1,32 @@
 require("crypto-js")
 const Secret = "XKrqBSeeEwgDy2pT"
-
+let token = localStorage.getItem('token') ? localStorage.getItem('token') : "0"
+let uid = localStorage.getItem('uid') ? localStorage.getItem('uid') : "0"
 function getsign(url, method, data) {
+str=""
+if(data){
     var str = data.split("&").sort(function(a, b) {
         return a.localeCompare(b)
     }).join("")
     console.log(data)
+    }
     str = method + url + str + Secret
     sign = CryptoJS.MD5(encodeURIComponent(str)).toString()
     console.log(sign)
     return sign
 
 }
-
+function decode(word) {
+    let key =CryptoJS.enc.Utf8.parse( "1701019k");
+    let iv = CryptoJS.enc.Base64.parse("AQIDBAUGBwg=");    
+    str = CryptoJS.DES.decrypt(word, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    })
+   return str.toString(CryptoJS.enc.Utf8)
+    
+}
 //搜索
 const search = (key) => {
     let url = "http://a.lc1001.com/app/query/keybooks"
@@ -89,6 +103,7 @@ const catalog = (url) => {
     })
     let $ = JSON.parse(response)
     let array = []
+    //
     $.DATA.BOOKCATA.forEach((booklet) => {
         array.push({
             name: booklet.VNAME
@@ -96,7 +111,12 @@ const catalog = (url) => {
         booklet.CHAPTERS.forEach((chapter) => {
             array.push({
                 name: chapter.CNAME,
-                url: chapter.ISVC == 0 ? `http://www.lcread.com/bookpage/${args.bid}/${chapter.CID}rc.html` : `http://my.lc1001.com/vipchapters/read?book=${args.bid}&chapter=${chapter.CID}`,
+                url: JSON.stringify({
+                u: chapter.ISVC == 0?"http://a.lc1001.com/app/book/pubchapter":"http://a.lc1001.com/app/book/vipchapter",
+                url: `http://a.lc1001.com${chapter.ISVC == 0?"/app/book/pubchapter":"/app/book/vipchapter"}bID=${args.bid}cID=${chapter.CID}consumerKey=LCREAD_ANDROID`,              
+                bid : args.bid,
+                cid:   chapter.CID          
+                }),                
                 vip: chapter.ISVC != 0
             })
         })
@@ -106,96 +126,52 @@ const catalog = (url) => {
 
 // 正文
 const chapter = (url) => {
-    let response = GET(url)
-    let $ = HTML.parse(response.replace("../vipchapters", "http://my.lc1001.com/vipchapters"))
-    if ((/订阅已选章节/).test(response)) throw JSON.stringify({
-        code: 403,
-        message: url
-    })
-    return $("#ccon,p.ccon_vip")
+    let args = JSON.parse(url)
+    let time = new Date().getTime()
+    let urls = args.url +`timestamp=${time}uID=${uid}`
+    let sign = getsign(urls ,"GET")
+    let curl = args.u +`?consumerKey=LCREAD_ANDROID&timestamp=${time}&sign=${sign}&bID=${args.bid}&cID=${args.cid}&uID=${uid}&token=${token}&mType=OPPO-PCRT00&PACKINGCHANNEL=YINGYONGBAO`
+    let response = GET(curl)
+   console.log(response.DATA)
+    let CTXT = JSON.parse(response).DATA.CTXT
+    let TXT = decode(CTXT)
+    return TXT
 
 }
 
 //个人中心
 const profile = () => {
-    let response = GET(`http://my.lc1001.com/epay/account?u=`)
-    let $ = HTML.parse(response)
+    let url = "http://a.lc1001.com/app/user/myInfo"
+    let method = "GET"
+    let data = `consumerKey=LCREAD_ANDROID&timestamp=${new Date().getTime()}&uID=${uid}`
+    let sign = getsign(url, method, data)
+    let curl = `${url}?${data}&sign=${sign}&token=${token}`
+    let response = GET(curl)
+    let $ = JSON.parse(response).DATA
     return JSON.stringify({
         basic: [{
                 name: "账号",
-                value: $("strong").text().match(/，(.+?)！/)[1],
+                value: $.UNAME,
                 url: "http://my.lc1001.com/book/bookhouse?u=&pn=0&from=null"
             },
             {
                 name: '铜板',
-                value: response.match(/(\d+) 铜板/)[1],
+                value: $.RESTNUM,
                 url: 'http://www.lcread.com/epay/cashin_interface_index.html'
 
             },
             {
                 name: '福利币',
-                value: response.match(/(\d+) 福利币/)[1],
+                value: $.RESTFLQ,
                 url: 'http://www.lcread.com/epay/cashin_interface_index.html'
             }
         ]
     })
 }
-const ranks = [{
-        title: {
-            key: 20,
-            value: "女生"
-        }
-    }
 
-    ,
-    {
-        title: {
-            key: 10,
-            value: "男生"
-        }
-    },
-    {
-        title: {
-            key: 50,
-            value: "耽美同人"
-        }
-    }
+const ranks=[{title:{key:20,value:"女生"}},{title:{key:10,value:"男生"}},{title:{key:50,value:"耽美同人"}}]
+const categories=[{"key":"fsb-0","value":"封神榜"},{"key":"zsb-1","value":"钻石榜"},{"key":"qgb-2","value":"勤更榜"},{"key":"tjb-3","value":"推荐榜"},{"key":"rqb-4","value":"人气榜"},{"key":"scb-5","value":"收藏榜"},{"key":"wdb-6","value":"字数榜"},{"key":"xsb-7","value":"新书榜"}]
 
-]
-
-let categories = [{
-        "key": "fsb-0",
-        "value": "封神榜"
-    },
-    {
-        "key": "zsb-1",
-        "value": "钻石榜"
-    },
-    {
-        "key": "qgb-2",
-        "value": "勤更榜"
-    },
-    {
-        "key": "tjb-3",
-        "value": "推荐榜"
-    },
-    {
-        "key": "rqb-4",
-        "value": "人气榜"
-    },
-    {
-        "key": "scb-5",
-        "value": "收藏榜"
-    },
-    {
-        "key": "wdb-6",
-        "value": "字数榜"
-    },
-    {
-        "key": "xsb-7",
-        "value": "新书榜"
-    }
-]
 for (var i = 0; i < ranks.length; i++) {
     ranks[i].categories = categories;
 }
@@ -225,13 +201,21 @@ const rank = (title, category, page) => {
         books
     })
 }
-
+const login = (args) => {
+    if(args.length!=2&&!args) return "账号或者密码不能为空"
+    let data = `pcd=${args[0]}&pwd=${args[1]}`
+     let response = POST("http://h5.lc1001.com/h5/login",{data})   
+    let $ = JSON.parse(response)
+    if($.result != "true" ) return "账号或密码不正确~"
+    localStorage.setItem("uid", $.uID)
+    localStorage.setItem("token", $.token)
+}
 
 var bookSource = JSON.stringify({
     name: "连城读书",
     url: "lc1001.com",
-    version: 101,
-    authorization: "http://my.lc1001.com/user/login",
+    version: 102,
+    authorization: JSON.stringify(['account', 'password']),
     cookies: [".lc1001.com", ".lcread.com"],
     ranks: ranks
 })

@@ -5,6 +5,7 @@
       let response = GET(`${baseurlapp}/search?keyword=${encodeURI(key)}&type=1&page=1&token=null&searchType=1&sortMode=DESC&versionCode=133`)
       let array = []
       let $ = JSON.parse(response)
+      if($.items){
       $.items.forEach((item) => {
           array.push({
               name: item.novelname,
@@ -13,6 +14,7 @@
               detail: `${baseurlapp}/novelbasicinfo?novelId=${item.novelid}`,
           })
       })
+      }
       return JSON.stringify(array)
   }
 
@@ -137,166 +139,11 @@
           books
       })
   }
-  const ranks = [{
-      "title": {
-          "key": "androidapi/newDayList",
-          "value": "新书"
-      }
-  }, {
-      "title": {
-          "key": 70000,
-          "value": "月榜"
-      },
-      "categories": [{
-          "key": "1",
-          "value": "言情"
-      }, {
-          "key": "2",
-          "value": "纯爱"
-      }, {
-          "key": "3",
-          "value": "原创"
-      }, {
-          "key": "4",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 7000,
-          "value": "季榜"
-      },
-      "categories": [{
-          "key": "06",
-          "value": "言情"
-      }, {
-          "key": "07",
-          "value": "纯爱"
-      }, {
-          "key": "08",
-          "value": "原创"
-      }, {
-          "key": "09",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 700,
-          "value": "半年榜"
-      },
-      "categories": [{
-          "key": "011",
-          "value": "言情"
-      }, {
-          "key": "012",
-          "value": "纯爱"
-      }, {
-          "key": "013",
-          "value": "原创"
-      }, {
-          "key": "014",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 70002,
-          "value": "总分榜"
-      },
-      "categories": [{
-          "key": "1",
-          "value": "言情"
-      }, {
-          "key": "2",
-          "value": "纯爱"
-      }, {
-          "key": "3",
-          "value": "原创"
-      }, {
-          "key": "4",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 70001,
-          "value": "长生殿"
-      },
-      "categories": [{
-          "key": "6",
-          "value": "言情"
-      }, {
-          "key": "7",
-          "value": "纯爱"
-      }, {
-          "key": "8",
-          "value": "原创"
-      }, {
-          "key": "9",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": "bookstore/getFullPage?channel=novelfree",
-          "value": "今日限免"
-      }
-  }, {
-      "title": {
-          "key": 10000,
-          "value": "完结金榜"
-      },
-      "categories": [{
-          "key": "6",
-          "value": "言情"
-      }, {
-          "key": "7",
-          "value": "纯爱"
-      }, {
-          "key": "8",
-          "value": "原创"
-      }, {
-          "key": "9",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 80000,
-          "value": "霸王票榜"
-      },
-      "categories": [{
-          "key": "1",
-          "value": "言情"
-      }, {
-          "key": "2",
-          "value": "纯爱"
-      }, {
-          "key": "3",
-          "value": "原创"
-      }, {
-          "key": "4",
-          "value": "衍生"
-      }]
-  }, {
-      "title": {
-          "key": 60000,
-          "value": "勤奋指数榜"
-      },
-      "categories": [{
-          "key": "6",
-          "value": "言情"
-      }, {
-          "key": "7",
-          "value": "纯爱"
-      }, {
-          "key": "8",
-          "value": "原创"
-      }, {
-          "key": "9",
-          "value": "衍生"
-      }]
-  }]
-
+const ranks=[{"title":{"key":"androidapi/newDayList","value":"新书"}},{"title":{"key":70000,"value":"月榜"},"categories":[{"key":"1","value":"言情"},{"key":"2","value":"纯爱"},{"key":"3","value":"原创"},{"key":"4","value":"衍生"}]},{"title":{"key":7000,"value":"季榜"},"categories":[{"key":"06","value":"言情"},{"key":"07","value":"纯爱"},{"key":"08","value":"原创"},{"key":"09","value":"衍生"}]},{"title":{"key":700,"value":"半年榜"},"categories":[{"key":"011","value":"言情"},{"key":"012","value":"纯爱"},{"key":"013","value":"原创"},{"key":"014","value":"衍生"}]},{"title":{"key":70002,"value":"总分榜"},"categories":[{"key":"1","value":"言情"},{"key":"2","value":"纯爱"},{"key":"3","value":"原创"},{"key":"4","value":"衍生"}]},{"title":{"key":70001,"value":"长生殿"},"categories":[{"key":"6","value":"言情"},{"key":"7","value":"纯爱"},{"key":"8","value":"原创"},{"key":"9","value":"衍生"}]},{"title":{"key":"bookstore/getFullPage?channel=novelfree","value":"今日限免"}},{"title":{"key":10000,"value":"完结金榜"},"categories":[{"key":"6","value":"言情"},{"key":"7","value":"纯爱"},{"key":"8","value":"原创"},{"key":"9","value":"衍生"}]},{"title":{"key":80000,"value":"霸王票榜"},"categories":[{"key":"1","value":"言情"},{"key":"2","value":"纯爱"},{"key":"3","value":"原创"},{"key":"4","value":"衍生"}]},{"title":{"key":60000,"value":"勤奋指数榜"},"categories":[{"key":"6","value":"言情"},{"key":"7","value":"纯爱"},{"key":"8","value":"原创"},{"key":"9","value":"衍生"}]}]
   var bookSource = JSON.stringify({
       name: "晋江文学城",
       url: "m.jjwxc.net",
-      version: 104,
+      version: 105,
       authorization: "https://m.jjwxc.net/my/login?login_mode=jjwxc",
       cookies: [".jjwxc.net"],
       ranks: ranks
