@@ -37,7 +37,7 @@ const catalog = (url) => {
   let response = GET(url)
   let $ = JSON.parse(response)
   let array = []
-  $.data.chapterListWithVolume.forEach(chapter => {
+  $.data.chapterListWithVolume[0].forEach(chapter => {
       array.push({
         name: chapter.title,
         url: `${baseUrl}/api/reader/full?itemId=${chapter.itemId}`
@@ -55,5 +55,5 @@ const chapter = (url) => {
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 100
+  version: 101
 })
