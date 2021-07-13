@@ -25,7 +25,7 @@
   },
   {
     "url": "m.jjwxc.net",
-    "version": 104
+    "version": 105
   },
   {
     "url": "shuqi.com",
@@ -73,7 +73,7 @@
   },
   {
     "url": "lc1001.com",
-    "version": 101
+    "version": 102
   },
   {
     "url": "zhangyue.com",
@@ -96,7 +96,15 @@
     "version": 102
   },
   {
+    "url": "yizhiqc.com",
+    "version": 100
+  },
+  {
     "url": "fanqienovel.com",
     "version": 100
-  }
+  },
+  {
+    "url": "yizhiqc.com",
+    "version": 100  
+  }  
 ]
