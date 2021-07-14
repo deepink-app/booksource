@@ -61,7 +61,7 @@ const catalog = (url) => {
             array.push({
                 name: chapter.chapterTitle,
                 url: chapter.chapterContent,
-                vip: chapter.chapterIsvip == 1
+                vip: false
             })
         })
     })
@@ -123,8 +123,7 @@ for (var i = 0; i < ranks.length; i++) {
 
 var bookSource = JSON.stringify({
     name: "一纸倾城",
-    url: "www.yizhiqc.com",
-    version: 100,
-    cookies: [".yizhiqc.com"],
+    url: "yizhiqc.com",
+    version: 101,
     ranks: ranks
 })
