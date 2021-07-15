@@ -25,7 +25,7 @@ const detail = (url) => {
   let book = {
     summary: $.data.expand.intro,
     status: $.data.isFinish == false ? '连载' : '完结',
-    category: $.data.expand.sysTags[0].tagName,
+    category: $.data.expand.sysTags.map((item)=>{ return item.tagName}).join(" "),
     words: $.data.charCount,
     update: $.data.lastUpdateTime.match(/.+(?=T)/)[0],
     lastChapter: $.data.expand.latestChapter.title,
@@ -211,7 +211,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 107,
+  version: 108,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
