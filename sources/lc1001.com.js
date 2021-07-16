@@ -8,13 +8,10 @@ if(data){
     var str = data.split("&").sort(function(a, b) {
         return a.localeCompare(b)
     }).join("")
-    console.log(data)
     }
     str = method + url + str + Secret
     sign = CryptoJS.MD5(encodeURIComponent(str)).toString()
-    console.log(sign)
     return sign
-
 }
 function decode(word) {
     let key =CryptoJS.enc.Utf8.parse( "1701019k");
@@ -24,8 +21,7 @@ function decode(word) {
         mode: CryptoJS.mode.CBC,
         padding: CryptoJS.pad.Pkcs7
     })
-   return str.toString(CryptoJS.enc.Utf8)
-    
+   return str.toString(CryptoJS.enc.Utf8)    
 }
 //搜索
 const search = (key) => {
@@ -43,11 +39,9 @@ const search = (key) => {
         cover: book.COVERURL,
         detail: JSON.stringify({
             url: "http://a.lc1001.com/app/info/bookindex",
-            data: `consumerKey=LCREAD_ANDROID&timestamp=${new Date().getTime()}&bID=${book.KEYID}&lmID=1000&uID=0`
+            bid: book.KEYID
         })
     }))
-
-
     return JSON.stringify(books)
 }
 
@@ -55,8 +49,9 @@ const search = (key) => {
 //详情
 const detail = (url) => {
     let args = JSON.parse(url)
-    let sign = getsign(args.url, "GET", args.data)
-    let data = args.data + "&sign=" + sign
+    let str =  `consumerKey=LCREAD_ANDROID&timestamp=${new Date().getTime()}&bID=${args.bid}&lmID=1000&uID=0`
+    let sign = getsign(args.url, "GET", str)
+    let data = str + "&sign=" + sign
     let response = POST(args.url, {
         data
     })
@@ -192,7 +187,7 @@ const rank = (title, category, page) => {
             cover: `http://pic.lc1001.com/pic/cover/${item.BOOKID.substring(0, item.BOOKID.length - 3)}/${item.BOOKID}_120.gif`,
             detail: JSON.stringify({
                 url: "http://a.lc1001.com/app/info/bookindex",
-                data: `consumerKey=LCREAD_ANDROID&timestamp=${new Date().getTime()}&bID=${item.BOOKID}&lmID=1000&uID=0`
+                bid: item.BOOKID
             })
         })
     })
@@ -214,7 +209,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
     name: "连城读书",
     url: "lc1001.com",
-    version: 102,
+    version: 103,
     authorization: JSON.stringify(['account', 'password']),
     cookies: [".lc1001.com", ".lcread.com"],
     ranks: ranks

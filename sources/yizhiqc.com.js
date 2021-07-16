@@ -11,20 +11,11 @@ const search = (key) => {
     let $ = JSON.parse(response)
     console.log($.data.list)
     $.data.list.forEach((child) => {
-        let det = {
-            summary: child.bookIntroduction,
-            status: child.bookCheckStatus == 1 ? '连载' : '完结',
-            category: child.classificationName,
-            words: child.bookWorldCount,
-            update: formatDate(child.lastUpdateTime),
-            lastChapter: child.lastUpdateChapterName,
-            catalog: `${baseUrl}/api/books-volumeChapterList/${child.bookId}`
-        }
         array.push({
             name: child.bookName,
             author: child.writerName,
             cover: child.bookImage,
-            detail: JSON.stringify(det)
+            detail: child.bookId
         })
     })
     return JSON.stringify(array)
@@ -45,7 +36,22 @@ function formatDate(timeStamp) {
 }
 //详情
 const detail = (url) => {
-    return url
+    let data = `bookid=${url}`
+    let response = POST(`${baseUrl}/api/book-bookInfo`, {
+        data,
+        headers
+    })
+    let bookInfo = JSON.parse(response).data.bookListInfo
+    let book = {
+            summary: bookInfo.bookIntroduction,
+            status: bookInfo.bookCheckStatus == 1 ? '连载' : '完结',
+            category: bookInfo.classificationName,
+            words: bookInfo.bookWorldCount,
+            update: formatDate(bookInfo.lastUpdateTime),
+            lastChapter: bookInfo.lastUpdateChapterName,
+            catalog: `${baseUrl}/api/books-volumeChapterList/${bookInfo.bookId}`
+        }
+    return JSON.stringify(book)
 }
 
 //目录
@@ -85,20 +91,11 @@ const rank = (title, category, page) => {
     let books = []
     console.log(category)
     $.data[category].list.forEach((child) => {
-        let det = {
-            summary: child.bookIntroduction,
-            status: child.bookCheckStatus == 1 ? '连载' : '完结',
-            category: child.classificationName,
-            words: child.bookWorldCount,
-            update: formatDate(child.lastUpdateTime),
-            lastChapter: child.lastUpdateChapterName,
-            catalog: `${baseUrl}/api/books-volumeChapterList/${child.bookId}`
-        }
         books.push({
             name: child.bookName,
             author: child.writerName,
             cover: child.bookImage,
-            detail: JSON.stringify(det)
+            detail: child.bookId
         })
 
     })
@@ -124,6 +121,6 @@ for (var i = 0; i < ranks.length; i++) {
 var bookSource = JSON.stringify({
     name: "一纸倾城",
     url: "yizhiqc.com",
-    version: 101,
+    version: 102,
     ranks: ranks
 })

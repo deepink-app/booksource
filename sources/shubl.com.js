@@ -1,8 +1,4 @@
-
-
 //抄自酷安@渊呀妹子大佬的阅读源
-
-
 require("crypto-js")
 let login_token=localStorage.getItem("token")?localStorage.getItem("token"):"2545b2d4237eefbc78a11ed3a95cae61"
 let account =localStorage.getItem("account")?localStorage.getItem("account"):"萌友121078118744"
@@ -39,7 +35,7 @@ const search = (key) => {
       cover: child.cover,
       detail: JSON.stringify({
       url: "https://app.shubl.com/book/get_info_by_id",
-      data: "secret_content="+encodeURIComponent(encode(JSON.stringify({"app_signature_md5":"f73576612783f8ed8b68cdf73a56be94","app_version":"2.1.6","channel":"default","book_id":child.book_id,"login_token":login_token,account:account})))
+      bid: child.book_id
       })
     })
   })
@@ -49,9 +45,10 @@ const search = (key) => {
 //详情
 const detail = (url) => {
   let args = JSON.parse(url)
-  let response = POST(args.url,{data:args.data})  
+  let data =  "secret_content="+encodeURIComponent(encode(JSON.stringify({"app_signature_md5":"f73576612783f8ed8b68cdf73a56be94","app_version":"2.1.6","channel":"default","book_id":args.bid,"login_token":login_token,account:account})))
+  let response = POST(args.url,{data})  
   let $ = JSON.parse(decode(response)).data.book_info
-   let book = {
+  let book = {
     summary: $.description,
     status: $.up_status == 1 ? '完结' : '连载',
     category: $.tag.replace(/,/g," "),
@@ -178,8 +175,8 @@ const rank = (title, category, page) => {
       cover: child.cover,
       detail: JSON.stringify({
         url: "https://app.shubl.com/book/get_info_by_id",
-        data: "secret_content="+encodeURIComponent(encode(JSON.stringify({"app_signature_md5":"f73576612783f8ed8b68cdf73a56be94","app_version":"2.1.6","channel":"default","book_id":child.book_id,"login_token":login_token,account:account})))
-        })
+        bid: child.book_id
+       })
       })
     })
   return JSON.stringify({
@@ -257,7 +254,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: "书耽",
   url: "shubl.com",
-  version: 100,
+  version: 101,
   authorization: JSON.stringify(['account','password']),
   cookies: ["shubl.com"],
   ranks: ranks
