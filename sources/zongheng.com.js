@@ -72,7 +72,7 @@ const catalog = (url) => {
 const chapter = (url) => {
     let $ = HTML.parse(GET(url))
     //未购买返回403和自动订阅地址
-    if ($('#reader-order-box')) throw JSON.stringify({
+    if ($('#reader-order-box')[0]) throw JSON.stringify({
         code: 403,
         message: url
     })
@@ -209,7 +209,7 @@ const ranks = [
 var bookSource = JSON.stringify({
     name: "纵横中文网",
     url: "zongheng.com",
-    version: 102,
+    version: 103,
     authorization: "https://passport.zongheng.com/",
     cookies: ["zongheng.com"],
     ranks: ranks
