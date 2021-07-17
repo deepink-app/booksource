@@ -52,7 +52,7 @@ const CGET = function (url, data, full) {
   url = url.slice(0, -1)
   let res = GET(url, {
     headers: [
-      'user-agent: Android com.kuangxiangciweimao.novel 2.8.008, Google, Pixel5',
+      'User-Agent: Android com.kuangxiangciweimao.novel 2.8.008, Google, Pixel5',
     ],
   })
   res = JSON.parse(decrypt(res))
@@ -455,7 +455,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 103,
+  version: 104,
   authorization: JSON.stringify(['account', 'password']),
   cookies: ['hbooker.com'],
   ranks: ranks,
