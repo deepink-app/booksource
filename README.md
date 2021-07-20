@@ -27,3 +27,4 @@
 - [x] 飞卢 [faloo.com](https://faloo.com)
 - [x] 番茄小说 [fanqienovel.com](https://fanqienovel.com)
 - [x] 一纸倾城 [yizhiqc.com](https://www.yizhiqc.com)
+- [x] 鲸云轻小说 [m.jyacg.com](https://m.jyacg.com)
