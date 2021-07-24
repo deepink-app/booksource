@@ -56,8 +56,7 @@ const catalog = (url) => {
   $.data.chapters.forEach((chapter) => {
     array.push({
       name: chapter.chapterName,
-      url: `http://m.tadu.com/book/${chapter.bookId}/${chapter.chapterId}`,
-      vip: chapter.isFree != null
+      url: `http://media3.tadu.com/${chapter.chapterUrl.replace(".tdz",".txt")}`
     })
   })
   return JSON.stringify(array)
@@ -70,9 +69,7 @@ const catalog = (url) => {
  */
 const chapter = (url) => {
   let response = GET(url)
-  let $ = HTML.parse(response)
-  let content = GET(`${$('input#bookPartResourceUrl').attr('value')}?callback=callback`)
-  return content.replace('callback({content:\'', '').replace('})', '')
+  return response.trim()
 }
 
 /**
@@ -212,7 +209,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "塔读文学",
   url: "tadu.com",
-  version: 104,
+  version: 105,
   authorization: "https://m.tadu.com/auth/user/personalCenter",
   cookies: ["tadu.com", "m.tadu.com"],
   ranks: ranks
