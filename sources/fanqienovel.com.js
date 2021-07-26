@@ -40,7 +40,7 @@ const catalog = (url) => {
   $.data.chapterListWithVolume[0].forEach(chapter => {
       array.push({
         name: chapter.title,
-        url: `${baseUrl}/api/reader/full?itemId=${chapter.itemId}`
+        url: `https://novel.snssdk.com/api/novel/book/reader/full/v1/?group_id=${chapter.itemId}&item_id=${chapter.itemId}`
       })
     })
   return JSON.stringify(array)
@@ -49,7 +49,7 @@ const catalog = (url) => {
 //章节
 const chapter = (url) => {
     let $ = JSON.parse(GET(url))
-  return $.data.chapterData.content
+  return $.data.content.replace(/<div.+<\/div>/,"")
 }
 
 //排行榜
@@ -89,6 +89,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 102,
+  version: 103,
   ranks: ranks
 })
