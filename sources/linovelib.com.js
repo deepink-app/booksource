@@ -1,6 +1,6 @@
 const baseUrl = "https://w.linovelib.com"
 
-const header_mobile = [ "User-Agent: Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Mobile Safari/537.36"]
+const header_mobile = [ "User-Agent: Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Mobile Safari/537.36"]
 
 /**
  * 搜索
@@ -8,7 +8,7 @@ const header_mobile = [ "User-Agent: Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Bu
  * @returns {[{name, author, cover, detail}]}
  */
 const search = (key) => {
-  let response = GET(`${baseUrl}/s/?searchkey=${encodeURI(key)}&searchtype=all`, {headers: header_mobile})
+  let response = GET(`${baseUrl}/sa/?searchkey=${encodeURI(key)}&searchtype=all`, {headers: header_mobile})
   let array = []
   let $ = HTML.parse(response)
 
@@ -86,15 +86,18 @@ const catalog = (url) => {
  */
 const chapter = (url) => {
   let content = ""
+  let i = 2
+  let first_url = url
   while (true) {
-    let response = GET(url.replace('w.', 'www.'))
+    let response = GET(url, {headers: header_mobile})
     let $ = HTML.parse(response)
-    content += $('#mlfy_main_text')
-    let next_btn = $('#readbg > p > a:contains(下一页)')
+    content += $('#acontent')
+    let next_btn = $('#footlink > a:contains(下一页)')
     if (next_btn.length == 0) {
       break
     }
-    url = baseUrl + next_btn.attr('href')
+    url = first_url.replace('.html', `_${i}.html`);
+    i += 1
   }
   return content
 }
@@ -230,6 +233,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "哔哩轻小说",
   url: "linovelib.com",
-  version: 105,
+  version: 107,
   ranks: ranks
 })

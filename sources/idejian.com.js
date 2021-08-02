@@ -1,4 +1,4 @@
-const baseUrl = "https://www.idejian.com"
+const baseUrl = "https://dj.palmestore.com"
 
 /**
  * 搜索
@@ -6,19 +6,17 @@ const baseUrl = "https://www.idejian.com"
  * @returns {[{name, author, cover, detail}]}
  */
 const search = (key) => {
-  let response = GET(`${baseUrl}/search?keyword=${encodeURI(key)}`)
+  let response = GET(`${baseUrl}/zybk/api/search/freeapp/book?word=${encodeURI(key)}&type=book,listen&pageSize=10&currentPage=1&pluginName=pluginweb_djsearch&p3=17180056`)
   let array = []
-  let $ = HTML.parse(response)
-    $('.main > div > ul > li').forEach((child) => {
-      let $ = HTML.parse(child)
+  let $ = JSON.parse(response)
+    $.body.book.datas.forEach((child) => {
       array.push({
-        name: $('.rank_bkname').text(),
-        author: $('.author').text(),
-        cover: $('.items_l > a > img').attr('src'),
-        detail: `${baseUrl}${$('.rank_bkname > a').attr('href')}`,
+        name: child.data_info.bookName.replace("《","").replace("》",""),
+        author: child.data_info.bookAuthor,
+        cover: child.data_info.picUrl,
+        detail: `${baseUrl}/zybk/api/detail/index?bid=${child.data_info.bookId}&p3=17180056`,
       })
     })
-  
   return JSON.stringify(array)
 }
 
@@ -29,15 +27,15 @@ const search = (key) => {
  */
 const detail = (url) => {
   let response = GET(url)
-  let $ = HTML.parse(response)
+  let $ = JSON.parse(response).body
   let book = {
-    summary: $('.brief_con').text(),
-    status: $('span.light_box').text(),
-    category: $('div.detail_bkgrade').text(),
-    words: $('.bk_fontinfo > span:nth-child(1)').text().replace("字",""),
-    update: $('.border_box.bk_detail > div > span').text(),
-    lastChapter: $('.bk_detail > div > div > a').text(),
-    catalog: url
+    summary: $.bookInfo.desc,
+    status: $.bookInfo.completeState == "N" ? '连载':'完结',
+    category: $.bookInfo.categorys.map((item)=>{ return item.name}).join(" "),
+    words: $.bookInfo.wordCount.replace("字",""),
+    update: $.bookInfo.lastChapterTime,
+    lastChapter: $.chaperInfo.chapterName,
+    catalog: $.bookInfo.bookId
   }
   return JSON.stringify(book)
 }
@@ -48,16 +46,19 @@ const detail = (url) => {
  * @returns {[{name, url, vip}]}
  */
 const catalog = (url) => {
-  let response = GET(url)
-  let $ = HTML.parse(response)
   let array = []
-    $('.catelog > ul > li').forEach((chapter) => {
-      let $ = HTML.parse(chapter)
+  endpage = 999
+  for (i=1;i<=endpage;i++){
+    let response = GET(`${baseUrl}/zybk/api/detail/chapter?bid=${url}&page=${i}&p3=17180056`)
+    let $ = JSON.parse(response)
+    endpage = $.body.page.totalPage
+    $.body.list.forEach((chapter) => {
       array.push({
-        name: $('a').text(),
-        url: `${baseUrl}${$('a').attr('href')}`
+      name: chapter.chapterName,
+      url: `https://m.idejian.com/book/${url}/${chapter.id}.html`
       })
-    })
+   })
+}
   return JSON.stringify(array)
 }
 
@@ -67,9 +68,9 @@ const catalog = (url) => {
  * @returns {string}
  */
 const chapter = (url) => {
-  let response = GET(url)
+  let response = GET(url,{headers:["user-agent:Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36"]})
   let $ = HTML.parse(response)
-  return $('.read_content')
+  return $('.read_c')
 }
 
 /**
@@ -85,10 +86,11 @@ const rank = (title, category, page) => {
       name: $('.bkitem_name').text(),
       author: $('.bkitem_author').text(),
       cover: $('.v_item > a > img').attr('src'),
-      detail: `${baseUrl}${$('.bkitem_name > a').attr('href')}`,
+      detail: `${baseUrl}/zybk/api/detail/index?bid=${$('.bkitem_name > a').attr('href').replace("/book/","").replace("/","")}&p3=17180056`,
     })
   })
   return JSON.stringify({
+    end: $('.search_nonefont').text() == "没有结果",
     books: books
   })
 }
@@ -147,6 +149,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "得间小说",
   url: "idejian.com",
-  version: 100,
+  version: 101,
   ranks: ranks
 })

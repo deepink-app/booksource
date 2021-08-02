@@ -1,75 +1,83 @@
-const baseUrl = "https://wap.faloo.com"
+const baseUrl = "https://client4xcx.faloo.com"
 
-/**
- * 搜索
- * @params {string} key
- * @returns {[{name, author, cover, detail}]}
- */
+//搜索
 const search = (key) => {
-  let response = GET(`${baseUrl}/category/0/1.html?k=${ENCODE(key,"gb2312")}`)
+  let response = POST(`${baseUrl}/V4.1/xml4android_listPage.aspx`,{data:`k=${encodeURI(key)}`})
   let array = []
-  let $ = HTML.parse(response)
-    $('.book_vessel').forEach((child) => {
-      let $ = HTML.parse(child)
-      array.push({
-        name: $('.show_title2 > a').text(),
-        author: $('.show_author > a').text(),
-        cover: $('.book_vessel_left > a > img').attr('src'),
-        detail: `http:${$('.show_title2 > a').attr('href')}`,
-      })
+  let $ = JSON.parse(response)
+  $.data.forEach((child) => {
+    array.push({
+      name: child.name,
+      author: child.author,
+      cover: child.cover,
+      detail: child.id,
     })
-  
+  })
   return JSON.stringify(array)
 }
 
-/**
- * 详情
- * @params {string} url
- * @returns {[{summary, status, category, words, update, lastChapter, catalog}]}
- */
+//详情
 const detail = (url) => {
-  let response = GET(url)
-  let $ = HTML.parse(response)
+  let response = POST(`https://client4xcx.faloo.com/V4.1/Xml4Android_relevantPage.aspx`,{data:`id=${url}`})
+  let $ = JSON.parse(response)
   let book = {
-    summary: $('#novel_intro').text().replace(/飞卢小说网.+签约小说：.+；本小说及人物纯属虚构，如有雷同，纯属巧合，切勿模仿。/,""),
-    status: $('i.textHide').text(),
-    category: $('li > a.textHide:nth-child(4)').text(),
-    words: $('li.textHide:nth-child(3)').text().replace(/字.+粉/,""),
-    update: $('li.textHide:nth-child(5)').text().replace("更新时间：",""),
-    lastChapter: $('a.newNode').text(),
-    catalog: `http:${$('div.btnLayout > a.textHide:nth-child(2)').attr('href')}`
+    summary: $.data.intro,
+    status: $.data.finish == 0 ? '连载' : '完结',
+    category: $.data.sc_name,
+    words: $.data.count,
+    update: $.data.update,
+    lastChapter: $.data.nn_name,
+    catalog: $.data.id
   }
   return JSON.stringify(book)
 }
 
-/**
- * 目录
- * @params {string} url
- * @returns {[{name, url, vip}]}
- */
+//目录
 const catalog = (url) => {
-  let response = GET(url)
-  let $ = HTML.parse(response)
+  let response = POST(`https://client4xcx.faloo.com/V4.1/Xml4android_novel_listPage.aspx`,{data:`id=${url}`})
+  let $ = JSON.parse(response)
   let array = []
-    $('[onclick=BookEx.listLink(this);]').forEach((chapter) => {
-      let $ = HTML.parse(chapter)
+  $.data.vols.forEach((booklet) => {
+    array.push({ name: booklet.name })
+    booklet.chapters.forEach((chapter) => {
       array.push({
-        name: $('a').text().replace("V",""),
-        url: `http:${$('a').attr('href')}`,
-        vip: $('.v_0').text() == "V"
+        name: chapter.name,
+        url: `id=${url}&n=${chapter.id}`,
+        vip: chapter.vip == 1
       })
+    })
     })
   return JSON.stringify(array)
 }
 
+function image_do3(num, o, id, n, en, t, k, u, time, fontsize, fontcolor, chaptertype, font_family_type, backgroundtype) {
+    var type = 1;
+    var domain = "https://read.faloo.com/";  
+    var backgroundtype = 1;
+    var path = "Page4VipImage.aspx?num=" + num + "&o=" + o + "&id=" + id + "&n=" + n + "&ct=" + chaptertype + "&en=" + en + "&t=" + t + "&font_size=" + fontsize + "&font_color=" + fontcolor + "&backgroundtype=" + backgroundtype + "&FontFamilyType=" + font_family_type + "&u=" + u + "&time=" + time + "&k=" + k;
+    var url = domain + path + "&ran=" + new Date().getTime();
+    url = encodeURI(url);
+    return url
+}
+
 //章节
 const chapter = (url) => {
-    let response = GET(url)
-    let $ = HTML.parse(response)
+    let $ = JSON.parse(POST(`https://client4xcx.faloo.com/V4.1/Xml4Android_ContentPage.aspx`,{data:`${url}`}))
     //未购买返回403和自动订阅地址
-    if ($('div.nodeContent').text() == "您还没有登录 请登录后在继续阅读本部小说！ 立即登录 注册账号"||$('div.nodeContent').text() == "您的账户余额不足 请充值！ 立即充值"||$('div.nodeContent').text() == "非VIP会员,不能阅读作者最新更新的VIP章节。"||$('.tips1').text() == "您还没有订阅本章节（VIP章节）") return "此为付费章节，请用飞卢官网或者飞卢APP阅读"
-  return $('div.nodeContent')
+    let res = GET(`https://wap.faloo.com/${url.replace("id=","").replace("&n=","_")}.html`)
+    let $1 = HTML.parse(res)
+    if ($1('div.nodeContent').text() == "您还没有登录 请登录后在继续阅读本部小说！ 立即登录 注册账号"||$1('div.nodeContent').text() == "您还没有订阅本章节（VIP章节） 体验懒人阅读模式 我要体验 解读：随看随订，省去反复订阅的烦恼，感受极佳阅读体验。 设置自动订阅最新章节(免费) 马上设置 解读：系统将第一时间为您订阅最新发布的章节 请订阅 订阅本章"||$1('div.nodeContent').text() == "非VIP会员,不能阅读作者最新更新的VIP章节。"||$1('div.nodeContent').text() == "您的账户余额不足 请充值！ 立即充值") throw JSON.stringify({
+        code: 403,
+        message: `https://wap.faloo.com/${url.replace("id=","").replace("&n=","_")}.html`
+    })
+    if($.code == 200) return $.data.content.trim()
+    if($.code == 317) { 
+  let code = res.match(/image_do3\(.+?\)/)[0]
+  let imageurl = eval(code)
+  return `<img src="${imageurl}" />`
+}        
 }
+
 
 //个人中心
 const profile = () => {
@@ -122,7 +130,7 @@ const bookshelf = (page) => {
         name: $('.bookName').text(),
         author: $('.spanAuthor').text(),
         cover: $('.collectBookPic > a > img').attr('src'),
-        detail: $('.bookName').attr('href').replace("b.faloo.com/f/","wap.faloo.com/"),
+        detail: $('.bookName').attr('href').replace("http://b.faloo.com/f/","").replace('.html',""),
       })
     })
   return JSON.stringify({
@@ -133,7 +141,7 @@ const bookshelf = (page) => {
 var bookSource = JSON.stringify({
   name: "飞卢",
   url: "faloo.com",
-  version: 102,  
+  version: 104,  
   authorization: `https://u.faloo.com/regist/Login.aspx`,
   cookies: ["faloo.com"]
 })

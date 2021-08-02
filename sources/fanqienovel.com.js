@@ -18,7 +18,7 @@ const search = (key) => {
 
 //详情
 const detail = (url) => {
-  let response = GET(url,{headers:["User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"]})
+  let response = GET(url)
   let $ = HTML.parse(response)
   let book = {
     summary: $('.page-abstract-content').text(),
@@ -40,7 +40,7 @@ const catalog = (url) => {
   $.data.chapterListWithVolume[0].forEach(chapter => {
       array.push({
         name: chapter.title,
-        url: `${baseUrl}/api/reader/full?itemId=${chapter.itemId}`
+        url: `https://novel.snssdk.com/api/novel/book/reader/full/v1/?group_id=${chapter.itemId}&item_id=${chapter.itemId}`
       })
     })
   return JSON.stringify(array)
@@ -49,11 +49,46 @@ const catalog = (url) => {
 //章节
 const chapter = (url) => {
     let $ = JSON.parse(GET(url))
-  return $.data.chapterData.content
+  return $.data.content.replace(/<div.+<\/div>/,"")
 }
+
+//排行榜
+const rank = (title, category, page) => {
+  let response = GET(`https://fanqienovel.com/api/author/library/book_list/v0/?page_count=18&page_index=${page}&gender=${title}&category_id=-1&creation_status=-1&word_count=-1&sort=0`)
+  let $ = JSON.parse(response)
+  let books = []
+  $.data.book_list.forEach((child) => {
+    books.push({
+      name: child.book_name,
+      author: child.author,
+      cover: `https://p3-tt.byteimg.com/img/${child.thumb_uri}~240x312.jpg`,
+      detail: `${baseUrl}/page/${child.book_id}`,
+    })
+  })
+  return JSON.stringify({
+    end:  $.data === null,
+    books: books
+  })
+}
+
+const ranks = [
+    {
+        title: {
+            key: '1',
+            value: '男生'
+        }
+    },
+    {
+        title: {
+            key: '0',
+            value: '女生'
+        }
+    }
+]
 
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 101
+  version: 103,
+  ranks: ranks
 })
