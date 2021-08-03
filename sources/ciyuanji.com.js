@@ -59,7 +59,7 @@ const chapter = (url) => {
     //未购买返回403和自动订阅地址
     if ($('.title').text() == "VIP章节 需订阅后才能阅读") throw JSON.stringify({
         code: 403,
-        message: url
+        message: `${url}?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36`
     })
   return $('.content-chapter')
 }
@@ -81,17 +81,17 @@ const profile = () => {
             {
                 name: '账号',
                 value: $.cmUser.nickName,
-                url: 'https://www.ciyuanji.com/personalCenter/info'
+                url: 'https://www.ciyuanji.com/personalCenter/info?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
             },
             {
                 name: '书币',
                 value: wenmoux.currencyBalance,
-                url: 'https://www.ciyuanji.com/recharge',
+                url: 'https://www.ciyuanji.com/recharge?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
             },
             {
                 name: '代币',
                 value: wenmoux.couponBalance,
-                url: 'https://www.ciyuanji.com/recharge',
+                url: 'https://www.ciyuanji.com/recharge?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
             }
         ],
     extra: [
@@ -206,7 +206,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "次元姬小说",
   url: "www.ciyuanji.com",
-  version: 100,
+  version: 101,
   authorization: `https://www.ciyuanji.com/login?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36`,
   cookies: [".ciyuanji.com"],
   ranks: ranks
