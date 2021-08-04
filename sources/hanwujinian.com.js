@@ -3,19 +3,19 @@ let token = localStorage.getItem('token') ? localStorage.getItem('token') : " "
 let uid = localStorage.getItem('uid') ? localStorage.getItem('uid') : "0"
 const search = (key) => {
     console.log(token)
-    let response = GET(`https://www.hanwujinian.com/riku/minibook/search.php?uid=0&network=wifi&act=normal&searchs=${encodeURI(key)}&offset=0&limit=20`)
+    let response = GET(`https://api.hanwujinian.net/api.php/api/search_app/searchResult?limit=20&offset=0&search=${encodeURI(key)}&type=0&uid=0`)
     let $ = JSON.parse(response)
-    let books = $.data.map(book => ({
-        name: book.articlename,
+    let books = $.data.book.map(book => ({
+        name: book.bookname,
         author: book.author,
-        cover: book.image,
-        detail: `https://www.hanwujinian.com/riku/minibook/articleinfo.php?network=wifi&bookid=${book.aid}&uid=0`
+        cover: book.pic,
+        detail: book.bookid
     }))
     return JSON.stringify(books)
 }
 //详情
 const detail = (url) => {
-    let response = GET(url)
+    let response = GET(`https://www.hanwujinian.com/riku/minibook/articleinfo.php?network=wifi&bookid=${url}&uid=0`)
     let $ = JSON.parse(response)
     let tags=""
     if(Array.isArray($.label)){
@@ -46,11 +46,13 @@ const catalog = (url) => {
     let $ = JSON.parse(response)
     let array = []
     $.data.chapterlist.forEach((book) => {
-        array.push({
+        if(book.chapterType ==1) array.push({name: book.chapterName  })
+        else array.push({
             name: book.chapterName,
             url: `https://api.hanwujinian.net/api.php/api/book_app/read?aid=${book.bookId}&cid=${book.chapterId}&uid=${uid}`,
             vip: book.isVip
         })
+        
     })
     return JSON.stringify(array)
 }
@@ -65,9 +67,6 @@ const chapter = (url) => {
         code: 403,
         message: `https://wap.hanwujinian.com/read/${url.query("aid")}/${url.query("cid")}`
     })
-
-
-
     return $.data.content
 }
 
@@ -168,7 +167,7 @@ const rank = (title, category, page) => {
             name: item.articlename,
             author: item.author,
             cover: item.image,
-            detail: `https://www.hanwujinian.com/riku/minibook/articleinfo.php?network=wifi&bookid=${item.aid}&uid=0`
+            detail: item.aid
         })
     })
     return JSON.stringify({
@@ -192,7 +191,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
     name: "寒武纪年",
     url: "hanwujinian.com",
-    version: 102,
+    version: 103,
     authorization: JSON.stringify(['account', 'password']),
     cookies: [".hanwujinian.com"],
     ranks: ranks
