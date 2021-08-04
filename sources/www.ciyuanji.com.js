@@ -206,8 +206,8 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "次元姬小说",
   url: "www.ciyuanji.com",
-  version: 101,
-  authorization: `https://www.ciyuanji.com/login?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36`,
+  version: 102,
+  authorization: "https://www.ciyuanji.com/login?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
   cookies: [".ciyuanji.com"],
   ranks: ranks
 })

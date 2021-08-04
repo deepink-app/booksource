@@ -148,7 +148,7 @@ const chapter = (cid) => {
   //未购买返回 403 和自动订阅地址
   if (cres.chapter_info.auth_access == 0) throw JSON.stringify({
     code: 403,
-    message: `cres`
+    message: `https://wap.ciweimao.com/chapter/${cid}`
   })
   return txt
 }
@@ -455,7 +455,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 104,
+  version: 105,
   authorization: JSON.stringify(['account', 'password']),
   cookies: ['hbooker.com'],
   ranks: ranks,
