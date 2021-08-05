@@ -1,3 +1,4 @@
+  require("crypto-js")
   const baseUrl = "https://m.jjwxc.net"
   const baseurlapp = "http://app.jjwxc.net/androidapi"
   //搜索
@@ -40,11 +41,15 @@
       let $ = JSON.parse(response)
       let array = []
       $.chapterlist.forEach((chapter) => {
-          array.push({
+          if(chapter.chaptertype ==1) array.push({
+          name : chapter.chaptername
+          })
+           else array.push({
               name: chapter.chaptername + "  " + chapter.chapterintro,
-              url: chapter.isvip == 0 ? `https://app-cdn.jjwxc.net/androidapi/chapterContent?novelId=${chapter.novelid}&chapterId=${chapter.chapterid}&token=${COOKIE("sid")}` : `https://m.jjwxc.net/vip/${chapter.novelid}/${chapter.chapterid}?ctime=`,
+              url: chapter.isvip == 0 ? `https://app-cdn.jjwxc.net/androidapi/chapterContent?novelId=${chapter.novelid}&chapterId=${chapter.chapterid}` : `https://app.jjwxc.org/androidapi/chapterContent?novelId=${chapter.novelid}&versionCode=206&token=${COOKIE("sid")}&chapterId=${chapter.chapterid}`,
               vip: chapter.isvip == 2
           })
+          
       })
       return JSON.stringify(array)
   }
@@ -53,16 +58,26 @@
   const chapter = (url) => {
 
       let response = GET(url)
-      if (url.match(/app-cdn/)) return JSON.parse(response).content.replace(/(\&lt;br\&gt;)+/g, "\n")
-      let $ = HTML.parse(response)
-      //VIP章节      
-      //未购买返回403和自动订阅地址
-      if ((/购买VIP文章/).test(response)) throw JSON.stringify({
+      let $ =  JSON.parse(response)
+      if (!url.match(/token/)) content =  $.content
+      else if ($.porint) throw JSON.stringify({
           code: 403,
-          message: url
+          message: `https://m.jjwxc.net/vip/${url.query("novelId")}/${url.query("chapterId")}?ctime=`
       })
-      return  $('ul > li:has(br)')
+      else content = decode($.content)
+      let say = $.sayBody ?`\n\n作者有话说：${$.sayBody}` : ""
+      return content.trim().replace(/(\&lt;br\&gt;)+/g, "\n") +say
   }
+function decode(word) {
+    let key =CryptoJS.enc.Utf8.parse( "KK!%G3JdCHJxpAF3%Vg9pN");
+    let iv = CryptoJS.enc.Utf8.parse("1ae2c94b");    
+    str = CryptoJS.DES.decrypt(word, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    })
+   return str.toString(CryptoJS.enc.Utf8)    
+}
 
   //个人中心
   const profile = () => {
@@ -143,7 +158,7 @@ const ranks=[{"title":{"key":"androidapi/newDayList","value":"新书"}},{"title"
   var bookSource = JSON.stringify({
       name: "晋江文学城",
       url: "m.jjwxc.net",
-      version: 105,
+      version: 106,
       authorization: "https://m.jjwxc.net/my/login?login_mode=jjwxc",
       cookies: [".jjwxc.net"],
       ranks: ranks
