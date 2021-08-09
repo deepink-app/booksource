@@ -455,7 +455,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 105,
+  version: 106,
   authorization: JSON.stringify(['account', 'password']),
   cookies: ['hbooker.com'],
   ranks: ranks,
