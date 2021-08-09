@@ -46,7 +46,7 @@ const catalog = (url) => {
     booklet.chapterList.forEach((chapter) => {
       array.push({
         name: chapter.title,
-        url: `${baseUrl}/pas/mpapi/Chaps/${chapter.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi&autoOrder=false`,
+        url: `${baseUrl}/pas/mpapi/Chaps/${chapter.chapId}?expand=content,needFireMoney,originNeedFireMoney,tsukkomi&autoOrder=true`,
         vip: chapter.isVip == true
       })
     })
@@ -64,7 +64,7 @@ const chapter = (url) => {
         code: 403,
         message: `https://m.sfacg.com/c/${$.data.chapId}/`
     })
-  return $.data.expand.content.replace(/\[img.*?\]/g, '<img src="').replace(/\[.*img\]/g, '"/>')
+  return $.data.expand.content.trim().replace(/\[img.*?\]/g, '<img src="').replace(/\[.*img\]/g, '"/>')
 }
 
 /**
@@ -116,13 +116,21 @@ const bookshelf = (page) => {
   let response = GET(`${baseUrl}/pas/mpapi/user/Pockets?expand=novels`,{headers:
   ["content-type:application/json","sf-minip-info:minip_novel/1.0.70(android;10)/wxmp"]
   })
-  let $ = JSON.parse(response).data[2]
-  let books = $.expand.novels.map(book => ({
+  let res = JSON.parse(response).data
+  var result = res.filter(function(item) {
+	return item.name != "漫画" && item.name != "对话小说"
+});
+  let books = []
+  result.forEach((bk) => {
+   bk.expand.novels.forEach((book) => {
+    books.push({
     name: book.novelName,
     author: book.authorName,
     cover: book.novelCover,
     detail: `${baseUrl}/pas/mpapi/novels/${book.novelId}?expand=latestchapter,chapterCount,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney`
-  }))
+      })
+    })
+  })
   return JSON.stringify({books})
 }
 
@@ -211,7 +219,7 @@ if(!args) return "账号或者密码不能为空"
 var bookSource = JSON.stringify({
   name: "SF轻小说",
   url: "sfacg.com",
-  version: 108,
+  version: 109,
   authorization: JSON.stringify(['account','password']),
   cookies: ["sfacg.com"],
   ranks: ranks
