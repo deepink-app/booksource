@@ -117,8 +117,9 @@ const catalog = (url) => {
       division_id: d.division_id,
     })
     let clist = cres.chapter_list
+    //过滤未审核章节
     var result = clist.filter(function(item) {
-	return item.chapter_title != "该章节未审核通过" && item.is_valid != 0
+	return item.is_valid == 1
 });
     result.forEach((c) => {
       arr.push({
