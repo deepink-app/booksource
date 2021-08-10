@@ -117,7 +117,10 @@ const catalog = (url) => {
       division_id: d.division_id,
     })
     let clist = cres.chapter_list
-    clist.forEach((c) => {
+    var result = clist.filter(function(item) {
+	return item.chapter_title != "该章节未审核通过" && item.is_valid != 0
+});
+    result.forEach((c) => {
       arr.push({
         name: c.chapter_title,
         url: c.chapter_id,
@@ -455,7 +458,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 106,
+  version: 107,
   authorization: JSON.stringify(['account', 'password']),
   cookies: ['hbooker.com'],
   ranks: ranks,
