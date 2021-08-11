@@ -91,7 +91,7 @@ const detail = (url) => {
   let book = {
     summary: binfo.description,
     status: binfo.up_status == '1' ? '完结' : '连载',
-    category: binfo.tag_list.map((item)=>{ return item.tag_name}).join(" "),
+    category: binfo.tag.replace(/,/g," "),
     words: binfo.total_word_count,
     update: binfo.uptime,
     lastChapter: binfo.last_chapter_info.chapter_title,
@@ -459,7 +459,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 107,
+  version: 108,
   authorization: JSON.stringify(['account', 'password']),
   cookies: ['hbooker.com'],
   ranks: ranks,
