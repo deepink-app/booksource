@@ -2,32 +2,36 @@ const baseUrl = "https://android-api.xrzww.com"
 
 //搜索
 const search = (key) => {
-  let response = GET(`https://android-api.xrzww.com/api/search?keyword=${encodeURI(key)}&type=1`)
   let array = []
-  let $ = JSON.parse(response)
-  $.data.data.forEach((child) => {
-    array.push({
-      name: child.novel_name,
-      author: child.novel_author,
-      cover: `http://oss.xrzww.com${child.novel_cover}`,
-      detail: `${baseUrl}/api/detail?novel_id=${child.novel_id}`,
+  last_page = 1
+  for (i=1;i<=last_page;i++){
+    let response = GET(`${baseUrl}/api/searchAll?search_type=novel&search_value=${encodeURI(key)}&page=${i}&pageSize=20`)
+    let $ = JSON.parse(response).data
+    last_page = $.last_page
+    $.data.forEach((child) => {
+      array.push({
+        name: child.novel_name,
+        author: child.novel_author,
+        cover: `http://oss.xrzww.com${child.novel_cover}`,
+        detail: `${baseUrl}/api/detail?novel_id=${child.novel_id}`
+       })
     })
-  })
+  }
   return JSON.stringify(array)
 }
 
-//详情
+//详情  
 const detail = (url) => {
   let response = GET(url)
-  let $ = JSON.parse(response)
+  let $ = JSON.parse(response).data
   let book = {
-    summary: $.data.novel_info,
-    status: $.data.novel_process == 1 ? '连载' : '完结',
-    category: $.data.novel_tags.replace(/,/g," "),
-    words: $.data.novel_wordnumber,
-    update: $.data.novel_uptime,
-    lastChapter: $.data.novel_newcname,
-    catalog: `${baseUrl}/api/directoryList?nid=${$.data.novel_id}`
+    summary: $.novel_info,
+    status: $.novel_process == 1 ? '连载' : '完结',
+    category: $.novel_tags.replace(/,/g," "),
+    words: $.novel_wordnumber,
+    update: $.novel_uptime,
+    lastChapter: $.novel_newcname,
+    catalog: `${baseUrl}/api/novelDirectory?nid=${$.novel_id}&orderBy=asc`
   }
   return JSON.stringify(book)
 }
@@ -37,16 +41,16 @@ const catalog = (url) => {
   let response = GET(url)
   let $ = JSON.parse(response)
   let array = []
-  $.data.volume.forEach((volume,index) => {
-    array.push({name:volume.volume_name})
-  $.data.data.filter(chapter => chapter.chapter_vid === volume.volume_id).forEach(chapter => {
+  $.data.forEach((booklet) => {
+    array.push({ name: booklet.volume_name })
+    booklet.chapter_list.forEach((chapter) => {
       array.push({
         name: chapter.chapter_name,
         url: `${baseUrl}/api/readNew?chapter_id=${chapter.chapter_id}&nid=${chapter.chapter_nid}&chapter_order=${chapter.chapter_order}&vid=${chapter.chapter_vid}`,
         vip: chapter.chapter_ispay == 1
       })
     })
-    })
+  })
   return JSON.stringify(array)
 }
 
@@ -58,9 +62,9 @@ const chapter = (url) => {
     //未购买返回403和自动订阅地址
     if ($.data.chapter_ispay==1&&$.data.is_subscribe == 0) throw JSON.stringify({
         code: 403,
-        message: `https://h5.xrzww.com/#/pages/bookread/index?data={"nid":${$.data.chapter_nid},"vid":${$.data.chapter_vid},"chapter_id":${$.data.chapter_id},"chapter_order":${$.data.chapter_order},"is_cut":1}`
+        message: `https://h5.xrzww.com/#/pages/bookread/index?data={"nid":${$.data.chapter_nid},"vid":${$.data.chapter_vid},"chapter_id":${$.data.chapter_id},"chapter_order":${$.data.chapter_order}}`
     })
-  return $.data.content
+  return $.data.content.trim()
 }
 
 /**
@@ -180,7 +184,7 @@ const login = (args) => {
 var bookSource = JSON.stringify({
   name: "息壤中文网",
   url: "xrzww.com",
-  version: 103,
+  version: 104,
   authorization: JSON.stringify(['account','password']),
   cookies: ["xrzww.com"],
   ranks: ranks

@@ -6,15 +6,16 @@ const baseUrl = "https://dj.palmestore.com"
  * @returns {[{name, author, cover, detail}]}
  */
 const search = (key) => {
-  let response = GET(`${baseUrl}/zybk/api/search/freeapp/book?word=${encodeURI(key)}&type=book,listen&pageSize=10&currentPage=1&pluginName=pluginweb_djsearch&p3=17180056`)
+  let response = GET(`https://m.idejian.com/search/do?keyword=${encodeURI(key)}`,{headers:["user-agent:Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36"]})
   let array = []
-  let $ = JSON.parse(response)
-    $.body.book.datas.forEach((child) => {
+  let $ = HTML.parse(response)
+    $('ul.v_list > li').forEach((child) => {
+      let $ = HTML.parse(child)
       array.push({
-        name: child.data_info.bookName.replace("《","").replace("》",""),
-        author: child.data_info.bookAuthor,
-        cover: child.data_info.picUrl,
-        detail: `${baseUrl}/zybk/api/detail/index?bid=${child.data_info.bookId}&p3=17180056`,
+        name: $('.book_name').text(),
+        author: $('span.book_author:nth-child(1)').text(),
+        cover: $('img').attr('src'),
+        detail: `${baseUrl}/zybk/api/detail/index?bid=${$('a.list_item').attr('href').replace("/book/","")}&p3=17180056`,
       })
     })
   return JSON.stringify(array)
@@ -70,7 +71,7 @@ const catalog = (url) => {
 const chapter = (url) => {
   let response = GET(url,{headers:["user-agent:Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.101 Mobile Safari/537.36"]})
   let $ = HTML.parse(response)
-  return $('.read_c')
+  return $('.read_c').remove("td.biaoti,span.kaiti,td.copyright,span.lantinghei,span.dotStyle2,h1.text-title-1")
 }
 
 /**
@@ -149,6 +150,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "得间小说",
   url: "idejian.com",
-  version: 101,
+  version: 102,
   ranks: ranks
 })
