@@ -59,7 +59,7 @@ const chapter = (url) => {
     //未购买返回403和自动订阅地址
     if ($('.title').text() == "VIP章节 需订阅后才能阅读") throw JSON.stringify({
         code: 403,
-        message: `${url}?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36`
+        message: `${url}&ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36`
     })
   return $('.content-chapter')
 }
@@ -206,7 +206,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "次元姬小说",
   url: "www.ciyuanji.com",
-  version: 102,
+  version: 103,
   authorization: "https://www.ciyuanji.com/login?ua=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
   cookies: [".ciyuanji.com"],
   ranks: ranks
