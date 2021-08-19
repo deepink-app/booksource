@@ -118,5 +118,9 @@
   {
     "url": "kujiang.com",
     "version": 100
+  },
+  { 
+    "url": "hotread.com",
+    "version": 100
   }
 ]
