@@ -31,3 +31,4 @@
 - [x] 次元姬小说 [ciyuanji.com](https://www.ciyuanji.com)
 - [x] 独阅读 [duread8.com](https://www.duread8.com)
 - [x] 酷匠 [kujiang.com](https://kujiang.com)
+- [x] 火星小说 [hotread.com](https://www.hotread.com)
