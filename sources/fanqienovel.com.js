@@ -3,9 +3,12 @@ const baseUrl = "https://fanqienovel.com"
 //搜索
 const search = (key) => {
   let response = GET(`https://api5-normal-lq.fqnovel.com/reading/bookapi/search/page/v/?offset=0&query=${encodeURI(key)}&iid=466614321180296&aid=1967`)
+  let res = JSON.parse(response).data
+  var $ = res.filter(function(item) {
+ 	return item.book_data[0].book_type == 0
+});
   let array = []
-  let $ = JSON.parse(response)
-  $.data.forEach((child) => {
+  $.forEach((child) => {
     array.push({
       name: child.book_data[0].book_name,
       author: child.book_data[0].author,
