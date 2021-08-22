@@ -125,7 +125,7 @@ const rank = (title, category, page) => {
       name: $('h4').text(),
       author: $('p.author > a.name').text(),
       cover: `https:${$('.book-img-box > a >  img').attr('src')}`,
-      detail: `https:${$('.book-img-box > a').attr('href')}`,
+      detail: `https://m.qidian.com/book/${$('.book-img-box > a').attr('data-bid')}`,
     })
   })
   return JSON.stringify({
@@ -281,7 +281,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 107,
+  version: 108,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
