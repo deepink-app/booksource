@@ -32,3 +32,4 @@
 - [x] 独阅读 [duread8.com](https://www.duread8.com)
 - [x] 酷匠 [kujiang.com](https://kujiang.com)
 - [x] 火星小说 [hotread.com](https://www.hotread.com)
+- [x] 移动阅读[m.ndlib.cn](https://m.ndlib.cn)
