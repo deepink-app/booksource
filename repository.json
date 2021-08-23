@@ -122,5 +122,9 @@
   { 
     "url": "hotread.com",
     "version": 100
+  },
+  {
+    "url": "m.ndlib.cn",
+    "version": 100
   }
 ]
