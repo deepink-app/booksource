@@ -2,16 +2,15 @@ const baseUrl = "https://m.qidian.com"
 
 //搜索
 const search = (key) => {
-  let response = GET(`${baseUrl}/search?kw=${encodeURI(key)}`)
+  let response = GET(`https://druid.if.qidian.com/Atom.axd/Api/Search/GetBookStoreWithCategory?type=-1&needDirect=1&key=${encodeURI(key)}`)
   let array = []
-  let $ = HTML.parse(response)
-  $('li.book-li').forEach((child) => {
-    let $ = HTML.parse(child)
+  let $ = JSON.parse(response)
+  $.Data.forEach((child) => {
     array.push({
-      name: $('.book-title').text(),
-      author: $('span.book-author').text().match('(?<=作者)(.+)')[0].replace(/\(.+\)/, '').trim(),
-      cover: `https:${$('img').attr('data-src')}`,
-      detail: `${baseUrl}${$('a').attr('href')}`,
+      name: child.BookName,
+      author: child.Author,
+      cover: `http://qidian.qpic.cn/qdbimg/349573/${child.BookId}/180`,
+      detail: `https://qqapp.qidian.com/ajax/book/info?bookId=${child.BookId}`,
     })
   })
   return JSON.stringify(array)
@@ -20,22 +19,22 @@ const search = (key) => {
 //详情
 const detail = (url) => {
   let response = GET(url)
-  let $ = HTML.parse(response)
+  let $ = JSON.parse(response).data.bookInfo
   let book = {
-    summary: $('content').text(),
-    status: $('.book-meta:nth-child(5)').text().match(/(?<=\|)(.+)/)[0],
-    category: $('.book-meta:nth-child(4)').text().replace('/', ' '),
-    words: $('.book-meta:nth-child(5)').text().match(/(.+)(?=字)/)[0],
-    update: $('#ariaMuLu').text().match(/(.+)(?=·)/)[0],
-    lastChapter: $('#ariaMuLu').text().match(/(?<=·连载至)(.+)/)[0],
-    catalog: `${baseUrl}/majax/book/category?bookId=${$('#bookDetailWrapper').attr('data-book-id')}`
+    summary: $.desc.trim(),
+    status: $.bookStatus,
+    category: $.bookLabels.map((item)=>{ return item.tag}).join(" ")||$.chanName,
+    words: $.wordsCnt,
+    update: $.updTime,
+    lastChapter: $.updChapterName,
+    catalog: `https://qqapp.qidian.com/ajax/book/category?bookId=${$.bookId}`
   }
   return JSON.stringify(book)
 }
 
 //目录
 const catalog = (url) => {
-  let response = GET(`${url}&_csrfToken=${COOKIE('_csrfToken')}`)
+  let response = GET(url)
   let $ = JSON.parse(response)
   let array = []
   $.data.vs.forEach((booklet) => {
@@ -43,7 +42,7 @@ const catalog = (url) => {
     booklet.cs.forEach((chapter) => {
       array.push({
         name: chapter.cN,
-        url: `${baseUrl}/majax/chapter/getChapterInfo?bookId=${url.query('bookId')}&chapterId=${chapter.id}`,
+        url: `https://qqapp.qidian.com/ajax/chapter/getInfo?debug=1&bookId=${url.query('bookId')}&chapterId=${chapter.id}`,
         vip: chapter.sS == 0
       })
     })
@@ -53,7 +52,7 @@ const catalog = (url) => {
 
 //章节
 const chapter = (url) => {
-  let response = GET(`${url}&_csrfToken=${COOKIE('_csrfToken')}`)
+  let response = GET(url)
   let $ = JSON.parse(response).data.chapterInfo
   //VIP章节
   if ($.vipStatus == 1) {
@@ -63,7 +62,7 @@ const chapter = (url) => {
       message: `${baseUrl}/book/${url.query('bookId')}/${url.query('chapterId')}`
     })
   }
-  return $.content
+  return $.content.trim()
 }
 
 //个人中心
@@ -104,7 +103,7 @@ const bookshelf = (page) => {
     name: book.bName,
     author: book.bAuth,
     cover: `https://bookcover.yuewen.com/qdbimg/349573/${book.bid}/300`,
-    detail: `${baseUrl}/book/${book.bid}`
+    detail: `https://qqapp.qidian.com/ajax/book/info?bookId=${book.bid}`
   }))
   return JSON.stringify({
     end: $.page.totalPage === page + 1,
@@ -125,7 +124,7 @@ const rank = (title, category, page) => {
       name: $('h4').text(),
       author: $('p.author > a.name').text(),
       cover: `https:${$('.book-img-box > a >  img').attr('src')}`,
-      detail: `https://m.qidian.com/book/${$('.book-img-box > a').attr('data-bid')}`,
+      detail: `https://qqapp.qidian.com/ajax/book/info?bookId=${$('.book-img-box > a').attr('data-bid')}`,
     })
   })
   return JSON.stringify({
@@ -281,7 +280,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 108,
+  version: 109,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
