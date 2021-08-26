@@ -21,7 +21,7 @@ const detail = (url) => {
   let response = GET(url)
   let $ = JSON.parse(response).data.bookInfo
   let book = {
-    summary: $.desc.trim(),
+    summary: $.desc.trim().replaceAll('<br>　　','\n').replaceAll("\n\n",'\n'),
     status: $.bookStatus,
     category: $.bookLabels.map((item)=>{ return item.tag}).join(" ")||$.chanName,
     words: $.wordsCnt,
@@ -280,7 +280,7 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 109,
+  version: 110,
   authorization: "https://passport.yuewen.com/yuewen.html?areaid=1&appid=13&source=m",
   cookies: [".qidian.com", ".yuewen.com"],
   ranks: ranks
