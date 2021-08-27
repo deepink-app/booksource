@@ -23,7 +23,7 @@ const detail = (url) => {
   let book = {
     summary: $.data.intro,
     status: $.data.finish == 0 ? '连载' : '完结',
-    category: $.data.sc_name,
+    category: $.data.tags.map((item)=>{ return item.name}).join(" "),
     words: $.data.count,
     update: $.data.update,
     lastChapter: $.data.nn_name,
@@ -138,10 +138,94 @@ const bookshelf = (page) => {
   })
 }
 
+//排行榜
+const rank = (title, category, page) => {
+  let response = POST(`${baseUrl}/V4.1/xml4android_listPage.aspx`,{data:`c=${title}&a=0&page=${page}`})
+  let $ = JSON.parse(response)
+  let books = []
+  $.data.forEach((child) => {
+    books.push({
+      name: child.name,
+      author: child.author,
+      cover: child.cover,
+      detail: child.id
+    })
+  })
+  return JSON.stringify({
+    end:  $.data === null,
+    books: books
+  })
+}
+
+
+const ranks = [
+    {
+        title: {
+            key: '97',
+            value: '轻小说'
+        }
+    },
+    {
+        title: {
+            key: '1',
+            value: '玄幻奇幻'
+        }
+    },
+    {
+        title: {
+            key: '6',
+            value: '武侠仙侠'
+        }
+    },
+    {
+        title: {
+            key: '44',
+            value: '同人小说'
+        }
+    },
+    {
+        title: {
+            key: '4',
+            value: '都市言情'
+        }
+    },
+    {
+        title: {
+            key: '7',
+            value: '青春校园'
+        }
+    },
+    {
+        title: {
+            key: '3',
+            value: '军事历史'
+        }
+    },
+    {
+        title: {
+            key: '2',
+            value: '科幻网游'
+        }
+    },
+    {
+        title: {
+            key: '5',
+            value: '恐怖灵异'
+        }
+    },
+    {
+        title: {
+            key: '54',
+            value: '女生小说'
+        }
+    }
+]
+
 var bookSource = JSON.stringify({
   name: "飞卢",
   url: "faloo.com",
-  version: 104,  
+  version: 105,  
   authorization: `https://u.faloo.com/regist/Login.aspx`,
-  cookies: ["faloo.com"]
+  cookies: ["faloo.com"],
+  ranks: ranks
 })
