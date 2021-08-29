@@ -25,7 +25,7 @@ const detail = (url) => {
   let $ = JSON.parse(response).data
   let book = {
     summary: $.abstract,
-    status: $.update_status == 1 ? '连载' : '完结',
+    status: $.creation_status == 1 ? '连载' : '完结',
     category: $.tags.replace(","," "),
     words: $.word_number,
     update: timestampToTime($.last_chapter_update_time),
@@ -104,6 +104,6 @@ const ranks = [
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 104,
+  version: 105,
   ranks: ranks
 })
