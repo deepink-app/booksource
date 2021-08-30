@@ -44,33 +44,6 @@ function timestampToTime(timestamp) {
         return Y+M+D+h+m+s;
 }
 
-//目录
-const catalog = (url) => {
-  let response = GET(url,{headers:
-  ["platform: android","version: 3.8.8"]
-  })
-  let $ = JSON.parse(response)
-  let array = []
-  $.body.catalog.forEach((booklet) => {
-    array.push({ name: booklet.v_volumn })
-    booklet.chapters.forEach((chapter) => {
-      array.push({
-        name: chapter.v_chapter,
-        url: `https://www.kujiang.com/api/v2/read?book=${url.query('book')}&chapter=${chapter.chapter}`
-      })
-    })
-  })
-  return JSON.stringify(array)
-}
-
-//章节
-const chapter = (url) => {
-    let $ = JSON.parse(GET(url,{headers:
-  ["platform: android","version: 3.8.8"]
-  }))
-    return $.data.content
-}
-
 var bookSource = JSON.stringify({
   name: "酷匠",
   url: "kujiang.com",
