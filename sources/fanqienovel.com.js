@@ -47,63 +47,8 @@ function timestampToTime(timestamp) {
         return Y+M+D+h+m+s;
 }
 
-//目录
-const catalog = (url) => {
-  let response = GET(url)
-  let $ = JSON.parse(response)
-  let array = []
-  $.data.chapterListWithVolume[0].forEach(chapter => {
-      array.push({
-        name: chapter.title,
-        url: `https://novel.snssdk.com/api/novel/book/reader/full/v1/?group_id=${chapter.itemId}&item_id=${chapter.itemId}`
-      })
-    })
-  return JSON.stringify(array)
-}
-
-//章节
-const chapter = (url) => {
-    let $ = JSON.parse(GET(url))
-  return $.data.content.replace(/<div.+<\/div>/,"")
-}
-
-//排行榜
-const rank = (title, category, page) => {
-  let response = GET(`https://fanqienovel.com/api/author/library/book_list/v0/?page_count=18&page_index=${page}&gender=${title}&category_id=-1&creation_status=-1&word_count=-1&sort=0`)
-  let $ = JSON.parse(response)
-  let books = []
-  $.data.book_list.forEach((child) => {
-    books.push({
-      name: child.book_name,
-      author: child.author,
-      cover: `https://p3-tt.byteimg.com/img/${child.thumb_uri}~240x312.jpg`,
-      detail: `https://api5-normal-lq.fqnovel.com/reading/bookapi/detail/v/?book_id=${child.book_id}&iid=466614321180296&aid=1967&version_code=290`,
-    })
-  })
-  return JSON.stringify({
-    end:  $.data === null,
-    books: books
-  })
-}
-
-const ranks = [
-    {
-        title: {
-            key: '1',
-            value: '男生'
-        }
-    },
-    {
-        title: {
-            key: '0',
-            value: '女生'
-        }
-    }
-]
-
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 105,
-  ranks: ranks
+  version: 105
 })
