@@ -4,7 +4,7 @@ const decrypt = function (data) {
     let key = CryptoJS.enc.Utf8.parse('ZUreQN0E')
     decrypted = CryptoJS.DES.decrypt(data, key, {
         mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.NoPadding
+        padding: CryptoJS.pad.Pkcs7
     })
     return decrypted.toString(CryptoJS.enc.Utf8)
 }
@@ -13,30 +13,14 @@ const encrypt = function (data) {
   let key = CryptoJS.enc.Utf8.parse('ZUreQN0E')
   encrypted = CryptoJS.DES.encrypt(data, key, {
     mode: CryptoJS.mode.ECB,
-    padding: CryptoJS.pad.NoPadding
+    padding: CryptoJS.pad.Pkcs7
   })
   return encrypted.toString()
 }
 
 //搜索
 const search = (key) => {
-  if(key.length == 1 || key.length%8 == 1)
-    var air = ""
-  else if(key.length == 2 || key.length%8 == 2)
-         var air = ""
-       else if(key.length == 3 || key.length%8 == 3)
-              var air = ""
-            else if(key.length == 4 || key.length%8 == 4)
-                   var air = ""
-                 else if(key.length == 5 || key.length%8 == 5)
-                        var air = ""
-                      else if(key.length == 6 || key.length%8 == 6)
-                             var air = ""
-                           else if(key.length == 7 || key.length%8 == 7)
-                                  var air = ""
-                                else if(key.length == 8 || key.length%8 == 0)
-                                       var air = ""
-  let params = encodeURIComponent(encrypt(JSON.stringify({keyword:key}) + air))
+  let params = encodeURIComponent(encrypt(JSON.stringify({keyword:key})))
   let response = GET(`https://m.ciyuanji.com/_next/data/ApH_5MGXsw1xRV2nxb8QL/search/list.json?params=${params}`)
   let $ = JSON.parse(response)
   let array = []
@@ -53,15 +37,7 @@ const search = (key) => {
 
 //详情
 const detail = (url) => {
-  if(url.length == 1)
-    var air = ""
-  else if(url.length == 2)
-         var air = ""
-       else if(url.length == 3)
-              var air = ""
-            else if(url.length == 4)
-                   var air = ""
-  let params = encodeURIComponent(encrypt(JSON.stringify({bookId:url}) + air))
+  let params = encodeURIComponent(encrypt(JSON.stringify({bookId:url})))
   let response = GET(`https://m.ciyuanji.com/_next/data/ApH_5MGXsw1xRV2nxb8QL/bookDetails.json?params=${params}`)
   let $ = JSON.parse(response).pageProps.book
   let book = {
@@ -79,5 +55,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
   name: "次元姬小说",
   url: "m.ciyuanji.com",
-  version: 104
+  version: 105
 })
