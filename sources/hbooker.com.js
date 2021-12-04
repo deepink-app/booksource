@@ -103,5 +103,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
   name: '刺猬猫阅读',
   url: 'hbooker.com',
-  version: 109
+  version: 110
 })
