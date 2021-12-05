@@ -2,15 +2,15 @@ const baseUrl = "https://m.qidian.com"
 
 //搜索
 const search = (key) => {
-  let response = GET(`https://druid.if.qidian.com/Atom.axd/Api/Search/GetBookStoreWithCategory?type=-1&needDirect=1&key=${encodeURI(key)}`)
+  let response = GET(`https://qqapp.qidian.com/ajax/search/list?kw=${encodeURI(key)}`)
   let array = []
   let $ = JSON.parse(response)
-  $.Data.forEach((child) => {
+  $.data.bookInfo.records.forEach((child) => {
     array.push({
-      name: child.BookName,
-      author: child.Author,
-      cover: `http://qidian.qpic.cn/qdbimg/349573/${child.BookId}/180`,
-      detail: `https://qqapp.qidian.com/ajax/book/info?bookId=${child.BookId}`,
+      name: child.bName,
+      author: child.bAuth,
+      cover: `https://bookcover.yuewen.com/qdbimg/349573/${child.bid}/180`,
+      detail: `https://qqapp.qidian.com/ajax/book/info?bookId=${child.bid}`,
     })
   })
   return JSON.stringify(array)
@@ -35,5 +35,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
   name: "起点中文网",
   url: "qidian.com",
-  version: 111
+  version: 112
 })
