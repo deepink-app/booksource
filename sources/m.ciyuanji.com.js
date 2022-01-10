@@ -21,7 +21,7 @@ const encrypt = function (data) {
 //搜索
 const search = (key) => {
   let params = encodeURIComponent(encrypt(JSON.stringify({keyword:key})))
-  let response = GET(`https://m.ciyuanji.com/_next/data/ApH_5MGXsw1xRV2nxb8QL/search/list.json?params=${params}`)
+  let response = GET(`https://m.ciyuanji.com/_next/data/wBMzM68QHlPmXTULTY67J/search/list.json?params=${params}`)
   let $ = JSON.parse(response)
   let array = []
   $.pageProps.esBookList.forEach((child) => {
@@ -38,7 +38,7 @@ const search = (key) => {
 //详情
 const detail = (url) => {
   let params = encodeURIComponent(encrypt(JSON.stringify({bookId:url})))
-  let response = GET(`https://m.ciyuanji.com/_next/data/ApH_5MGXsw1xRV2nxb8QL/bookDetails.json?params=${params}`)
+  let response = GET(`https://m.ciyuanji.com/_next/data/wBMzM68QHlPmXTULTY67J/bookDetails.json?params=${params}`)
   let $ = JSON.parse(response).pageProps.book
   let book = {
     summary: $.notes,
@@ -55,5 +55,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
   name: "次元姬小说",
   url: "m.ciyuanji.com",
-  version: 105
+  version: 106
 })
