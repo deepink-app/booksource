@@ -2,21 +2,17 @@ const baseUrl = "https://api.m.hotread.com"
 
 //搜索
 const search = (key) => {
+  let response = GET(`${baseUrl}/m1/search/searchByWord?keyword=${encodeURI(key)}&pageNo=1&pageSize=10`)
+  let $ = JSON.parse(response).data
   let array = []
-  totalPages = 1
-  for (i=1;i<=totalPages;i++){
-    let response = GET(`${baseUrl}/m1/search/searchByWord?keyword=${encodeURI(key)}&pageNo=${i}&pageSize=10`)
-    let $ = JSON.parse(response).data
-    totalPages = $.totalPages
-    $.list.forEach((child) => {
-      array.push({
-        name: child.name,
-        author: child.authorName,
-        cover: child.cover,
-        detail: `${baseUrl}/m1/story/get?storyId=${child.id}`
-       })
+  $.list.forEach((child) => {
+    array.push({
+      name: child.name,
+      author: child.authorName,
+      cover: child.cover,
+      detail: `${baseUrl}/m1/story/get?storyId=${child.id}`
     })
-  }
+  })
   return JSON.stringify(array)
 }
 
@@ -51,5 +47,5 @@ function timestampToTime(timestamp) {
 var bookSource = JSON.stringify({
   name: "火星小说",
   url: "hotread.com",
-  version: 100
+  version: 101
 })
