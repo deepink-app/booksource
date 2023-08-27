@@ -1,7 +1,7 @@
 const baseUrl = "https://fanqienovel.com"
 //搜索
 const search = (key) => {
-      let response = GET("https://novel.snssdk.com/api/novel/channel/homepage/search/search/v1/?device_platform=android&parent_enterfrom=novel_channel_search.tab.&offset=0&aid=1967&q={key}")
+      let response = GET(`https://novel.snssdk.com/api/novel/channel/homepage/search/search/v1/?device_platform=android&parent_enterfrom=novel_channel_search.tab.&offset=0&aid=1967&q=${encodeURI(key)}`)
     let $ = JSON.parse(response)
     let books = $.data.ret_data.map(book => ({
         name: book.title,
@@ -31,5 +31,5 @@ const detail = (url) => {
 var bookSource = JSON.stringify({
   name: "番茄小说",
   url: "fanqienovel.com",
-  version: 106
+  version: 107
 })
